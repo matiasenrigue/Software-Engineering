@@ -1,7 +1,12 @@
-install-packages:
-	pip install -r requirements.txt
+install:
+	pip install -e .
 
 
+debug-env:
+	export PATH="$HOME/.pyenv/bin:$PATH"
+	eval "$(pyenv init --path)"
+	eval "$(pyenv virtualenv-init -)"
+	source ~/.bashrc
 
 
 set-up-env:
