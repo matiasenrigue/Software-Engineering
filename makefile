@@ -59,6 +59,7 @@ setup:
 activate:
 	@echo "To activate your virtual environment, run the following command in your shell:"
 	@echo "source $$(pyenv root)/versions/SEcomp3083/bin/activate"
+	source $$(pyenv root)/versions/SEcomp3083/bin/activate
 
 
 
