@@ -1,3 +1,6 @@
+SHELL := /bin/bash  # Ensure we're using bash, since our commands are bash-specific
+
+
 .PHONY: setup install activate debug-env
 
 
@@ -18,8 +21,7 @@ debug-env:
 	@echo "=== End Debug ==="
 
 
-# Target: setup
-# Installs system dependencies and pyenv (if not already installed)
+
 setup:
 	@echo "Updating system and installing build dependencies..."
 	sudo apt-get update
@@ -27,19 +29,26 @@ setup:
 		libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev \
 		libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 	@echo "Installing pyenv..."
-	# This script installs pyenv; if already installed, you might want to skip or check first
-	curl https://pyenv.run | bash
-	@echo "Setting up pyenv in ~/.bashrc (if not already present)..."
-	@grep -qxF 'export PATH="$$HOME/.pyenv/bin:$$PATH"' ~/.bashrc || echo 'export PATH="$$HOME/.pyenv/bin:$$PATH"' >> ~/.bashrc
-	@grep -qxF 'eval "$$(pyenv init --path)"' ~/.bashrc || echo 'eval "$$(pyenv init --path)"' >> ~/.bashrc
-	@grep -qxF 'eval "$$(pyenv virtualenv-init -)"' ~/.bashrc || echo 'eval "$$(pyenv virtualenv-init -)"' >> ~/.bashrc
-	@echo "Reload your shell or run 'source ~/.bashrc' to complete the pyenv setup."
-	@echo "Installing Python 3.11.0 via pyenv (if not already installed)..."
-	pyenv install 3.11.0 || echo "Python 3.11.0 is already installed."
-	@echo "Creating virtual environment 'SEcomp3083' via pyenv..."
-	pyenv virtualenv 3.11.0 SEcomp3083 || echo "Virtual environment 'SEcomp3083' already exists."
-	@echo "Setting local pyenv version to 'SEcomp3083' for this project..."
+	if [ ! -d "$$HOME/.pyenv" ]; then \
+	  curl https://pyenv.run | bash; \
+	else \
+	  echo "pyenv already installed, skipping installation."; \
+	fi
+	@echo "Setting up pyenv environment in this shell..."
+	# Set the necessary environment variables explicitly
+	export PYENV_ROOT="$$HOME/.pyenv"; \
+	export PATH="$$PYENV_ROOT/bin:$$PATH"; \
+	# Optionally, you could source your ~/.bashrc if it sets these variables
+	source ~/.bashrc; \
+	\
+	echo "Installing Python 3.11.0 via pyenv (if not already installed)..."; \
+	pyenv install 3.11.0 || echo "Python 3.11.0 is already installed."; \
+	echo "Creating virtual environment 'SEcomp3083' via pyenv..."; \
+	pyenv virtualenv 3.11.0 SEcomp3083 || echo "Virtual environment 'SEcomp3083' already exists."; \
+	echo "Setting local pyenv version to 'SEcomp3083' for this project..."; \
 	pyenv local SEcomp3083
+
+
 
 
 
