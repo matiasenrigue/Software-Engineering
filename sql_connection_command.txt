@@ -1,0 +1,8 @@
+Check AWS VM connection:
+
+ssh -i "aws-flask.pem" ec2-user@$EC2_PUBLIC_IP 'uname -a'
+
+
+ssh -i "aws-flask.pem" -L 3306:ec2-13-60-31-166.eu-north-1.compute.amazonaws.com 'uname -a'
+
+ssh -i "aws-flask.pem" -L 3306:dublin-bikes-data.cbq40u2g88do.eu-north-1.rds.amazonaws.com:3306 ubuntu@ec2-13-60-31-166.eu-north-1.compute.amazonaws.coma

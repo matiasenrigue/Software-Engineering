@@ -13,7 +13,7 @@ STATIONS_URI = "https://api.jcdecaux.com/vls/v1/stations"
 
 # DataBase: AWS RDS
 USER = 'matiasenrigue'
-PASSWORD = 'sxTjHMpzPco5zeVCUeN9'
+PASSWORD = 'H9BfGPsp5hKayrLVgDU24k'
 PORT = "3306"
 DB = 'dbbikes'
 URI = 'dublin-bikes-data.cbq40u2g88do.eu-north-1.rds.amazonaws.com'

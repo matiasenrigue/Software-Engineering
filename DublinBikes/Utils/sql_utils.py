@@ -14,7 +14,7 @@ def get_sql_engine() -> sqla.engine.base.Connection:
     
     # If local is True, the connection is made to the local database
     # If local is False, the connection is made to the remote database
-    local: bool = True
+    local: bool = False
     
     print("🌐 Connecting to the database")
     
