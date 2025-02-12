@@ -1,0 +1,22 @@
+Matías:
+
+    - Initial Set up --> 2 hours
+    
+    - Setting the environment and Github --> 2 hours
+
+    - Team Problems Managing (emails, chats, etc...) --> 2 hours
+    
+    - Reformatting the initial code form the slides --> 5 hours
+        - Created some utils, auxiliar functions (ex: to manage SQL)
+        - Made ir scrapped data and save it both in a .txt and in a .db
+        - Created local data base to check everything worked okay
+    
+    - Expanding the scrapping (4 hours)
+        - JcDeacaux both tables --> 1 hour
+        - Start working on Weather API --> 3 hours
+            - Making the tables (1)
+            - Scrapping of the current weather (2)
+    
+    - Setting up the rds --> 4 hours (or more)
+
+

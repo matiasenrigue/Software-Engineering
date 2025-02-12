@@ -14,7 +14,7 @@ def get_sql_engine() -> sqla.engine.base.Connection:
     
     # If local is True, the connection is made to the local database
     # If local is False, the connection is made to the remote database
-    local: bool = False
+    local: bool = LOCAL_RUNNING
     
     print("🌐 Connecting to the database")
     
@@ -91,31 +91,102 @@ def execute_sql(sql: str, engine: sqla.engine.base.Connection) -> None:
 
 
 def create_data_base():
-    
     engine = get_sql_engine()
 
-    
+    # Station table
     sql_station_table = '''
     CREATE TABLE IF NOT EXISTS station (
-    address VARCHAR(256), 
-    banking INTEGER,
-    bikestands INTEGER,
-    name VARCHAR(256),
-    status VARCHAR(256));
+        station_id INTEGER NOT NULL,
+        address VARCHAR(128),
+        banking INTEGER,
+        bonus INTEGER,
+        bike_stands INTEGER,
+        name VARCHAR(128),
+        position_lat FLOAT,
+        position_lng FLOAT,
+        PRIMARY KEY (station_id)
+    );
     '''
 
+    # Availability table
     sql_availability_table = """
     CREATE TABLE IF NOT EXISTS availability (
-    number INTEGER,
-    available_bikes INTEGER,
-    available_bike_stands INTEGER,
-    last_update DATETIME
+        station_id INTEGER NOT NULL,
+        last_update DATETIME NOT NULL,
+        available_bikes INTEGER,
+        available_bike_stands INTEGER,
+        status VARCHAR(128),
+        PRIMARY KEY (station_id, last_update)
     );
     """
 
+    # Current weather table
+    sql_current_table = """
+    CREATE TABLE IF NOT EXISTS current (
+        dt DATETIME NOT NULL,
+        feels_like FLOAT,
+        humidity INTEGER,
+        pressure INTEGER,
+        sunrise DATETIME,
+        sunset DATETIME,
+        temp FLOAT,
+        uvi FLOAT,
+        weather_id INTEGER,
+        wind_gust FLOAT,
+        wind_speed FLOAT,
+        rain_1h FLOAT,
+        snow_1h FLOAT,
+        PRIMARY KEY (dt)
+    );
+    """
+
+    # Hourly forecast table
+    sql_hourly_table = """
+    CREATE TABLE IF NOT EXISTS hourly (
+        dt DATETIME NOT NULL,
+        future_dt DATETIME NOT NULL,
+        feels_like FLOAT,
+        humidity INTEGER,
+        pop FLOAT,
+        pressure INTEGER,
+        temp FLOAT,
+        uvi FLOAT,
+        weather_id INTEGER,
+        wind_gust FLOAT,
+        wind_speed FLOAT,
+        rain_1h FLOAT,
+        snow_1h FLOAT,
+        PRIMARY KEY (dt, future_dt)
+    );
+    """
+
+    # Daily forecast table
+    sql_daily_table = """
+    CREATE TABLE IF NOT EXISTS daily (
+        dt DATETIME NOT NULL,
+        future_dt DATETIME NOT NULL,
+        humidity INTEGER,
+        pop FLOAT,
+        pressure INTEGER,
+        temp_max FLOAT,
+        temp_min FLOAT,
+        uvi FLOAT,
+        weather_id INTEGER,
+        wind_speed FLOAT,
+        wind_gust FLOAT,
+        rain FLOAT,
+        snow FLOAT,
+        PRIMARY KEY (dt, future_dt)
+    );
+    """
+
+    # Execute all the CREATE TABLE statements
     execute_sql(sql_station_table, engine)
     execute_sql(sql_availability_table, engine)
-    
+    execute_sql(sql_current_table, engine)
+    execute_sql(sql_hourly_table, engine)
+    execute_sql(sql_daily_table, engine)
+
     
     
     
@@ -149,4 +220,4 @@ def test_queries():
 
 if __name__ == "__main__":
     create_data_base()
-    test_queries()
+    # test_queries()

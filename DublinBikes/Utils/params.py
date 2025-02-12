@@ -1,14 +1,25 @@
-from dotenv import load_dotenv
 import os
 
 # Automatically load variables from the .env file in the current directory.
-load_dotenv()
+# --> Disabled for now because can't make it work on amazon
+# from dotenv import load_dotenv
+# load_dotenv()
 
+
+
+# Where is the code running --> Local or AWS
+LOCAL_RUNNING = True
 
 # Dublin Bikes API
 JCKEY = 'c7d3631426d8d7f599c2d73bfce5ebcacc525445'
 NAME = "dublin"
 STATIONS_URI = "https://api.jcdecaux.com/vls/v1/stations"
+
+
+# Open Weather API
+WEATHER_KEY = "dbfc50e69bbbfe9e2bb4117a52072796"
+WEATHER_URI = "https://api.openweathermap.org/data/2.5/onecall"
+
 
 
 # DataBase: AWS RDS
@@ -20,7 +31,7 @@ URI = 'dublin-bikes-data.cbq40u2g88do.eu-north-1.rds.amazonaws.com'
 
 # Local DataBase
 LOCAL_USER = "root"
-LOCAL_PASSWORD = os.environ.get("LOCAL_PASSWORD")
+LOCAL_PASSWORD = "12345678" # os.environ.get("LOCAL_PASSWORD")
 LOCAL_DB = "dbbikes"
 LOCAL_URI = "127.0.0.1"
 
