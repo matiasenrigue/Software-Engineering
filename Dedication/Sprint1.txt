@@ -1,22 +1,49 @@
 Matías:
 
-    - Initial Set up --> 2 hours
+    - Setup - 4h - EC2, environment and GitHub -> 4 hours
     
-    - Setting the environment and Github --> 2 hours
-
     - Team Problems Managing (emails, chats, etc...) --> 2 hours
     
-    - Reformatting the initial code form the slides --> 5 hours
-        - Created some utils, auxiliar functions (ex: to manage SQL)
-        - Made ir scrapped data and save it both in a .txt and in a .db
-        - Created local data base to check everything worked okay
+    - Python/SQL - 5h - InitialSkeleton --> 5 hours
+
+            From original slides code:
+
+                - Created utils files:
+
+                - Utils/sql_utils.py
+                    - creates connection to db
+                    - executes sql commands
+                    - creates the data base
+
+                - Utils/params.py
+                    - manages our keys & co
+
+                - Scrapping/jc_decaux.py
+                    - gets data from bikes API
+                    - fills once: stations table
+                    - updates regularily: availability table
+                    - sends data to sql or text file
+                
+
+                - Created local version of the data base:
+                    - For testing purposes
+                    - When AWS db is connected it will be ready
+
+
     
-    - Expanding the scrapping (4 hours)
-        - JcDeacaux both tables --> 1 hour
-        - Start working on Weather API --> 3 hours
-            - Making the tables (1)
-            - Scrapping of the current weather (2)
+    - Python/SQL - 4h - Scrapping v2 --> 4 hours
+
+                - JcDeacaux: change of slides code (1h):
+                    - changed the fields per table
+                    - diff between updated and non updated fields
+
+
+                - Weather API (3h): 
+                    - creating sql tables for weather 
+                    - scrapping of the current weather
     
+
+
     - Setting up the rds --> 4 hours (or more)
 
 

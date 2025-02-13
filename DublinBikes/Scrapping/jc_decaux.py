@@ -45,8 +45,8 @@ def save_data_to_db(data: str, in_engine: sqla.engine.base.Connection) -> None:
     :param data: the data to be loaded (text)
     :param in_engine: the engine to be used to load the data
     """
-    save_stations_data_to_db(data, in_engine)
-    # save_availability_data_to_db(data, in_engine)
+    # save_stations_data_to_db(data, in_engine)
+    save_availability_data_to_db(data, in_engine)
     
 
         
