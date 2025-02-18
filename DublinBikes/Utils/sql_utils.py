@@ -140,52 +140,10 @@ def create_data_base():
     );
     """
 
-    # Hourly forecast table
-    sql_hourly_table = """
-    CREATE TABLE IF NOT EXISTS hourly (
-        dt DATETIME NOT NULL,
-        future_dt DATETIME NOT NULL,
-        feels_like FLOAT,
-        humidity INTEGER,
-        pop FLOAT,
-        pressure INTEGER,
-        temp FLOAT,
-        uvi FLOAT,
-        weather_id INTEGER,
-        wind_gust FLOAT,
-        wind_speed FLOAT,
-        rain_1h FLOAT,
-        snow_1h FLOAT,
-        PRIMARY KEY (dt, future_dt)
-    );
-    """
-
-    # Daily forecast table
-    sql_daily_table = """
-    CREATE TABLE IF NOT EXISTS daily (
-        dt DATETIME NOT NULL,
-        future_dt DATETIME NOT NULL,
-        humidity INTEGER,
-        pop FLOAT,
-        pressure INTEGER,
-        temp_max FLOAT,
-        temp_min FLOAT,
-        uvi FLOAT,
-        weather_id INTEGER,
-        wind_speed FLOAT,
-        wind_gust FLOAT,
-        rain FLOAT,
-        snow FLOAT,
-        PRIMARY KEY (dt, future_dt)
-    );
-    """
-
     # Execute all the CREATE TABLE statements
     execute_sql(sql_station_table, engine)
     execute_sql(sql_availability_table, engine)
     execute_sql(sql_current_table, engine)
-    execute_sql(sql_hourly_table, engine)
-    execute_sql(sql_daily_table, engine)
 
     
     
@@ -207,17 +165,13 @@ def test_queries():
     sql = "select * from station where address = 'Smithfield North';"
     execute_sql(sql, engine)
 
-    # QUERY 3 remove the duplicates: first create a temporary table where I put only unique elements
-    # then remove the original table and rename the temporary one with the old name
-    execute_sql("CREATE TABLE temp_station AS SELECT DISTINCT * FROM station;", engine)
-    execute_sql("DROP TABLE station;", engine)
-    execute_sql("RENAME TABLE temp_station TO station;", engine)
 
-    # QUERY 4: Check that the table was correctly updated
+    # QUERY 3: Check that the table was correctly updated
     execute_sql("select * from station where address = 'Smithfield North';", engine)
-    execute_sql("select * from station where bikestands > 20", engine)
+    execute_sql("select * from availability where available_bike_stands > 20 LIMIT 5", engine)
+    execute_sql("select * from current where temp > 20", engine)
 
 
 if __name__ == "__main__":
     create_data_base()
-    # test_queries()
+    test_queries()

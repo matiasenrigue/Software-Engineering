@@ -4,6 +4,21 @@ SHELL := /bin/bash  # Ensure we're using bash, since our commands are bash-speci
 .PHONY: setup install activate debug-env
 
 
+scraping-textfile:
+	@echo "Running scraping script..."
+	python DublinBikes/Scrapping/general_scrapper.py
+
+scraping-database:
+	@echo "Running scraping script..."
+	python DublinBikes/Scrapping/general_scrapper.py --save-to-db
+
+
+create-db:
+	@echo "Creating database tables..."
+	python DublinBikes/Utils/sql_utils.py
+
+
+
 install:
 	@echo "Installing package in editable mode..."
 	pip install -e .

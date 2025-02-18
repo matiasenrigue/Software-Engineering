@@ -13,7 +13,8 @@ import requests
 import time
 
 from DublinBikes.Utils.params import *
-from DublinBikes.Utils.sql_utils import get_sql_engine, execute_sql
+from DublinBikes.Utils.sql_utils import execute_sql
+from DublinBikes.Scrapping.local_scrapping import save_data_to_file
 
 
 
@@ -38,7 +39,7 @@ def get_data_from_jcdecaux() -> str:
 
 
 
-def save_data_to_db(data: str, in_engine: sqla.engine.base.Connection) -> None:
+def save_bikes_data_to_db(data: str, in_engine: sqla.engine.base.Connection) -> None:
     """
     Function to load the data into the database.
     
@@ -122,68 +123,34 @@ def save_availability_data_to_db(data: str, in_engine: sqla.engine.base.Connecti
  
 
 
-def main_data_scrapper_bikes():
+def main_data_scrapper_bikes(
+            save_to_db: bool, 
+            engine: sqla.engine.base.Connection = None,
+            text_file_path : os.path = None
+    ) -> None:
+    """
+    Main function for the bikes data scrapper.
+    """
     
-    # Determine if Data will be saved to the database or to a file
-    # hardcoded for now: True if we want to save to db, False if we want to save to file
-    save_to_db: bool = True
-    
-    if save_to_db: # If we connext to db: get the engine
-        engine = get_sql_engine()
+    minutes = 5
     
     while True:
-        
         bikes_data = get_data_from_jcdecaux()
         
         if bikes_data:
             
-            if save_to_db:
-                save_data_to_db(bikes_data, engine)
-            else:
-                save_data_to_file(bikes_data)
+            print("Bike Data Downloaded at ", datetime.datetime.now())
             
-        # For future: add logging info of failure to get data
-        else:
-            print("No Bike Data")
+            if save_to_db:
+                save_bikes_data_to_db(bikes_data, engine)
+            else:
+                save_data_to_file(bikes_data, text_file_path)
+            
+        else:    # For future: add logging info of failure to get data
+            print("No Bike Data at ", datetime.datetime.now())
+            
         
-        time.sleep(5*60)
-
-
-
-
-
-
-
-### Old code, when saving to file
-
-def get_data_folder() -> str:
-    """
-    Ensure that the data folder exists and return the path to it.
-    If it does not exist, create it.
-    """
-    
-    data_folder: str = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
-    
-    if not os.path.exists(data_folder):
-        os.mkdir(data_folder)
-        print("Folder 'data' created!")
-
-    return data_folder
-
-
-
-def save_data_to_file(data: str)-> None:
-    """
-    Function to save the data to a text file.
-    """
-   
-    data_folder: str = get_data_folder()
-    time_stamp: str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    text_file: str = os.path.join(data_folder, f"bikes_{time_stamp}.json")
-
-    with open(text_file, "w") as f:
-        f.write(data)
-
+        time.sleep(60 * minutes)
 
 
 
