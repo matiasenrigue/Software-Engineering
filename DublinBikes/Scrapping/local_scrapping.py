@@ -54,23 +54,32 @@ def save_data_to_file(data: str, filepath: os.path) -> None:
 def save_data_to_file(data: str, filepath: str) -> None:
     """
     Save data to a CSV file. If the data is in JSON format, convert it to CSV.
+    Makes sure to write the headers only the first time the file is written to.
     """
     try:
         # Try to parse the data as JSON
         json_data = json.loads(data)
 
+        # Checks if file is empty
+        file_empty = True
+        if os.path.exists(filepath):
+            if os.stat(filepath).st_size > 0:
+                file_empty = False
+
         # If it is a list of dictionaries (e.g. bikes data)
         if isinstance(json_data, list) and json_data and isinstance(json_data[0], dict):
             with open(filepath, "a", newline="") as f:
                 writer = csv.DictWriter(f, fieldnames=json_data[0].keys())
-                writer.writeheader()
+                if file_empty:
+                    writer.writeheader()
                 writer.writerows(json_data)
                 
         # If it is a single dictionary (e.g. weather data)
         elif isinstance(json_data, dict):
             with open(filepath, "a", newline="") as f:
                 writer = csv.DictWriter(f, fieldnames=json_data.keys())
-                writer.writeheader()
+                if file_empty:
+                    writer.writeheader()
                 writer.writerow(json_data)
         else:
             # If JSON data is not in an expected format, write the raw data.
@@ -81,3 +90,4 @@ def save_data_to_file(data: str, filepath: str) -> None:
         # If parsing as JSON fails, simply write the raw data.
         with open(filepath, "a") as f:
             f.write(data)
+

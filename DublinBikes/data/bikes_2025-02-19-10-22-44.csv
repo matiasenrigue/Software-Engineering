@@ -1,0 +1,343 @@
+number,contract_name,name,address,position,banking,bonus,bike_stands,available_bike_stands,available_bikes,status,last_update
+42,dublin,SMITHFIELD NORTH,Smithfield North,"{'lat': 53.349562, 'lng': -6.278198}",False,False,30,26,4,OPEN,1739960189000
+30,dublin,PARNELL SQUARE NORTH,Parnell Square North,"{'lat': 53.3537415547453, 'lng': -6.26530144781526}",False,False,20,8,12,OPEN,1739960026000
+54,dublin,CLONMEL STREET,Clonmel Street,"{'lat': 53.336021, 'lng': -6.26298}",False,False,33,24,9,OPEN,1739959966000
+108,dublin,AVONDALE ROAD,Avondale Road,"{'lat': 53.359405, 'lng': -6.276142}",False,False,35,17,18,OPEN,1739960460000
+20,dublin,JAMES STREET EAST,James Street East,"{'lat': 53.336597, 'lng': -6.248109}",False,False,30,6,24,OPEN,1739960028000
+56,dublin,MOUNT STREET LOWER,Mount Street Lower,"{'lat': 53.33796, 'lng': -6.24153}",False,False,40,23,17,OPEN,1739960320000
+6,dublin,CHRISTCHURCH PLACE,Christchurch Place,"{'lat': 53.343368, 'lng': -6.27012}",False,False,20,14,6,OPEN,1739960398000
+18,dublin,GRANTHAM STREET,Grantham Street,"{'lat': 53.334123, 'lng': -6.265436}",False,False,30,26,3,OPEN,1739960503000
+32,dublin,PEARSE STREET,Pearse Street,"{'lat': 53.344304, 'lng': -6.250427}",False,False,30,3,26,OPEN,1739960490000
+52,dublin,YORK STREET EAST,York Street East,"{'lat': 53.338755, 'lng': -6.262003}",False,False,32,16,16,OPEN,1739960462000
+48,dublin,EXCISE WALK,Excise Walk,"{'lat': 53.347777, 'lng': -6.244239}",False,False,40,28,12,OPEN,1739960443000
+13,dublin,FITZWILLIAM SQUARE WEST,Fitzwilliam Square West,"{'lat': 53.336074, 'lng': -6.252825}",False,False,30,20,10,OPEN,1739960440000
+43,dublin,PORTOBELLO ROAD,Portobello Road,"{'lat': 53.330091, 'lng': -6.268044}",False,False,30,30,0,OPEN,1739959910000
+31,dublin,PARNELL STREET,Parnell Street,"{'lat': 53.350929, 'lng': -6.265125}",False,False,20,8,12,OPEN,1739960458000
+98,dublin,FREDERICK STREET SOUTH,Frederick Street South,"{'lat': 53.341515, 'lng': -6.256853}",False,False,40,19,20,OPEN,1739960424000
+14,dublin,FOWNES STREET UPPER,Fownes Street Upper,"{'lat': 53.344603, 'lng': -6.263371}",False,False,30,5,25,OPEN,1739960296000
+1,dublin,CLARENDON ROW,Clarendon Row,"{'lat': 53.340927, 'lng': -6.262501}",False,False,31,18,12,OPEN,1739960496000
+23,dublin,CUSTOM HOUSE,Custom House,"{'lat': 53.348279, 'lng': -6.254662}",False,False,30,18,12,OPEN,1739960007000
+106,dublin,RATHDOWN ROAD,Rathdown Road,"{'lat': 53.35893, 'lng': -6.280337}",False,False,40,40,0,OPEN,1739959906000
+112,dublin,NORTH CIRCULAR ROAD (O'CONNELL'S),North Circular Road (O'Connell's),"{'lat': 53.357841, 'lng': -6.251557}",False,False,30,30,0,OPEN,1739960139000
+68,dublin,HANOVER QUAY,Hanover Quay,"{'lat': 53.344115, 'lng': -6.237153}",False,False,40,11,29,OPEN,1739960478000
+74,dublin,OLIVER BOND STREET,Oliver Bond Street,"{'lat': 53.343893, 'lng': -6.280531}",False,False,30,30,0,OPEN,1739960499000
+87,dublin,COLLINS BARRACKS MUSEUM,Collins Barracks Museum,"{'lat': 53.347477, 'lng': -6.28525}",False,False,38,30,7,OPEN,1739960366000
+84,dublin,BROOKFIELD ROAD,Brookfield Road,"{'lat': 53.339005, 'lng': -6.300217}",False,False,30,20,10,OPEN,1739960474000
+90,dublin,BENSON STREET,Benson Street,"{'lat': 53.344153, 'lng': -6.233451}",False,False,40,6,34,OPEN,1739960401000
+11,dublin,EARLSFORT TERRACE,Earlsfort Terrace,"{'lat': 53.334295, 'lng': -6.258503}",False,False,30,9,19,OPEN,1739960375000
+17,dublin,GOLDEN LANE,Golden Lane,"{'lat': 53.340803, 'lng': -6.267732}",False,False,20,13,7,OPEN,1739960019000
+45,dublin,DEVERELL PLACE,Deverell Place,"{'lat': 53.351464, 'lng': -6.255265}",False,False,30,12,16,OPEN,1739959947000
+114,dublin,WILTON TERRACE (PARK),Wilton Terrace (Park),"{'lat': 53.333653, 'lng': -6.248345}",False,False,40,28,10,OPEN,1739960426000
+72,dublin,JOHN STREET WEST,John Street West,"{'lat': 53.343105, 'lng': -6.277167}",False,False,31,20,11,OPEN,1739960451000
+63,dublin,FENIAN STREET,Fenian Street,"{'lat': 53.341428, 'lng': -6.24672}",False,False,35,23,12,OPEN,1739959939000
+113,dublin,MERRION SQUARE SOUTH,Merrion Square South,"{'lat': 53.338614, 'lng': -6.248606}",False,False,40,16,13,OPEN,1739960486000
+91,dublin,SOUTH DOCK ROAD,South Dock Road,"{'lat': 53.341833, 'lng': -6.231291}",False,False,30,17,12,OPEN,1739960445000
+99,dublin,CITY QUAY,City Quay,"{'lat': 53.346637, 'lng': -6.246154}",False,False,30,2,28,OPEN,1739960137000
+9,dublin,EXCHEQUER STREET,Exchequer Street,"{'lat': 53.343034, 'lng': -6.263578}",False,False,24,10,13,OPEN,1739960050000
+67,dublin,THE POINT,The Point,"{'lat': 53.346867, 'lng': -6.230852}",False,False,40,31,9,OPEN,1739960308000
+116,dublin,BROADSTONE,Broadstone,"{'lat': 53.3547, 'lng': -6.272314}",False,False,30,10,20,OPEN,1739960339000
+55,dublin,HATCH STREET,Hatch Street,"{'lat': 53.33403, 'lng': -6.260714}",False,False,36,20,16,OPEN,1739960072000
+62,dublin,LIME STREET,Lime Street,"{'lat': 53.346026, 'lng': -6.243576}",False,False,40,16,24,OPEN,1739960479000
+5,dublin,CHARLEMONT PLACE,Charlemont Street,"{'lat': 53.330662, 'lng': -6.260177}",False,False,40,37,3,OPEN,1739960454000
+97,dublin,KILMAINHAM GAOL,Kilmainham Gaol,"{'lat': 53.342113, 'lng': -6.310015}",False,False,40,40,0,OPEN,1739960002000
+61,dublin,HARDWICKE PLACE,Hardwicke Place,"{'lat': 53.357043, 'lng': -6.263232}",False,False,25,12,13,OPEN,1739960373000
+77,dublin,WOLFE TONE STREET,Wolfe Tone Street,"{'lat': 53.348875, 'lng': -6.267459}",False,False,29,29,0,OPEN,1739960046000
+73,dublin,FRANCIS STREET,Francis Street,"{'lat': 53.342081, 'lng': -6.275233}",False,False,30,19,11,OPEN,1739959951000
+4,dublin,GREEK STREET,Greek Street,"{'lat': 53.346874, 'lng': -6.272976}",False,False,20,5,15,OPEN,1739960221000
+49,dublin,GUILD STREET,Guild Street,"{'lat': 53.347932, 'lng': -6.240928}",False,False,40,21,19,OPEN,1739960085000
+19,dublin,HERBERT PLACE,Herbert Place,"{'lat': 53.334432, 'lng': -6.245575}",False,False,30,0,28,OPEN,1739960194000
+7,dublin,HIGH STREET,High Street,"{'lat': 53.343565, 'lng': -6.275071}",False,False,29,18,11,OPEN,1739960428000
+60,dublin,NORTH CIRCULAR ROAD,North Circular Road,"{'lat': 53.359624, 'lng': -6.260348}",False,False,30,30,0,OPEN,1739960182000
+102,dublin,WESTERN WAY,Western Way,"{'lat': 53.354929, 'lng': -6.269425}",False,False,40,28,12,OPEN,1739960471000
+38,dublin,TALBOT STREET,Talbot Street,"{'lat': 53.350974, 'lng': -6.25294}",False,False,40,26,13,OPEN,1739960394000
+53,dublin,NEWMAN HOUSE,Newman House,"{'lat': 53.337132, 'lng': -6.26059}",False,False,40,18,22,OPEN,1739960484000
+58,dublin,SIR PATRICK DUN'S,Sir Patrick's Dun,"{'lat': 53.339218, 'lng': -6.240642}",False,False,40,10,30,OPEN,1739960056000
+66,dublin,NEW CENTRAL BANK,New Central Bank,"{'lat': 53.347122, 'lng': -6.234749}",False,False,40,21,19,OPEN,1739960474000
+104,dublin,GRANGEGORMAN LOWER (CENTRAL),Grangegorman Lower (Central),"{'lat': 53.355173, 'lng': -6.278424}",False,False,40,27,12,OPEN,1739960192000
+101,dublin,KING STREET NORTH,King Street North,"{'lat': 53.350291, 'lng': -6.273507}",False,False,30,29,1,OPEN,1739960465000
+115,dublin,KILLARNEY STREET,Killarney Street,"{'lat': 53.354845, 'lng': -6.247579}",False,False,30,21,9,OPEN,1739960273000
+47,dublin,HERBERT STREET,Herbert Street,"{'lat': 53.335742, 'lng': -6.24551}",False,False,40,33,6,OPEN,1739960424000
+117,dublin,HANOVER QUAY EAST,Hanover Quay East,"{'lat': 53.343653, 'lng': -6.231755}",False,False,40,8,32,OPEN,1739960012000
+8,dublin,CUSTOM HOUSE QUAY,Custom House Quay,"{'lat': 53.347884, 'lng': -6.248048}",False,False,30,16,14,OPEN,1739960463000
+27,dublin,MOLESWORTH STREET,Molesworth Street,"{'lat': 53.341288, 'lng': -6.258117}",False,False,20,2,17,OPEN,1739960450000
+16,dublin,GEORGES QUAY,Georges Quay,"{'lat': 53.347508, 'lng': -6.252192}",False,False,20,6,14,OPEN,1739960411000
+96,dublin,KILMAINHAM LANE,Kilmainham Lane,"{'lat': 53.341805, 'lng': -6.305085}",False,False,30,15,15,OPEN,1739960320000
+82,dublin,MOUNT BROWN,Mount Brown,"{'lat': 53.341645, 'lng': -6.29719}",False,False,22,21,1,OPEN,1739960373000
+76,dublin,MARKET STREET SOUTH,Market Street South,"{'lat': 53.342296, 'lng': -6.287661}",False,False,38,33,5,OPEN,1739960332000
+71,dublin,KEVIN STREET,Kevin Street,"{'lat': 53.337757, 'lng': -6.267699}",False,False,40,27,13,OPEN,1739960382000
+79,dublin,ECCLES STREET EAST,Eccles Street East,"{'lat': 53.358115, 'lng': -6.265601}",False,False,27,5,22,OPEN,1739960484000
+69,dublin,GRAND CANAL DOCK,Grand Canal Dock,"{'lat': 53.342638, 'lng': -6.238695}",False,False,40,14,25,OPEN,1739960236000
+25,dublin,MERRION SQUARE EAST,Merrion Square East,"{'lat': 53.339434, 'lng': -6.246548}",False,False,30,15,15,OPEN,1739959959000
+51,dublin,YORK STREET WEST,York Street West,"{'lat': 53.339334, 'lng': -6.264699}",False,False,40,0,0,OPEN,1739960010000
+37,dublin,ST. STEPHEN'S GREEN SOUTH,St. Stephen's Green South,"{'lat': 53.337494, 'lng': -6.26199}",False,False,30,23,7,OPEN,1739960367000
+59,dublin,DENMARK STREET GREAT,Denmark Street Great,"{'lat': 53.35561, 'lng': -6.261397}",False,False,20,15,5,OPEN,1739959966000
+95,dublin,ROYAL HOSPITAL,Royal Hospital,"{'lat': 53.343897, 'lng': -6.29706}",False,False,40,20,20,OPEN,1739960167000
+94,dublin,HEUSTON STATION (CAR PARK),Heuston Station (Car Park),"{'lat': 53.346985, 'lng': -6.297804}",False,False,40,38,2,OPEN,1739960045000
+105,dublin,GRANGEGORMAN LOWER (NORTH),Grangegorman Lower (North),"{'lat': 53.355954, 'lng': -6.278378}",False,False,36,31,5,OPEN,1739960094000
+36,dublin,ST. STEPHEN'S GREEN EAST,St. Stephen's Green East,"{'lat': 53.337824, 'lng': -6.256035}",False,False,40,17,23,OPEN,1739960392000
+93,dublin,HEUSTON STATION (CENTRAL),Heuston Station (Central),"{'lat': 53.346603, 'lng': -6.296924}",False,False,40,40,0,OPEN,1739959922000
+22,dublin,TOWNSEND STREET,Townsend Street,"{'lat': 53.345922, 'lng': -6.254614}",False,False,20,7,11,OPEN,1739960418000
+50,dublin,GEORGES LANE,George's Lane,"{'lat': 53.35023, 'lng': -6.279696}",False,False,40,40,0,OPEN,1739959953000
+110,dublin,PHIBSBOROUGH ROAD,Phibsborough Road,"{'lat': 53.356307, 'lng': -6.273717}",False,False,40,28,12,OPEN,1739960099000
+12,dublin,ECCLES STREET,Eccles Street,"{'lat': 53.359246, 'lng': -6.269779}",False,False,20,20,0,OPEN,1739959970000
+34,dublin,PORTOBELLO HARBOUR,Portobello Harbour,"{'lat': 53.330362, 'lng': -6.265163}",False,False,30,17,13,OPEN,1739959962000
+78,dublin,MATER HOSPITAL,Mater Hospital,"{'lat': 53.359967, 'lng': -6.264828}",False,False,40,39,1,OPEN,1739959944000
+2,dublin,BLESSINGTON STREET,Blessington Street,"{'lat': 53.356769, 'lng': -6.26814}",False,False,20,13,7,OPEN,1739960413000
+75,dublin,JAMES STREET,James Street,"{'lat': 53.343456, 'lng': -6.287409}",False,False,40,28,12,OPEN,1739960091000
+111,dublin,MOUNTJOY SQUARE EAST,Mountjoy Square East,"{'lat': 53.356717, 'lng': -6.256359}",False,False,40,40,0,OPEN,1739960221000
+26,dublin,MERRION SQUARE WEST,Merrion Square West,"{'lat': 53.339764, 'lng': -6.251988}",False,False,20,1,19,OPEN,1739960400000
+65,dublin,CONVENTION CENTRE,Convention Centre,"{'lat': 53.34744, 'lng': -6.238523}",False,False,40,22,18,OPEN,1739960068000
+15,dublin,HARDWICKE STREET,Hardwicke Street,"{'lat': 53.355473, 'lng': -6.264423}",False,False,16,10,6,OPEN,1739959989000
+86,dublin,PARKGATE STREET,Parkgate Street,"{'lat': 53.347972, 'lng': -6.291804}",False,False,38,38,0,OPEN,1739960380000
+35,dublin,SMITHFIELD,Smithfield,"{'lat': 53.347692, 'lng': -6.278214}",False,False,30,8,22,OPEN,1739960005000
+10,dublin,DAME STREET,Dame Street,"{'lat': 53.344007, 'lng': -6.266802}",False,False,16,9,7,OPEN,1739960038000
+100,dublin,HEUSTON BRIDGE (SOUTH),Heuston Bridge (South),"{'lat': 53.347106, 'lng': -6.292041}",False,False,25,24,1,OPEN,1739960442000
+24,dublin,CATHAL BRUGHA STREET,Cathal Brugha Street,"{'lat': 53.352149, 'lng': -6.260533}",False,False,20,6,14,OPEN,1739959986000
+64,dublin,SANDWITH STREET,Sandwith Street,"{'lat': 53.345203, 'lng': -6.247163}",False,False,40,38,2,OPEN,1739960345000
+109,dublin,BUCKINGHAM STREET LOWER,Buckingham Street Lower,"{'lat': 53.353331, 'lng': -6.249319}",False,False,29,7,19,OPEN,1739960333000
+85,dublin,ROTHE ABBEY,Rothe Abbey,"{'lat': 53.338776, 'lng': -6.30395}",False,False,35,20,15,OPEN,1739960489000
+107,dublin,CHARLEVILLE ROAD,Charleville Road,"{'lat': 53.359157, 'lng': -6.281866}",False,False,40,36,4,OPEN,1739960312000
+33,dublin,PRINCES STREET / O'CONNELL STREET,Princes Street / O'Connell Street,"{'lat': 53.349013, 'lng': -6.260311}",False,False,23,6,17,OPEN,1739960336000
+44,dublin,UPPER SHERRARD STREET,Upper Sherrard Street,"{'lat': 53.358437, 'lng': -6.260641}",False,False,30,30,0,OPEN,1739959982000
+89,dublin,FITZWILLIAM SQUARE EAST,Fitzwilliam Square East,"{'lat': 53.335211, 'lng': -6.2509}",False,False,40,30,10,OPEN,1739960119000
+57,dublin,GRATTAN STREET,Grattan Street,"{'lat': 53.339629, 'lng': -6.243778}",False,False,23,7,16,OPEN,1739960368000
+80,dublin,ST JAMES HOSPITAL (LUAS),St James Hospital (Luas),"{'lat': 53.341359, 'lng': -6.292951}",False,False,40,27,13,OPEN,1739960304000
+41,dublin,HARCOURT TERRACE,Harcourt Terrace,"{'lat': 53.332763, 'lng': -6.257942}",False,False,20,19,1,OPEN,1739960362000
+3,dublin,BOLTON STREET,Bolton Street,"{'lat': 53.351182, 'lng': -6.269859}",False,False,20,18,2,OPEN,1739960477000
+40,dublin,JERVIS STREET,Jervis Street,"{'lat': 53.3483, 'lng': -6.266651}",False,False,21,6,15,OPEN,1739960238000
+29,dublin,ORMOND QUAY UPPER,Ormond Quay Upper,"{'lat': 53.346057, 'lng': -6.268001}",False,False,29,17,12,OPEN,1739959980000
+103,dublin,GRANGEGORMAN LOWER (SOUTH),Grangegorman Lower (South),"{'lat': 53.354663, 'lng': -6.278681}",False,False,40,29,11,OPEN,1739960197000
+28,dublin,MOUNTJOY SQUARE WEST,Mountjoy Square West,"{'lat': 53.356299, 'lng': -6.258586}",False,False,30,26,4,OPEN,1739960357000
+39,dublin,WILTON TERRACE,Wilton Terrace,"{'lat': 53.332383, 'lng': -6.252717}",False,False,20,18,2,OPEN,1739960147000
+83,dublin,EMMET ROAD,Emmet Road,"{'lat': 53.340714, 'lng': -6.308191}",False,False,40,12,28,OPEN,1739959905000
+92,dublin,HEUSTON BRIDGE (NORTH),Heuston Bridge (North),"{'lat': 53.347802, 'lng': -6.292432}",False,False,40,37,3,OPEN,1739960427000
+21,dublin,LEINSTER STREET SOUTH,Leinster Street South,"{'lat': 53.34218, 'lng': -6.254485}",False,False,30,15,15,OPEN,1739959933000
+88,dublin,BLACKHALL PLACE,Blackhall Place,"{'lat': 53.3488, 'lng': -6.281637}",False,False,30,22,8,OPEN,1739960298000
+42,dublin,SMITHFIELD NORTH,Smithfield North,"{'lat': 53.349562, 'lng': -6.278198}",False,False,30,26,4,OPEN,1739960508000
+30,dublin,PARNELL SQUARE NORTH,Parnell Square North,"{'lat': 53.3537415547453, 'lng': -6.26530144781526}",False,False,20,8,12,OPEN,1739960631000
+54,dublin,CLONMEL STREET,Clonmel Street,"{'lat': 53.336021, 'lng': -6.26298}",False,False,33,24,9,OPEN,1739960571000
+108,dublin,AVONDALE ROAD,Avondale Road,"{'lat': 53.359405, 'lng': -6.276142}",False,False,35,17,18,OPEN,1739960460000
+20,dublin,JAMES STREET EAST,James Street East,"{'lat': 53.336597, 'lng': -6.248109}",False,False,30,6,24,OPEN,1739960632000
+56,dublin,MOUNT STREET LOWER,Mount Street Lower,"{'lat': 53.33796, 'lng': -6.24153}",False,False,40,23,17,OPEN,1739960320000
+6,dublin,CHRISTCHURCH PLACE,Christchurch Place,"{'lat': 53.343368, 'lng': -6.27012}",False,False,20,14,6,OPEN,1739960398000
+18,dublin,GRANTHAM STREET,Grantham Street,"{'lat': 53.334123, 'lng': -6.265436}",False,False,30,27,2,OPEN,1739960771000
+32,dublin,PEARSE STREET,Pearse Street,"{'lat': 53.344304, 'lng': -6.250427}",False,False,30,4,25,OPEN,1739960552000
+52,dublin,YORK STREET EAST,York Street East,"{'lat': 53.338755, 'lng': -6.262003}",False,False,32,16,16,OPEN,1739960462000
+48,dublin,EXCISE WALK,Excise Walk,"{'lat': 53.347777, 'lng': -6.244239}",False,False,40,28,12,OPEN,1739960443000
+13,dublin,FITZWILLIAM SQUARE WEST,Fitzwilliam Square West,"{'lat': 53.336074, 'lng': -6.252825}",False,False,30,20,10,OPEN,1739960440000
+43,dublin,PORTOBELLO ROAD,Portobello Road,"{'lat': 53.330091, 'lng': -6.268044}",False,False,30,30,0,OPEN,1739960514000
+31,dublin,PARNELL STREET,Parnell Street,"{'lat': 53.350929, 'lng': -6.265125}",False,False,20,8,12,OPEN,1739960458000
+98,dublin,FREDERICK STREET SOUTH,Frederick Street South,"{'lat': 53.341515, 'lng': -6.256853}",False,False,40,19,20,OPEN,1739960424000
+14,dublin,FOWNES STREET UPPER,Fownes Street Upper,"{'lat': 53.344603, 'lng': -6.263371}",False,False,30,5,25,OPEN,1739960575000
+1,dublin,CLARENDON ROW,Clarendon Row,"{'lat': 53.340927, 'lng': -6.262501}",False,False,31,18,12,OPEN,1739960496000
+23,dublin,CUSTOM HOUSE,Custom House,"{'lat': 53.348279, 'lng': -6.254662}",False,False,30,19,11,OPEN,1739960751000
+106,dublin,RATHDOWN ROAD,Rathdown Road,"{'lat': 53.35893, 'lng': -6.280337}",False,False,40,40,0,OPEN,1739960510000
+112,dublin,NORTH CIRCULAR ROAD (O'CONNELL'S),North Circular Road (O'Connell's),"{'lat': 53.357841, 'lng': -6.251557}",False,False,30,30,0,OPEN,1739960742000
+68,dublin,HANOVER QUAY,Hanover Quay,"{'lat': 53.344115, 'lng': -6.237153}",False,False,40,11,29,OPEN,1739960513000
+74,dublin,OLIVER BOND STREET,Oliver Bond Street,"{'lat': 53.343893, 'lng': -6.280531}",False,False,30,30,0,OPEN,1739960499000
+87,dublin,COLLINS BARRACKS MUSEUM,Collins Barracks Museum,"{'lat': 53.347477, 'lng': -6.28525}",False,False,38,30,7,OPEN,1739960366000
+84,dublin,BROOKFIELD ROAD,Brookfield Road,"{'lat': 53.339005, 'lng': -6.300217}",False,False,30,20,10,OPEN,1739960512000
+90,dublin,BENSON STREET,Benson Street,"{'lat': 53.344153, 'lng': -6.233451}",False,False,40,6,34,OPEN,1739960647000
+11,dublin,EARLSFORT TERRACE,Earlsfort Terrace,"{'lat': 53.334295, 'lng': -6.258503}",False,False,30,9,19,OPEN,1739960375000
+17,dublin,GOLDEN LANE,Golden Lane,"{'lat': 53.340803, 'lng': -6.267732}",False,False,20,13,7,OPEN,1739960624000
+45,dublin,DEVERELL PLACE,Deverell Place,"{'lat': 53.351464, 'lng': -6.255265}",False,False,30,12,16,OPEN,1739960551000
+114,dublin,WILTON TERRACE (PARK),Wilton Terrace (Park),"{'lat': 53.333653, 'lng': -6.248345}",False,False,40,27,11,OPEN,1739960677000
+72,dublin,JOHN STREET WEST,John Street West,"{'lat': 53.343105, 'lng': -6.277167}",False,False,31,20,11,OPEN,1739960625000
+63,dublin,FENIAN STREET,Fenian Street,"{'lat': 53.341428, 'lng': -6.24672}",False,False,35,23,12,OPEN,1739960542000
+113,dublin,MERRION SQUARE SOUTH,Merrion Square South,"{'lat': 53.338614, 'lng': -6.248606}",False,False,40,16,13,OPEN,1739960486000
+91,dublin,SOUTH DOCK ROAD,South Dock Road,"{'lat': 53.341833, 'lng': -6.231291}",False,False,30,17,12,OPEN,1739960512000
+99,dublin,CITY QUAY,City Quay,"{'lat': 53.346637, 'lng': -6.246154}",False,False,30,2,28,OPEN,1739960705000
+9,dublin,EXCHEQUER STREET,Exchequer Street,"{'lat': 53.343034, 'lng': -6.263578}",False,False,24,9,14,OPEN,1739960690000
+67,dublin,THE POINT,The Point,"{'lat': 53.346867, 'lng': -6.230852}",False,False,40,32,8,OPEN,1739960763000
+116,dublin,BROADSTONE,Broadstone,"{'lat': 53.3547, 'lng': -6.272314}",False,False,30,10,20,OPEN,1739960339000
+55,dublin,HATCH STREET,Hatch Street,"{'lat': 53.33403, 'lng': -6.260714}",False,False,36,20,16,OPEN,1739960677000
+62,dublin,LIME STREET,Lime Street,"{'lat': 53.346026, 'lng': -6.243576}",False,False,40,16,24,OPEN,1739960479000
+5,dublin,CHARLEMONT PLACE,Charlemont Street,"{'lat': 53.330662, 'lng': -6.260177}",False,False,40,39,1,OPEN,1739960730000
+97,dublin,KILMAINHAM GAOL,Kilmainham Gaol,"{'lat': 53.342113, 'lng': -6.310015}",False,False,40,40,0,OPEN,1739960607000
+61,dublin,HARDWICKE PLACE,Hardwicke Place,"{'lat': 53.357043, 'lng': -6.263232}",False,False,25,12,13,OPEN,1739960373000
+77,dublin,WOLFE TONE STREET,Wolfe Tone Street,"{'lat': 53.348875, 'lng': -6.267459}",False,False,29,29,0,OPEN,1739960650000
+73,dublin,FRANCIS STREET,Francis Street,"{'lat': 53.342081, 'lng': -6.275233}",False,False,30,19,11,OPEN,1739960555000
+4,dublin,GREEK STREET,Greek Street,"{'lat': 53.346874, 'lng': -6.272976}",False,False,20,5,15,OPEN,1739960586000
+49,dublin,GUILD STREET,Guild Street,"{'lat': 53.347932, 'lng': -6.240928}",False,False,40,21,19,OPEN,1739960778000
+19,dublin,HERBERT PLACE,Herbert Place,"{'lat': 53.334432, 'lng': -6.245575}",False,False,30,0,28,OPEN,1739960671000
+7,dublin,HIGH STREET,High Street,"{'lat': 53.343565, 'lng': -6.275071}",False,False,29,18,11,OPEN,1739960428000
+60,dublin,NORTH CIRCULAR ROAD,North Circular Road,"{'lat': 53.359624, 'lng': -6.260348}",False,False,30,30,0,OPEN,1739960786000
+102,dublin,WESTERN WAY,Western Way,"{'lat': 53.354929, 'lng': -6.269425}",False,False,40,28,12,OPEN,1739960471000
+38,dublin,TALBOT STREET,Talbot Street,"{'lat': 53.350974, 'lng': -6.25294}",False,False,40,26,13,OPEN,1739960724000
+53,dublin,NEWMAN HOUSE,Newman House,"{'lat': 53.337132, 'lng': -6.26059}",False,False,40,18,22,OPEN,1739960484000
+58,dublin,SIR PATRICK DUN'S,Sir Patrick's Dun,"{'lat': 53.339218, 'lng': -6.240642}",False,False,40,9,31,OPEN,1739960728000
+66,dublin,NEW CENTRAL BANK,New Central Bank,"{'lat': 53.347122, 'lng': -6.234749}",False,False,40,19,21,OPEN,1739960700000
+104,dublin,GRANGEGORMAN LOWER (CENTRAL),Grangegorman Lower (Central),"{'lat': 53.355173, 'lng': -6.278424}",False,False,40,27,12,OPEN,1739960565000
+101,dublin,KING STREET NORTH,King Street North,"{'lat': 53.350291, 'lng': -6.273507}",False,False,30,29,1,OPEN,1739960465000
+115,dublin,KILLARNEY STREET,Killarney Street,"{'lat': 53.354845, 'lng': -6.247579}",False,False,30,22,8,OPEN,1739960772000
+47,dublin,HERBERT STREET,Herbert Street,"{'lat': 53.335742, 'lng': -6.24551}",False,False,40,33,6,OPEN,1739960679000
+117,dublin,HANOVER QUAY EAST,Hanover Quay East,"{'lat': 53.343653, 'lng': -6.231755}",False,False,40,8,32,OPEN,1739960617000
+8,dublin,CUSTOM HOUSE QUAY,Custom House Quay,"{'lat': 53.347884, 'lng': -6.248048}",False,False,30,16,14,OPEN,1739960694000
+27,dublin,MOLESWORTH STREET,Molesworth Street,"{'lat': 53.341288, 'lng': -6.258117}",False,False,20,1,18,OPEN,1739960713000
+16,dublin,GEORGES QUAY,Georges Quay,"{'lat': 53.347508, 'lng': -6.252192}",False,False,20,6,14,OPEN,1739960411000
+96,dublin,KILMAINHAM LANE,Kilmainham Lane,"{'lat': 53.341805, 'lng': -6.305085}",False,False,30,15,15,OPEN,1739960320000
+82,dublin,MOUNT BROWN,Mount Brown,"{'lat': 53.341645, 'lng': -6.29719}",False,False,22,21,1,OPEN,1739960373000
+76,dublin,MARKET STREET SOUTH,Market Street South,"{'lat': 53.342296, 'lng': -6.287661}",False,False,38,33,5,OPEN,1739960332000
+71,dublin,KEVIN STREET,Kevin Street,"{'lat': 53.337757, 'lng': -6.267699}",False,False,40,27,13,OPEN,1739960382000
+79,dublin,ECCLES STREET EAST,Eccles Street East,"{'lat': 53.358115, 'lng': -6.265601}",False,False,27,5,22,OPEN,1739960484000
+69,dublin,GRAND CANAL DOCK,Grand Canal Dock,"{'lat': 53.342638, 'lng': -6.238695}",False,False,40,13,26,OPEN,1739960788000
+25,dublin,MERRION SQUARE EAST,Merrion Square East,"{'lat': 53.339434, 'lng': -6.246548}",False,False,30,15,15,OPEN,1739960562000
+51,dublin,YORK STREET WEST,York Street West,"{'lat': 53.339334, 'lng': -6.264699}",False,False,40,0,0,OPEN,1739960614000
+37,dublin,ST. STEPHEN'S GREEN SOUTH,St. Stephen's Green South,"{'lat': 53.337494, 'lng': -6.26199}",False,False,30,23,7,OPEN,1739960367000
+59,dublin,DENMARK STREET GREAT,Denmark Street Great,"{'lat': 53.35561, 'lng': -6.261397}",False,False,20,15,5,OPEN,1739960572000
+95,dublin,ROYAL HOSPITAL,Royal Hospital,"{'lat': 53.343897, 'lng': -6.29706}",False,False,40,20,20,OPEN,1739960772000
+94,dublin,HEUSTON STATION (CAR PARK),Heuston Station (Car Park),"{'lat': 53.346985, 'lng': -6.297804}",False,False,40,38,2,OPEN,1739960520000
+105,dublin,GRANGEGORMAN LOWER (NORTH),Grangegorman Lower (North),"{'lat': 53.355954, 'lng': -6.278378}",False,False,36,31,5,OPEN,1739960698000
+36,dublin,ST. STEPHEN'S GREEN EAST,St. Stephen's Green East,"{'lat': 53.337824, 'lng': -6.256035}",False,False,40,17,23,OPEN,1739960392000
+93,dublin,HEUSTON STATION (CENTRAL),Heuston Station (Central),"{'lat': 53.346603, 'lng': -6.296924}",False,False,40,40,0,OPEN,1739960526000
+22,dublin,TOWNSEND STREET,Townsend Street,"{'lat': 53.345922, 'lng': -6.254614}",False,False,20,7,11,OPEN,1739960418000
+50,dublin,GEORGES LANE,George's Lane,"{'lat': 53.35023, 'lng': -6.279696}",False,False,40,39,1,OPEN,1739960649000
+110,dublin,PHIBSBOROUGH ROAD,Phibsborough Road,"{'lat': 53.356307, 'lng': -6.273717}",False,False,40,28,12,OPEN,1739960703000
+12,dublin,ECCLES STREET,Eccles Street,"{'lat': 53.359246, 'lng': -6.269779}",False,False,20,20,0,OPEN,1739960573000
+34,dublin,PORTOBELLO HARBOUR,Portobello Harbour,"{'lat': 53.330362, 'lng': -6.265163}",False,False,30,18,12,OPEN,1739960748000
+78,dublin,MATER HOSPITAL,Mater Hospital,"{'lat': 53.359967, 'lng': -6.264828}",False,False,40,39,1,OPEN,1739960550000
+2,dublin,BLESSINGTON STREET,Blessington Street,"{'lat': 53.356769, 'lng': -6.26814}",False,False,20,13,7,OPEN,1739960413000
+75,dublin,JAMES STREET,James Street,"{'lat': 53.343456, 'lng': -6.287409}",False,False,40,29,11,OPEN,1739960697000
+111,dublin,MOUNTJOY SQUARE EAST,Mountjoy Square East,"{'lat': 53.356717, 'lng': -6.256359}",False,False,40,40,0,OPEN,1739960221000
+26,dublin,MERRION SQUARE WEST,Merrion Square West,"{'lat': 53.339764, 'lng': -6.251988}",False,False,20,1,19,OPEN,1739960400000
+65,dublin,CONVENTION CENTRE,Convention Centre,"{'lat': 53.34744, 'lng': -6.238523}",False,False,40,21,19,OPEN,1739960673000
+15,dublin,HARDWICKE STREET,Hardwicke Street,"{'lat': 53.355473, 'lng': -6.264423}",False,False,16,10,6,OPEN,1739960592000
+86,dublin,PARKGATE STREET,Parkgate Street,"{'lat': 53.347972, 'lng': -6.291804}",False,False,38,38,0,OPEN,1739960380000
+35,dublin,SMITHFIELD,Smithfield,"{'lat': 53.347692, 'lng': -6.278214}",False,False,30,9,21,OPEN,1739960776000
+10,dublin,DAME STREET,Dame Street,"{'lat': 53.344007, 'lng': -6.266802}",False,False,16,10,6,OPEN,1739960645000
+100,dublin,HEUSTON BRIDGE (SOUTH),Heuston Bridge (South),"{'lat': 53.347106, 'lng': -6.292041}",False,False,25,23,2,OPEN,1739960725000
+24,dublin,CATHAL BRUGHA STREET,Cathal Brugha Street,"{'lat': 53.352149, 'lng': -6.260533}",False,False,20,7,13,OPEN,1739960592000
+64,dublin,SANDWITH STREET,Sandwith Street,"{'lat': 53.345203, 'lng': -6.247163}",False,False,40,38,2,OPEN,1739960613000
+109,dublin,BUCKINGHAM STREET LOWER,Buckingham Street Lower,"{'lat': 53.353331, 'lng': -6.249319}",False,False,29,7,19,OPEN,1739960333000
+85,dublin,ROTHE ABBEY,Rothe Abbey,"{'lat': 53.338776, 'lng': -6.30395}",False,False,35,20,15,OPEN,1739960632000
+107,dublin,CHARLEVILLE ROAD,Charleville Road,"{'lat': 53.359157, 'lng': -6.281866}",False,False,40,36,4,OPEN,1739960661000
+33,dublin,PRINCES STREET / O'CONNELL STREET,Princes Street / O'Connell Street,"{'lat': 53.349013, 'lng': -6.260311}",False,False,23,5,18,OPEN,1739960557000
+44,dublin,UPPER SHERRARD STREET,Upper Sherrard Street,"{'lat': 53.358437, 'lng': -6.260641}",False,False,30,30,0,OPEN,1739960588000
+89,dublin,FITZWILLIAM SQUARE EAST,Fitzwilliam Square East,"{'lat': 53.335211, 'lng': -6.2509}",False,False,40,30,10,OPEN,1739960724000
+57,dublin,GRATTAN STREET,Grattan Street,"{'lat': 53.339629, 'lng': -6.243778}",False,False,23,7,16,OPEN,1739960368000
+80,dublin,ST JAMES HOSPITAL (LUAS),St James Hospital (Luas),"{'lat': 53.341359, 'lng': -6.292951}",False,False,40,27,13,OPEN,1739960304000
+41,dublin,HARCOURT TERRACE,Harcourt Terrace,"{'lat': 53.332763, 'lng': -6.257942}",False,False,20,19,1,OPEN,1739960362000
+3,dublin,BOLTON STREET,Bolton Street,"{'lat': 53.351182, 'lng': -6.269859}",False,False,20,18,2,OPEN,1739960477000
+40,dublin,JERVIS STREET,Jervis Street,"{'lat': 53.3483, 'lng': -6.266651}",False,False,21,5,16,OPEN,1739960783000
+29,dublin,ORMOND QUAY UPPER,Ormond Quay Upper,"{'lat': 53.346057, 'lng': -6.268001}",False,False,29,17,12,OPEN,1739960776000
+103,dublin,GRANGEGORMAN LOWER (SOUTH),Grangegorman Lower (South),"{'lat': 53.354663, 'lng': -6.278681}",False,False,40,28,12,OPEN,1739960803000
+28,dublin,MOUNTJOY SQUARE WEST,Mountjoy Square West,"{'lat': 53.356299, 'lng': -6.258586}",False,False,30,26,4,OPEN,1739960643000
+39,dublin,WILTON TERRACE,Wilton Terrace,"{'lat': 53.332383, 'lng': -6.252717}",False,False,20,18,2,OPEN,1739960752000
+83,dublin,EMMET ROAD,Emmet Road,"{'lat': 53.340714, 'lng': -6.308191}",False,False,40,12,28,OPEN,1739960509000
+92,dublin,HEUSTON BRIDGE (NORTH),Heuston Bridge (North),"{'lat': 53.347802, 'lng': -6.292432}",False,False,40,36,4,OPEN,1739960599000
+21,dublin,LEINSTER STREET SOUTH,Leinster Street South,"{'lat': 53.34218, 'lng': -6.254485}",False,False,30,15,15,OPEN,1739960539000
+88,dublin,BLACKHALL PLACE,Blackhall Place,"{'lat': 53.3488, 'lng': -6.281637}",False,False,30,21,9,OPEN,1739960710000
+42,dublin,SMITHFIELD NORTH,Smithfield North,"{'lat': 53.349562, 'lng': -6.278198}",False,False,30,27,3,OPEN,1739960870000
+30,dublin,PARNELL SQUARE NORTH,Parnell Square North,"{'lat': 53.3537415547453, 'lng': -6.26530144781526}",False,False,20,8,12,OPEN,1739960631000
+54,dublin,CLONMEL STREET,Clonmel Street,"{'lat': 53.336021, 'lng': -6.26298}",False,False,33,24,9,OPEN,1739960571000
+108,dublin,AVONDALE ROAD,Avondale Road,"{'lat': 53.359405, 'lng': -6.276142}",False,False,35,17,18,OPEN,1739961008000
+20,dublin,JAMES STREET EAST,James Street East,"{'lat': 53.336597, 'lng': -6.248109}",False,False,30,7,23,OPEN,1739960949000
+56,dublin,MOUNT STREET LOWER,Mount Street Lower,"{'lat': 53.33796, 'lng': -6.24153}",False,False,40,23,17,OPEN,1739960924000
+6,dublin,CHRISTCHURCH PLACE,Christchurch Place,"{'lat': 53.343368, 'lng': -6.27012}",False,False,20,14,6,OPEN,1739961002000
+18,dublin,GRANTHAM STREET,Grantham Street,"{'lat': 53.334123, 'lng': -6.265436}",False,False,30,27,2,OPEN,1739960771000
+32,dublin,PEARSE STREET,Pearse Street,"{'lat': 53.344304, 'lng': -6.250427}",False,False,30,4,26,OPEN,1739961042000
+52,dublin,YORK STREET EAST,York Street East,"{'lat': 53.338755, 'lng': -6.262003}",False,False,32,17,15,OPEN,1739961068000
+48,dublin,EXCISE WALK,Excise Walk,"{'lat': 53.347777, 'lng': -6.244239}",False,False,40,28,12,OPEN,1739961047000
+13,dublin,FITZWILLIAM SQUARE WEST,Fitzwilliam Square West,"{'lat': 53.336074, 'lng': -6.252825}",False,False,30,20,10,OPEN,1739961044000
+43,dublin,PORTOBELLO ROAD,Portobello Road,"{'lat': 53.330091, 'lng': -6.268044}",False,False,30,29,1,OPEN,1739961024000
+31,dublin,PARNELL STREET,Parnell Street,"{'lat': 53.350929, 'lng': -6.265125}",False,False,20,8,12,OPEN,1739960956000
+98,dublin,FREDERICK STREET SOUTH,Frederick Street South,"{'lat': 53.341515, 'lng': -6.256853}",False,False,40,19,20,OPEN,1739961028000
+14,dublin,FOWNES STREET UPPER,Fownes Street Upper,"{'lat': 53.344603, 'lng': -6.263371}",False,False,30,5,25,OPEN,1739960575000
+1,dublin,CLARENDON ROW,Clarendon Row,"{'lat': 53.340927, 'lng': -6.262501}",False,False,31,17,13,OPEN,1739961101000
+23,dublin,CUSTOM HOUSE,Custom House,"{'lat': 53.348279, 'lng': -6.254662}",False,False,30,18,12,OPEN,1739960934000
+106,dublin,RATHDOWN ROAD,Rathdown Road,"{'lat': 53.35893, 'lng': -6.280337}",False,False,40,40,0,OPEN,1739960510000
+112,dublin,NORTH CIRCULAR ROAD (O'CONNELL'S),North Circular Road (O'Connell's),"{'lat': 53.357841, 'lng': -6.251557}",False,False,30,30,0,OPEN,1739960742000
+68,dublin,HANOVER QUAY,Hanover Quay,"{'lat': 53.344115, 'lng': -6.237153}",False,False,40,10,30,OPEN,1739960922000
+74,dublin,OLIVER BOND STREET,Oliver Bond Street,"{'lat': 53.343893, 'lng': -6.280531}",False,False,30,30,0,OPEN,1739961103000
+87,dublin,COLLINS BARRACKS MUSEUM,Collins Barracks Museum,"{'lat': 53.347477, 'lng': -6.28525}",False,False,38,30,7,OPEN,1739960970000
+84,dublin,BROOKFIELD ROAD,Brookfield Road,"{'lat': 53.339005, 'lng': -6.300217}",False,False,30,20,10,OPEN,1739960512000
+90,dublin,BENSON STREET,Benson Street,"{'lat': 53.344153, 'lng': -6.233451}",False,False,40,6,34,OPEN,1739961008000
+11,dublin,EARLSFORT TERRACE,Earlsfort Terrace,"{'lat': 53.334295, 'lng': -6.258503}",False,False,30,9,19,OPEN,1739960979000
+17,dublin,GOLDEN LANE,Golden Lane,"{'lat': 53.340803, 'lng': -6.267732}",False,False,20,13,7,OPEN,1739960624000
+45,dublin,DEVERELL PLACE,Deverell Place,"{'lat': 53.351464, 'lng': -6.255265}",False,False,30,12,16,OPEN,1739960551000
+114,dublin,WILTON TERRACE (PARK),Wilton Terrace (Park),"{'lat': 53.333653, 'lng': -6.248345}",False,False,40,27,11,OPEN,1739960677000
+72,dublin,JOHN STREET WEST,John Street West,"{'lat': 53.343105, 'lng': -6.277167}",False,False,31,20,11,OPEN,1739961056000
+63,dublin,FENIAN STREET,Fenian Street,"{'lat': 53.341428, 'lng': -6.24672}",False,False,35,23,12,OPEN,1739960542000
+113,dublin,MERRION SQUARE SOUTH,Merrion Square South,"{'lat': 53.338614, 'lng': -6.248606}",False,False,40,16,13,OPEN,1739961092000
+91,dublin,SOUTH DOCK ROAD,South Dock Road,"{'lat': 53.341833, 'lng': -6.231291}",False,False,30,17,12,OPEN,1739960512000
+99,dublin,CITY QUAY,City Quay,"{'lat': 53.346637, 'lng': -6.246154}",False,False,30,1,29,OPEN,1739960958000
+9,dublin,EXCHEQUER STREET,Exchequer Street,"{'lat': 53.343034, 'lng': -6.263578}",False,False,24,9,14,OPEN,1739960690000
+67,dublin,THE POINT,The Point,"{'lat': 53.346867, 'lng': -6.230852}",False,False,40,32,8,OPEN,1739960763000
+116,dublin,BROADSTONE,Broadstone,"{'lat': 53.3547, 'lng': -6.272314}",False,False,30,10,20,OPEN,1739960943000
+55,dublin,HATCH STREET,Hatch Street,"{'lat': 53.33403, 'lng': -6.260714}",False,False,36,20,16,OPEN,1739960677000
+62,dublin,LIME STREET,Lime Street,"{'lat': 53.346026, 'lng': -6.243576}",False,False,40,16,24,OPEN,1739961084000
+5,dublin,CHARLEMONT PLACE,Charlemont Street,"{'lat': 53.330662, 'lng': -6.260177}",False,False,40,38,2,OPEN,1739960984000
+97,dublin,KILMAINHAM GAOL,Kilmainham Gaol,"{'lat': 53.342113, 'lng': -6.310015}",False,False,40,40,0,OPEN,1739960607000
+61,dublin,HARDWICKE PLACE,Hardwicke Place,"{'lat': 53.357043, 'lng': -6.263232}",False,False,25,12,13,OPEN,1739960977000
+77,dublin,WOLFE TONE STREET,Wolfe Tone Street,"{'lat': 53.348875, 'lng': -6.267459}",False,False,29,28,1,OPEN,1739960839000
+73,dublin,FRANCIS STREET,Francis Street,"{'lat': 53.342081, 'lng': -6.275233}",False,False,30,20,10,OPEN,1739960909000
+4,dublin,GREEK STREET,Greek Street,"{'lat': 53.346874, 'lng': -6.272976}",False,False,20,5,15,OPEN,1739960586000
+49,dublin,GUILD STREET,Guild Street,"{'lat': 53.347932, 'lng': -6.240928}",False,False,40,22,18,OPEN,1739960905000
+19,dublin,HERBERT PLACE,Herbert Place,"{'lat': 53.334432, 'lng': -6.245575}",False,False,30,1,27,OPEN,1739961002000
+7,dublin,HIGH STREET,High Street,"{'lat': 53.343565, 'lng': -6.275071}",False,False,29,18,11,OPEN,1739961032000
+60,dublin,NORTH CIRCULAR ROAD,North Circular Road,"{'lat': 53.359624, 'lng': -6.260348}",False,False,30,30,0,OPEN,1739960786000
+102,dublin,WESTERN WAY,Western Way,"{'lat': 53.354929, 'lng': -6.269425}",False,False,40,28,12,OPEN,1739961076000
+38,dublin,TALBOT STREET,Talbot Street,"{'lat': 53.350974, 'lng': -6.25294}",False,False,40,26,13,OPEN,1739960724000
+53,dublin,NEWMAN HOUSE,Newman House,"{'lat': 53.337132, 'lng': -6.26059}",False,False,40,18,22,OPEN,1739961088000
+58,dublin,SIR PATRICK DUN'S,Sir Patrick's Dun,"{'lat': 53.339218, 'lng': -6.240642}",False,False,40,8,32,OPEN,1739961064000
+66,dublin,NEW CENTRAL BANK,New Central Bank,"{'lat': 53.347122, 'lng': -6.234749}",False,False,40,19,21,OPEN,1739961079000
+104,dublin,GRANGEGORMAN LOWER (CENTRAL),Grangegorman Lower (Central),"{'lat': 53.355173, 'lng': -6.278424}",False,False,40,27,12,OPEN,1739960565000
+101,dublin,KING STREET NORTH,King Street North,"{'lat': 53.350291, 'lng': -6.273507}",False,False,30,29,1,OPEN,1739961070000
+115,dublin,KILLARNEY STREET,Killarney Street,"{'lat': 53.354845, 'lng': -6.247579}",False,False,30,22,8,OPEN,1739960772000
+47,dublin,HERBERT STREET,Herbert Street,"{'lat': 53.335742, 'lng': -6.24551}",False,False,40,33,7,OPEN,1739961084000
+117,dublin,HANOVER QUAY EAST,Hanover Quay East,"{'lat': 53.343653, 'lng': -6.231755}",False,False,40,8,32,OPEN,1739960617000
+8,dublin,CUSTOM HOUSE QUAY,Custom House Quay,"{'lat': 53.347884, 'lng': -6.248048}",False,False,30,16,14,OPEN,1739960694000
+27,dublin,MOLESWORTH STREET,Molesworth Street,"{'lat': 53.341288, 'lng': -6.258117}",False,False,20,1,18,OPEN,1739960713000
+16,dublin,GEORGES QUAY,Georges Quay,"{'lat': 53.347508, 'lng': -6.252192}",False,False,20,6,14,OPEN,1739960996000
+96,dublin,KILMAINHAM LANE,Kilmainham Lane,"{'lat': 53.341805, 'lng': -6.305085}",False,False,30,15,15,OPEN,1739960924000
+82,dublin,MOUNT BROWN,Mount Brown,"{'lat': 53.341645, 'lng': -6.29719}",False,False,22,21,1,OPEN,1739960977000
+76,dublin,MARKET STREET SOUTH,Market Street South,"{'lat': 53.342296, 'lng': -6.287661}",False,False,38,33,5,OPEN,1739960936000
+71,dublin,KEVIN STREET,Kevin Street,"{'lat': 53.337757, 'lng': -6.267699}",False,False,40,28,12,OPEN,1739961101000
+79,dublin,ECCLES STREET EAST,Eccles Street East,"{'lat': 53.358115, 'lng': -6.265601}",False,False,27,5,22,OPEN,1739960484000
+69,dublin,GRAND CANAL DOCK,Grand Canal Dock,"{'lat': 53.342638, 'lng': -6.238695}",False,False,40,13,26,OPEN,1739960788000
+25,dublin,MERRION SQUARE EAST,Merrion Square East,"{'lat': 53.339434, 'lng': -6.246548}",False,False,30,15,15,OPEN,1739960562000
+51,dublin,YORK STREET WEST,York Street West,"{'lat': 53.339334, 'lng': -6.264699}",False,False,40,0,0,OPEN,1739960614000
+37,dublin,ST. STEPHEN'S GREEN SOUTH,St. Stephen's Green South,"{'lat': 53.337494, 'lng': -6.26199}",False,False,30,23,7,OPEN,1739960970000
+59,dublin,DENMARK STREET GREAT,Denmark Street Great,"{'lat': 53.35561, 'lng': -6.261397}",False,False,20,15,5,OPEN,1739960572000
+95,dublin,ROYAL HOSPITAL,Royal Hospital,"{'lat': 53.343897, 'lng': -6.29706}",False,False,40,20,20,OPEN,1739960772000
+94,dublin,HEUSTON STATION (CAR PARK),Heuston Station (Car Park),"{'lat': 53.346985, 'lng': -6.297804}",False,False,40,38,2,OPEN,1739960520000
+105,dublin,GRANGEGORMAN LOWER (NORTH),Grangegorman Lower (North),"{'lat': 53.355954, 'lng': -6.278378}",False,False,36,32,4,OPEN,1739960905000
+36,dublin,ST. STEPHEN'S GREEN EAST,St. Stephen's Green East,"{'lat': 53.337824, 'lng': -6.256035}",False,False,40,16,24,OPEN,1739960998000
+93,dublin,HEUSTON STATION (CENTRAL),Heuston Station (Central),"{'lat': 53.346603, 'lng': -6.296924}",False,False,40,40,0,OPEN,1739960526000
+22,dublin,TOWNSEND STREET,Townsend Street,"{'lat': 53.345922, 'lng': -6.254614}",False,False,20,7,11,OPEN,1739961022000
+50,dublin,GEORGES LANE,George's Lane,"{'lat': 53.35023, 'lng': -6.279696}",False,False,40,40,0,OPEN,1739961007000
+110,dublin,PHIBSBOROUGH ROAD,Phibsborough Road,"{'lat': 53.356307, 'lng': -6.273717}",False,False,40,28,12,OPEN,1739960703000
+12,dublin,ECCLES STREET,Eccles Street,"{'lat': 53.359246, 'lng': -6.269779}",False,False,20,20,0,OPEN,1739960573000
+34,dublin,PORTOBELLO HARBOUR,Portobello Harbour,"{'lat': 53.330362, 'lng': -6.265163}",False,False,30,18,12,OPEN,1739960748000
+78,dublin,MATER HOSPITAL,Mater Hospital,"{'lat': 53.359967, 'lng': -6.264828}",False,False,40,39,1,OPEN,1739960550000
+2,dublin,BLESSINGTON STREET,Blessington Street,"{'lat': 53.356769, 'lng': -6.26814}",False,False,20,13,7,OPEN,1739961017000
+75,dublin,JAMES STREET,James Street,"{'lat': 53.343456, 'lng': -6.287409}",False,False,40,29,11,OPEN,1739960697000
+111,dublin,MOUNTJOY SQUARE EAST,Mountjoy Square East,"{'lat': 53.356717, 'lng': -6.256359}",False,False,40,40,0,OPEN,1739960827000
+26,dublin,MERRION SQUARE WEST,Merrion Square West,"{'lat': 53.339764, 'lng': -6.251988}",False,False,20,1,19,OPEN,1739961005000
+65,dublin,CONVENTION CENTRE,Convention Centre,"{'lat': 53.34744, 'lng': -6.238523}",False,False,40,21,19,OPEN,1739960673000
+15,dublin,HARDWICKE STREET,Hardwicke Street,"{'lat': 53.355473, 'lng': -6.264423}",False,False,16,10,6,OPEN,1739960592000
+86,dublin,PARKGATE STREET,Parkgate Street,"{'lat': 53.347972, 'lng': -6.291804}",False,False,38,38,0,OPEN,1739960983000
+35,dublin,SMITHFIELD,Smithfield,"{'lat': 53.347692, 'lng': -6.278214}",False,False,30,9,21,OPEN,1739960776000
+10,dublin,DAME STREET,Dame Street,"{'lat': 53.344007, 'lng': -6.266802}",False,False,16,10,6,OPEN,1739960645000
+100,dublin,HEUSTON BRIDGE (SOUTH),Heuston Bridge (South),"{'lat': 53.347106, 'lng': -6.292041}",False,False,25,23,2,OPEN,1739960725000
+24,dublin,CATHAL BRUGHA STREET,Cathal Brugha Street,"{'lat': 53.352149, 'lng': -6.260533}",False,False,20,8,12,OPEN,1739961100000
+64,dublin,SANDWITH STREET,Sandwith Street,"{'lat': 53.345203, 'lng': -6.247163}",False,False,40,38,2,OPEN,1739960613000
+109,dublin,BUCKINGHAM STREET LOWER,Buckingham Street Lower,"{'lat': 53.353331, 'lng': -6.249319}",False,False,29,7,19,OPEN,1739960937000
+85,dublin,ROTHE ABBEY,Rothe Abbey,"{'lat': 53.338776, 'lng': -6.30395}",False,False,35,20,15,OPEN,1739960632000
+107,dublin,CHARLEVILLE ROAD,Charleville Road,"{'lat': 53.359157, 'lng': -6.281866}",False,False,40,36,4,OPEN,1739960661000
+33,dublin,PRINCES STREET / O'CONNELL STREET,Princes Street / O'Connell Street,"{'lat': 53.349013, 'lng': -6.260311}",False,False,23,5,18,OPEN,1739960557000
+44,dublin,UPPER SHERRARD STREET,Upper Sherrard Street,"{'lat': 53.358437, 'lng': -6.260641}",False,False,30,30,0,OPEN,1739960588000
+89,dublin,FITZWILLIAM SQUARE EAST,Fitzwilliam Square East,"{'lat': 53.335211, 'lng': -6.2509}",False,False,40,30,10,OPEN,1739960724000
+57,dublin,GRATTAN STREET,Grattan Street,"{'lat': 53.339629, 'lng': -6.243778}",False,False,23,7,16,OPEN,1739960972000
+80,dublin,ST JAMES HOSPITAL (LUAS),St James Hospital (Luas),"{'lat': 53.341359, 'lng': -6.292951}",False,False,40,27,13,OPEN,1739960907000
+41,dublin,HARCOURT TERRACE,Harcourt Terrace,"{'lat': 53.332763, 'lng': -6.257942}",False,False,20,19,1,OPEN,1739960966000
+3,dublin,BOLTON STREET,Bolton Street,"{'lat': 53.351182, 'lng': -6.269859}",False,False,20,18,2,OPEN,1739961081000
+40,dublin,JERVIS STREET,Jervis Street,"{'lat': 53.3483, 'lng': -6.266651}",False,False,21,4,17,OPEN,1739960950000
+29,dublin,ORMOND QUAY UPPER,Ormond Quay Upper,"{'lat': 53.346057, 'lng': -6.268001}",False,False,29,17,12,OPEN,1739960776000
+103,dublin,GRANGEGORMAN LOWER (SOUTH),Grangegorman Lower (South),"{'lat': 53.354663, 'lng': -6.278681}",False,False,40,27,13,OPEN,1739961012000
+28,dublin,MOUNTJOY SQUARE WEST,Mountjoy Square West,"{'lat': 53.356299, 'lng': -6.258586}",False,False,30,27,3,OPEN,1739960934000
+39,dublin,WILTON TERRACE,Wilton Terrace,"{'lat': 53.332383, 'lng': -6.252717}",False,False,20,19,1,OPEN,1739960908000
+83,dublin,EMMET ROAD,Emmet Road,"{'lat': 53.340714, 'lng': -6.308191}",False,False,40,12,28,OPEN,1739960509000
+92,dublin,HEUSTON BRIDGE (NORTH),Heuston Bridge (North),"{'lat': 53.347802, 'lng': -6.292432}",False,False,40,36,4,OPEN,1739961031000
+21,dublin,LEINSTER STREET SOUTH,Leinster Street South,"{'lat': 53.34218, 'lng': -6.254485}",False,False,30,13,17,OPEN,1739960915000
+88,dublin,BLACKHALL PLACE,Blackhall Place,"{'lat': 53.3488, 'lng': -6.281637}",False,False,30,20,10,OPEN,1739960968000

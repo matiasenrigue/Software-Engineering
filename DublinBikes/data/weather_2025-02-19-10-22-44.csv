@@ -1,0 +1,2 @@
+coord,weather,base,main,visibility,wind,clouds,dt,sys,timezone,id,name,cod
+"{'lon': -6.2672, 'lat': 53.344}","[{'id': 803, 'main': 'Clouds', 'description': 'broken clouds', 'icon': '04d'}]",stations,"{'temp': 9.77, 'feels_like': 6.89, 'temp_min': 8.36, 'temp_max': 10.7, 'pressure': 1007, 'humidity': 89, 'sea_level': 1007, 'grnd_level': 992}",10000,"{'speed': 6.17, 'deg': 210}",{'all': 75},1739960522,"{'type': 2, 'id': 2091862, 'country': 'IE', 'sunrise': 1739950496, 'sunset': 1739986990}",0,2964574,Dublin,200
