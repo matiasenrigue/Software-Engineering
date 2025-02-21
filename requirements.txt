@@ -2,7 +2,7 @@ blinker==1.9.0
 certifi==2025.1.31
 charset-normalizer==3.4.1
 click==8.1.8
--e git+ssh://git@github.com/matiasenrigue/Software-Engineering.git@13f1d7b31b87e99c2ed9b7fda9ca6d51579a60ae#egg=DublinBikes
+-e git+ssh://git@github.com/matiasenrigue/Software-Engineering.git@0a8afd1466b43e8c683d15934a4f380621623169#egg=DublinBikes
 Flask==3.1.0
 idna==3.10
 itsdangerous==2.2.0
@@ -14,6 +14,7 @@ mysqlclient==2.2.7
 numpy==2.2.2
 pandas==2.2.3
 python-dateutil==2.9.0.post0
+python-dotenv==1.0.1
 pytz==2024.2
 requests==2.32.3
 six==1.17.0
