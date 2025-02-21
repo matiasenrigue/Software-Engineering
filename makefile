@@ -3,6 +3,14 @@ SHELL := /bin/bash  # Ensure we're using bash, since our commands are bash-speci
 
 .PHONY: setup install activate debug-env
 
+# Comand to kill the port 5000
+killport:
+	lsof -ti:5000 | xargs kill -9 || echo "No hay procesos en el puerto 8000"
+
+# Comand to run the server
+runserver: killport
+	python run.py & sleep 2 & open -a "Google Chrome" http://127.0.0.1:5000/
+
 
 scraping-textfile:
 	@echo "Running scraping script..."

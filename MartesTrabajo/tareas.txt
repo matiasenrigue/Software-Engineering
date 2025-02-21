@@ -1,0 +1,8 @@
+1. Estimacion horas del trabajo hecho en flask
+
+2. Configuracion de las variables ambientales, en archivo 
+    (tener un registro para luego poder copiarlas en server prod)
+
+3. Revisar que todo el codigo nuevo de Mr Ferrari esté correctamente implementado
+
+4. Pulir código

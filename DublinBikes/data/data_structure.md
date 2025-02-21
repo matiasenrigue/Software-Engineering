@@ -1,5 +1,63 @@
 # Data Structures
 
+## SQL Format
+
+3 Tables
+
+### Data to show for bikes station
+
+    # Station table
+    sql_station_table = '''
+    CREATE TABLE IF NOT EXISTS station (
+        station_id INTEGER NOT NULL,
+        address VARCHAR(128),
+        banking INTEGER,
+        bonus INTEGER,
+        bike_stands INTEGER,
+        name VARCHAR(128),
+        position_lat FLOAT,
+        position_lng FLOAT,
+        PRIMARY KEY (station_id)
+    );
+    '''
+
+    # Availability table
+    sql_availability_table = """
+    CREATE TABLE IF NOT EXISTS availability (
+        station_id INTEGER NOT NULL,
+        last_update DATETIME NOT NULL,
+        available_bikes INTEGER,
+        available_bike_stands INTEGER,
+        status VARCHAR(128),
+        PRIMARY KEY (station_id, last_update)
+    );
+    """
+
+### Data to show for weather
+
+    # Current weather table
+    sql_current_table = """
+    CREATE TABLE IF NOT EXISTS current (
+        dt DATETIME NOT NULL,
+        feels_like FLOAT,
+        humidity INTEGER,
+        pressure INTEGER,
+        sunrise DATETIME,
+        sunset DATETIME,
+        temp FLOAT,
+        uvi FLOAT,
+        weather_id INTEGER,
+        wind_gust FLOAT,
+        wind_speed FLOAT,
+        rain_1h FLOAT,
+        snow_1h FLOAT,
+        PRIMARY KEY (dt)
+    );
+    """
+
+
+## CSV Format
+
 ### Bike Station Data
 
 CSV: 'bikes_data.csv'

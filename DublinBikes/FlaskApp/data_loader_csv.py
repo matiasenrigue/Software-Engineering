@@ -16,7 +16,8 @@ def read_bike_data_csv():
             station = {
                 'name': row.get('name'),
                 'address': row.get('address'),
-                'bike_stands': row.get('bike_stands')
+                'bike_stands': row.get('bike_stands'),
+                'station_id': row.get('number')
             }
             stations.append(station)
     return stations

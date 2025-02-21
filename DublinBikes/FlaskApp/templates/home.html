@@ -27,6 +27,12 @@
                 <td>{{ station.name }}</td>
                 <td>{{ station.address }}</td>
                 <td>{{ station.bike_stands }}</td>
+                <td>
+                    <!-- 'Details' button linking to the station details view -->
+                    <a href="{{ url_for('station_view', station_id=station.station_id) }}">
+                      <button>Details</button>
+                    </a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

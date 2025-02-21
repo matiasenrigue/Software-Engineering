@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Station Details{% endblock %}
+
+{% block content %}
+<section>
+
+    <h1>Station Details</h1>
+    <table>
+        <tr>
+            <th>Station ID</th>
+            <td>{{ station.station_id }}</td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td>{{ station.name }}</td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td>{{ station.address }}</td>
+        </tr>
+        <tr>
+            <th>Bike Stands</th>
+            <td>{{ station.bike_stands }}</td>
+        </tr>
+        <tr>
+            <th>Banking</th>
+            <td>{{ station.banking }}</td>
+        </tr>
+        <tr>
+            <th>Bonus</th>
+            <td>{{ station.bonus }}</td>
+        </tr>
+        <tr>
+            <th>Position</th>
+            <td>{{ station.position_lat }}, {{ station.position_lng }}</td>
+        </tr>
+        <tr>
+            <th>Last Update</th>
+            <td>{{ station.last_update }}</td>
+        </tr>
+        <tr>
+            <th>Available Bikes</th>
+            <td>{{ station.available_bikes }}</td>
+        </tr>
+        <tr>
+            <th>Available Bike Stands</th>
+            <td>{{ station.available_bike_stands }}</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>{{ station.status }}</td>
+        </tr>
+    </table>
+
+</section>
+{% endblock %}
