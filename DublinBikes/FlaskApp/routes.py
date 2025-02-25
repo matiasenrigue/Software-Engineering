@@ -1,9 +1,8 @@
-# DublinBikes/FlaskApp/routes.py
-
 from flask import render_template, jsonify
 from DublinBikes.FlaskApp import app
-from DublinBikes.FlaskApp.data_loader_csv import read_bike_data_csv, read_weather_data_csv
-from DublinBikes.FlaskApp.logic import get_station_data, get_current_data
+from DublinBikes.FontEndData.data_loader_csv import read_bike_data_csv, read_weather_data_csv
+from DublinBikes.FontEndData.data_loader_SQL import get_station_data
+from DublinBikes.FontEndData.data_loader_realtime import get_current_data
 
 
 @app.route('/')
@@ -11,15 +10,6 @@ def home():
     weather = read_weather_data_csv()
     stations = read_bike_data_csv()
     return render_template('home.html', weather=weather, stations=stations)
-
-
-@app.route('/old_home')
-def old_home():
-    weather = read_weather_data_csv()
-    stations = read_bike_data_csv()
-    return render_template('old_home.html', weather=weather, stations=stations)
-
-
 
 
 @app.route('/about')
@@ -34,6 +24,7 @@ def station_view(station_id):
     if not station:
         return f"No data found for station {station_id}", 404
     return render_template('station.html', station=station)
+
 
 # Page that will display current data in JSON format.
 @app.route('/currentdata')

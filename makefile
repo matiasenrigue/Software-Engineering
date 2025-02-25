@@ -26,6 +26,12 @@ create-db:
 	python DublinBikes/Utils/sql_utils.py
 
 
+# create the database tables and start the scrapper (saving data to DB)
+init-and-scrape: create-db
+	@echo "Starting scrapping in database mode..."
+	python DublinBikes/ScrappingData/general_scrapper.py --save-to-db
+
+
 
 install:
 	@echo "Installing package in editable mode..."

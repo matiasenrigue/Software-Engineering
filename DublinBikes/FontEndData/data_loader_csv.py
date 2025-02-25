@@ -3,12 +3,21 @@ import ast
 import os
 from datetime import datetime
 
+
+def get_csv_folder_path():
+    """
+    Return the path to the folder containing the CSV files.
+    """
+    return os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data')
+
+
 def read_bike_data_csv():
     """
     Reads the bike station data from bikes_data.csv and returns a list of stations.
     Each station contains: name, address, and bike_stands.
     """
-    data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data', 'bikes_data.csv')
+    data_path = os.path.join(get_csv_folder_path(), 'bikes_data.csv')
+    
     stations = []
     with open(data_path, newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
@@ -16,12 +25,16 @@ def read_bike_data_csv():
             station = {
                 'name': row.get('name'),
                 'address': row.get('address'),
-                'bike_stands': row.get('bike_stands'),
                 'station_id': row.get('number'),
-                'position': ast.literal_eval(row.get('position'))  # Parse the string into a dict
+                'position': ast.literal_eval(row.get('position')),  # Parse the string into a dict
+                'bike_stands': row.get('bike_stands'),
+                'available_bike_stands': row.get('available_bike_stands'),
+                'available_bikes': row.get('available_bikes')
             }
             stations.append(station)
     return stations
+
+
 
 
 def read_weather_data_csv():
@@ -30,7 +43,8 @@ def read_weather_data_csv():
     temperature, description, sunrise, and sunset.
     Uses ast.literal_eval to parse stringified Python dictionaries/lists.
     """
-    data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data', 'weather_data.csv')
+    data_path = os.path.join(get_csv_folder_path(), 'weather_data.csv')
+    
     with open(data_path, newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
         row = next(reader, None)

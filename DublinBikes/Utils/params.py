@@ -8,7 +8,7 @@ import os
 
 
 # Where is the code running --> Local or AWS / Railway 
-LOCAL_RUNNING = True
+LOCAL_RUNNING = False
 
 # Dublin Bikes API
 JCKEY = 'c7d3631426d8d7f599c2d73bfce5ebcacc525445'
@@ -27,8 +27,9 @@ USER = 'root'
 PASSWORD = 'gxtuFFUfsKIGieRySYwKLNYgrFYoPZuc'
 PORT = '3306'
 DB = 'railway'
-URI = 'mysql://root:gxtuFFUfsKIGieRySYwKLNYgrFYoPZuc@centerbeam.proxy.rlwy.net:26648/railway'
-WHOLE_URI = 'mysql://root:gxtuFFUfsKIGieRySYwKLNYgrFYoPZuc@centerbeam.proxy.rlwy.net:26648/railway'
+URI = 'mysql.railway.internal'
+WHOLE_URI = 'mysql+mysqlconnector://root:gxtuFFUfsKIGieRySYwKLNYgrFYoPZuc@centerbeam.proxy.rlwy.net:26648/railway'
+
 
 # Local DataBase
 LOCAL_USER = "root"

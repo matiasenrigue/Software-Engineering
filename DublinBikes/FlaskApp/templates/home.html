@@ -39,7 +39,7 @@
       </script>
     
       <!-- Load your custom script after defining 'stations' -->
-      <script src="{{ url_for('static', filename='script.js') }}"></script>
+      <script src="{{ url_for('static', filename='maps.js') }}"></script>
     
       <!-- Google Maps API script with callback to initMap -->
       <script
@@ -52,12 +52,5 @@
 
   </body>
 
-
-
-  <script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC52iyqUSWXyFtZcnhnnZRPWleHL3h-5AQ&callback=initMap"
-  async
-  defer
-></script>
 
   {% endblock %}
