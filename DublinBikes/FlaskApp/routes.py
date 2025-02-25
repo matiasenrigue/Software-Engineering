@@ -12,6 +12,16 @@ def home():
     stations = read_bike_data_csv()
     return render_template('home.html', weather=weather, stations=stations)
 
+
+@app.route('/old_home')
+def old_home():
+    weather = read_weather_data_csv()
+    stations = read_bike_data_csv()
+    return render_template('old_home.html', weather=weather, stations=stations)
+
+
+
+
 @app.route('/about')
 def about():
     return render_template('about.html')
@@ -36,3 +46,29 @@ def currentdata_page():
 def current_data_api():
     data = get_current_data()
     return jsonify(data)
+
+
+
+
+
+###### DELETED CODE
+
+"""
+@app.route('/api/stations', methods=['GET'])
+def get_stations():
+    response = requests.get(BIKES_API_URL)
+    data = response.json()
+    return jsonify(data)
+
+@app.route('/api/weather', methods=['GET'])
+def get_weather():
+    # Placeholder for weather API integration
+    return jsonify({"temperature": 12, "humidity": 80, "description": "Cloudy"})
+
+@app.route('/api/predict', methods=['POST'])
+def predict_availability():
+    model = joblib.load("l") (bike_model.pki)# Placeholder
+    # Example prediction input
+    prediction = model.predict([[12, 80, 14]])  # Temp, Humidity, Hour
+    return jsonify({"predicted_bikes": int(prediction[0])})
+"""

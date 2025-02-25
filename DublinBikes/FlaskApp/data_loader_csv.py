@@ -17,7 +17,8 @@ def read_bike_data_csv():
                 'name': row.get('name'),
                 'address': row.get('address'),
                 'bike_stands': row.get('bike_stands'),
-                'station_id': row.get('number')
+                'station_id': row.get('number'),
+                'position': ast.literal_eval(row.get('position'))  # Parse the string into a dict
             }
             stations.append(station)
     return stations

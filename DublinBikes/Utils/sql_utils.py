@@ -21,7 +21,8 @@ def get_sql_engine() -> sqla.engine.base.Connection:
     if local:
         engine = create_engine(f"mysql+mysqlconnector://{LOCAL_USER}:{LOCAL_PASSWORD}@{LOCAL_URI}:{PORT}/{LOCAL_DB}")
     else:
-        engine = create_engine(f"mysql+mysqlconnector://{USER}:{PASSWORD}@{URI}:{PORT}/{DB}")
+        # engine = create_engine(f"mysql+mysqlconnector://{USER}:{PASSWORD}@{URI}:{PORT}/{DB}")
+        engine = create_engine(WHOLE_URI)
     
     try:
         with engine.connect() as connection:

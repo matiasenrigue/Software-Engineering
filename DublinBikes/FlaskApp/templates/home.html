@@ -1,41 +1,63 @@
-{% extends "base.html" %}
 
-{% block title %}Home - Dublin Bikes{% endblock %}
+  {% extends "base.html" %}
 
-{% block content %}
-<section id="weather">
-    <h2>Current Weather</h2>
-    <p><strong>Temperature:</strong> {{ weather.temperature }}°C</p>
-    <p><strong>Description:</strong> {{ weather.description }}</p>
-    <p><strong>Sunrise:</strong> {{ weather.sunrise }}</p>
-    <p><strong>Sunset:</strong> {{ weather.sunset }}</p>
-</section>
+  {% block title %}Home - Dublin Bikes{% endblock %}
+  
+  {% block content %}
 
-<section id="stations">
-    <h2>Bike Stations</h2>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Bike Stands</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for station in stations %}
-            <tr>
-                <td>{{ station.name }}</td>
-                <td>{{ station.address }}</td>
-                <td>{{ station.bike_stands }}</td>
-                <td>
-                    <!-- 'Details' button linking to the station details view -->
-                    <a href="{{ url_for('station_view', station_id=station.station_id) }}">
-                      <button>Details</button>
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</section>
-{% endblock %}
+
+    <div class="container">
+
+      <div class="sidebar">
+        <h2>Get Directions</h2>
+
+        <h3>Begin Journey</h3>
+        <button>Select Location on the map</button>
+
+        <h3>Finish Journey</h3>
+        <button>Select Location on the map</button>
+
+        <div class="weather">
+          <h3>Live Weather</h3>
+
+          <p><strong>Temperature:</strong> {{ weather.temperature }}°C</p>
+          <p><strong>Description:</strong> {{ weather.description }}</p>
+          <p><strong>Sunrise:</strong> {{ weather.sunrise }}</p>
+          <p><strong>Sunset:</strong> {{ weather.sunset }}</p>
+
+        </div>
+      </div>
+
+      <div class="map">
+        <!-- This div is the container where the map will be rendered -->
+        <div id="map" style="height: 500px;"></div>
+      </div>
+  
+      <!-- Embed the stations data into a global JS variable -->
+      <script>
+        const stations = {{ stations | tojson }};
+      </script>
+    
+      <!-- Load your custom script after defining 'stations' -->
+      <script src="{{ url_for('static', filename='script.js') }}"></script>
+    
+      <!-- Google Maps API script with callback to initMap -->
+      <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC52iyqUSWXyFtZcnhnnZRPWleHL3h-5AQ&callback=initMap"
+        async
+        defer>
+      </script>
+
+    </div>
+
+  </body>
+
+
+
+  <script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC52iyqUSWXyFtZcnhnnZRPWleHL3h-5AQ&callback=initMap"
+  async
+  defer
+></script>
+
+  {% endblock %}

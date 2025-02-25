@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Dublin Bikes{% endblock %}
+
+{% block content %}
+<section id="weather">
+    <h2>Current Weather</h2>
+    <p><strong>Temperature:</strong> {{ weather.temperature }}°C</p>
+    <p><strong>Description:</strong> {{ weather.description }}</p>
+    <p><strong>Sunrise:</strong> {{ weather.sunrise }}</p>
+    <p><strong>Sunset:</strong> {{ weather.sunset }}</p>
+</section>
+
+<section id="stations">
+    <h2>Bike Stations</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Bike Stands</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for station in stations %}
+            <tr>
+                <td>{{ station.name }}</td>
+                <td>{{ station.address }}</td>
+                <td>{{ station.bike_stands }}</td>
+                <td>
+                    <!-- 'Details' button linking to the station details view -->
+                    <a href="{{ url_for('station_view', station_id=station.station_id) }}">
+                      <button>Details</button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

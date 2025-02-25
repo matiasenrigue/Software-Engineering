@@ -7,7 +7,7 @@ import os
 
 
 
-# Where is the code running --> Local or AWS
+# Where is the code running --> Local or AWS / Railway 
 LOCAL_RUNNING = True
 
 # Dublin Bikes API
@@ -22,12 +22,13 @@ WEATHER_URI = "https://api.openweathermap.org/data/2.5/onecall"
 
 
 
-# DataBase: AWS RDS
-USER = 'matiasenrigue'
-PASSWORD = 'H9BfGPsp5hKayrLVgDU24k'
-PORT = "3306"
-DB = 'dbbikes'
-URI = 'dublin-bikes-data.cbq40u2g88do.eu-north-1.rds.amazonaws.com'
+# DataBase: Railway
+USER = 'root'
+PASSWORD = 'gxtuFFUfsKIGieRySYwKLNYgrFYoPZuc'
+PORT = '3306'
+DB = 'railway'
+URI = 'mysql://root:gxtuFFUfsKIGieRySYwKLNYgrFYoPZuc@centerbeam.proxy.rlwy.net:26648/railway'
+WHOLE_URI = 'mysql://root:gxtuFFUfsKIGieRySYwKLNYgrFYoPZuc@centerbeam.proxy.rlwy.net:26648/railway'
 
 # Local DataBase
 LOCAL_USER = "root"

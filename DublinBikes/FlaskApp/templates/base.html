@@ -8,13 +8,23 @@
 </head>
 <body>
     <header>
-        <h1>Dublin Bikes Project</h1>
-        <nav>
-            <a href="{{ url_for('home') }}">Home</a> |
-            <a href="{{ url_for('about') }}">About</a> |
-            <a href="{{ url_for('currentdata_page') }}">Current Data</a>
-        </nav>
+
+        <h1>
+            <img src="{{ url_for('static', filename='logo.webp') }}" alt="Logo" width="40" />
+            DUBLIN BIKES
+          </h1>
+          <nav>
+            <ul>
+                <a href="{{ url_for('home') }}">Home</a>
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="{{ url_for('currentdata_page') }}">Current Data</a>
+                <a href="{{ url_for('old_home') }}">Old Home</a>
+            </ul>
+          </nav>
+
     </header>
+
+
     
     <main>
         {% block content %}{% endblock %}
