@@ -16,14 +16,21 @@ def read_bike_data_csv():
     Reads the bike station data from bikes_data.csv and returns a list of stations.
     Each station contains: name, address, and bike_stands.
     """
-    data_path = os.path.join(get_csv_folder_path(), 'bikes_data.csv')
+    data_path = os.path.join(get_csv_folder_path(), 'bikes_24h.csv')
+    
+    set_of_unique_stations = set()
     
     stations = []
     with open(data_path, newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
+            
+            station_name = row.get('name')
+            if station_name in set_of_unique_stations:
+                continue
+            
             station = {
-                'name': row.get('name'),
+                'name': station_name,
                 'address': row.get('address'),
                 'station_id': row.get('number'),
                 'position': ast.literal_eval(row.get('position')),  # Parse the string into a dict
@@ -32,6 +39,9 @@ def read_bike_data_csv():
                 'available_bikes': row.get('available_bikes')
             }
             stations.append(station)
+            
+            set_of_unique_stations.add(station_name)
+            
     return stations
 
 
@@ -43,7 +53,7 @@ def read_weather_data_csv():
     temperature, description, sunrise, and sunset.
     Uses ast.literal_eval to parse stringified Python dictionaries/lists.
     """
-    data_path = os.path.join(get_csv_folder_path(), 'weather_data.csv')
+    data_path = os.path.join(get_csv_folder_path(), 'weather_24h.csv')
     
     with open(data_path, newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)

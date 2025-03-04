@@ -6,9 +6,8 @@ import os
 # load_dotenv()
 
 
-
 # Where is the code running --> Local or AWS / Railway 
-LOCAL_RUNNING = False
+LOCAL_RUNNING = True
 
 # Dublin Bikes API
 JCKEY = 'c7d3631426d8d7f599c2d73bfce5ebcacc525445'

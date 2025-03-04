@@ -14,11 +14,11 @@ runserver: killport
 
 scraping-textfile:
 	@echo "Running scraping script..."
-	python DublinBikes/Scrapping/general_scrapper.py
+	python DublinBikes/ScrappingData/general_scrapper.py
 
 scraping-database:
 	@echo "Running scraping script..."
-	python DublinBikes/Scrapping/general_scrapper.py --save-to-db
+	python DublinBikes/ScrappingData/general_scrapper.py --save-to-db
 
 
 create-db:

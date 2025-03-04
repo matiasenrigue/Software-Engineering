@@ -1,6 +1,9 @@
 let map;
 
 function initMap() {
+
+    let oneWindowWasOpen = false;
+
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 53.3498, lng: -6.2603 }, // Center the map on Dublin
         zoom: 14,
@@ -32,8 +35,16 @@ function initMap() {
             });
 
             marker.addListener("click", () => {
+
+                if (oneWindowWasOpen) {
+                    currentInfoWindow.close();
+                }
+
+                oneWindowWasOpen = true;
                 infoWindow.open(map, marker);
+                currentInfoWindow = infoWindow;
             });
+            
         }
     });
 }
