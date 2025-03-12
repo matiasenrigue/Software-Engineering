@@ -20,6 +20,9 @@ WEATHER_KEY = "dbfc50e69bbbfe9e2bb4117a52072796"
 WEATHER_URI = "https://api.openweathermap.org/data/2.5/onecall"
 
 
+# Maps API Key
+MAPS_API_KEY = "AIzaSyARH2XSKUGhfUzApps65pDq4AZdaXoeYjY"
+
 
 # DataBase: Railway
 USER = 'root'

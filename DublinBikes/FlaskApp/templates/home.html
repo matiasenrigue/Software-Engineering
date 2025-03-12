@@ -42,11 +42,7 @@
       <script src="{{ url_for('static', filename='maps.js') }}"></script>
     
       <!-- Google Maps API script with callback to initMap -->
-      <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC52iyqUSWXyFtZcnhnnZRPWleHL3h-5AQ&callback=initMap"
-        async
-        defer>
-      </script>
+      <script src="https://maps.googleapis.com/maps/api/js?key={{ mapskey }}&callback=initMap" async defer></script>
 
     </div>
 

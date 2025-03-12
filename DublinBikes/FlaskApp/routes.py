@@ -1,4 +1,5 @@
 from flask import render_template, jsonify
+from DublinBikes.Utils.params import *
 from DublinBikes.FlaskApp import app
 from DublinBikes.FontEndData.data_loader_csv import read_bike_data_csv, read_weather_data_csv
 from DublinBikes.FontEndData.data_loader_SQL import get_station_data
@@ -9,7 +10,9 @@ from DublinBikes.FontEndData.data_loader_realtime import get_current_data
 def home():
     weather = read_weather_data_csv()
     stations = read_bike_data_csv()
-    return render_template('home.html', weather=weather, stations=stations)
+    return render_template('home.html', 
+                           weather=weather, stations=stations,
+                           mapskey=MAPS_API_KEY)
 
 
 @app.route('/about')
@@ -37,6 +40,8 @@ def currentdata_page():
 def current_data_api():
     data = get_current_data()
     return jsonify(data)
+
+
 
 
 
