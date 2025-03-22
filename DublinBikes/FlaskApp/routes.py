@@ -4,7 +4,7 @@ from DublinBikes.FlaskApp import app
 from DublinBikes.FontEndData.data_loader_csv import read_bike_data_csv, read_weather_data_csv
 from DublinBikes.FontEndData.data_loader_SQL import get_station_data, get_all_stations_data, get_one_station_data
 from DublinBikes.FontEndData.data_loader_realtime import get_current_data
-from DublinBikes.SQL_code.user_db import register_user, get_user_by_email
+from DublinBikes.SQL_code.user_db import register_user, get_user_by_email, update_user_profile
 
 
 @app.route('/')
@@ -106,6 +106,49 @@ def logout():
     # Redirect to the previous page, or the home page if there is no referrer.
     return redirect(request.referrer or url_for('home'))
 
+
+
+
+
+@app.route('/edit_profile', methods=['GET', 'POST'])
+def edit_profile():
+    # Ensure the user is logged in
+    if 'user' not in session:
+        flash("Please log in to edit your profile.")
+        return redirect(url_for('login'))
+    
+    user = session['user']
+    
+    # Retrieve list of stations for the default_station select input
+    stations = sorted(get_all_stations_data(), key=lambda s: s['name'])
+    
+    if request.method == 'POST':
+        # Get updated profile values from the form
+        username = request.form.get('username')
+        first_name = request.form.get('first_name')
+        last_name = request.form.get('last_name')
+        password = request.form.get('password')
+        default_station = request.form.get('default_station')
+        
+        # Call the update function; note: email remains unchanged.
+        success = update_user_profile(user['email'], username, first_name, last_name, password, int(default_station))
+        
+        if success:
+            flash("Profile updated successfully.")
+            # Update session with new values
+            session['user']['username'] = username
+            session['user']['first_name'] = first_name
+            session['user']['last_name'] = last_name
+            session['user']['password'] = password
+            session['user']['default_station'] = int(default_station)
+            return redirect(url_for('home'))  # Redirect to home after successful update
+
+        else:
+            flash("Error updating profile. Please try again.")
+        
+        return redirect(url_for('edit_profile'))
+    
+    return render_template('edit_profile.html', user=user, stations=stations)
 
 
 

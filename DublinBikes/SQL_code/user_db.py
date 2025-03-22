@@ -68,3 +68,29 @@ def get_user_by_email(email: str) -> Optional[Dict[str, Union[str, int]]]:
     finally:
         conn.close()
 
+
+
+
+def update_user_profile(email: str, username: str, first_name: str, last_name: str, password: str, default_station: int) -> bool:
+    """
+    Updates a user's profile information except for the email.
+    Returns True on success, False if an error occurs (e.g., integrity issues).
+    """
+    conn = get_sql_engine()
+    try:
+        cursor = conn.cursor()
+        cursor.execute(
+            '''
+            UPDATE user
+            SET username = ?, first_name = ?, last_name = ?, password = ?, default_station = ?
+            WHERE email = ?
+            ''',
+            (username, first_name, last_name, password, default_station, email)
+        )
+        conn.commit()
+        return True
+    except sqlite3.IntegrityError as e:
+        print("Error updating user profile:", e)
+        return False
+    finally:
+        conn.close()

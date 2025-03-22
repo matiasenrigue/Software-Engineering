@@ -20,7 +20,8 @@
                 <a href="{{ url_for('currentdata_page') }}">Current Data</a>
                 {% if session.user %}
                     <span style="margin-right: 20px;">Welcome, {{ session.user.username }}!</span>
-                    <a href="{{ url_for('logout') }}">    Logout</a>
+                    <a href="{{ url_for('edit_profile') }}">    Edit Profile</a>
+                    <a href="{{ url_for('logout') }}">Logout</a>
                 {% else %}
                     <a href="{{ url_for('login') }}">Login</a> 
                     <a href="{{ url_for('register') }}">   Create an Account</a>
