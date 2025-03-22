@@ -7,7 +7,7 @@ import json
 import sqlalchemy as sqla
 
 from DublinBikes.Utils.params import WEATHER_KEY
-from DublinBikes.Utils.sql_utils import execute_sql
+from DublinBikes.SQL_code.sql_utils import execute_sql
 from DublinBikes.ScrappingData.local_scrapping import save_data_to_file
 
 

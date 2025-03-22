@@ -9,13 +9,14 @@
     <div class="container">
 
       <div class="sidebar">
-        <h2>Get Directions</h2>
 
-        <h3>Begin Journey</h3>
-        <button>Select Location on the map</button>
+        {% if session.user %}
+          <p>You chose <strong>{{ default_station.name }}</strong> as your default station, can be changed in your profile settings.</p>
+        {% else %}
+          <p>Using <strong>{{ default_station.name }}</strong> as default location, sign in if you want to change it.</p>
+        {% endif %}
 
-        <h3>Finish Journey</h3>
-        <button>Select Location on the map</button>
+        <button id="locationText">Select Location on the map</button>
 
         <div class="weather">
           <h3>Live Weather</h3>
@@ -36,6 +37,12 @@
       <!-- Embed the stations data into a global JS variable -->
       <script>
         const stations = {{ stations | tojson }};
+
+        var defaultStation = {
+        id: {{ default_station.station_id }},
+       lat: {{ default_station.position_lat }},
+       lng: {{ default_station.position_lng }}
+      };
       </script>
     
       <!-- Load your custom script after defining 'stations' -->

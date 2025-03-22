@@ -4,7 +4,7 @@ import threading
 from DublinBikes.ScrappingData.scrapper_jc_decaux import main_data_scrapper_bikes
 from DublinBikes.ScrappingData.scrapper_open_weather import main_data_scrapper_weather
 from DublinBikes.ScrappingData.local_scrapping import create_data_file
-from DublinBikes.Utils.sql_utils import get_sql_engine
+from DublinBikes.SQL_code.sql_utils import get_sql_engine
 
 
 def main_data_scrapper() -> None:

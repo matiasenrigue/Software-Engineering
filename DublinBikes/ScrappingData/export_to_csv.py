@@ -2,7 +2,7 @@ import csv
 import json
 from datetime import datetime
 from sqlalchemy import text
-from DublinBikes.Utils.sql_utils import get_sql_engine
+from DublinBikes.SQL_code.sql_utils import get_sql_engine
 
 def export_bikes_data(engine, output_file):
     """

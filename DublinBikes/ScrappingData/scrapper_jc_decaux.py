@@ -13,7 +13,7 @@ import requests
 import time
 
 from DublinBikes.Utils.params import *
-from DublinBikes.Utils.sql_utils import execute_sql
+from DublinBikes.SQL_code.sql_utils import execute_sql
 from DublinBikes.ScrappingData.local_scrapping import save_data_to_file
 
 

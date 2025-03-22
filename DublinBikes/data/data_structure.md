@@ -1,5 +1,7 @@
 # Data Structures
 
+All the data scrapped from the API is both in CSV and in SQL
+
 ## SQL Format
 
 3 Tables
