@@ -12,6 +12,15 @@ runserver: killport
 	python run.py & sleep 2 & open -a "Google Chrome" http://127.0.0.1:5000/
 
 
+# Run the server for local development (opens browser)
+runserver-local: killport
+	python run.py --host=127.0.0.1 --port=5000 & sleep 2 & open -a "Google Chrome" http://127.0.0.1:5000/
+
+# Run the server for EC2 (listens on all interfaces)
+runserver-ec2: killport
+	python run.py --host=0.0.0.0 --port=5000
+
+
 scraping-textfile:
 	@echo "Running scraping script..."
 	python DublinBikes/ScrappingData/general_scrapper.py
