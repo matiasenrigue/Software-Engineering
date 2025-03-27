@@ -6,17 +6,16 @@ import os
 import json
 import sqlalchemy as sqla
 
-from DublinBikes.Utils.params import WEATHER_KEY
+from DublinBikes.Utils.params import WEATHER_KEY, CURRENT_OPENWEATHER_URI
 from DublinBikes.SQL_code.sql_utils import execute_sql
 from DublinBikes.ScrappingData.local_scrapping import save_data_to_file
 
 
 
-# OpenWeatherMap API endpoint (current weather)
-CURRENT_OPENWEATHER_URI = "http://api.openweathermap.org/data/2.5/weather"
 
 
-def get_data_from_openweather() -> str:
+
+def get_data_from_openweather(link=CURRENT_OPENWEATHER_URI) -> str:
     """
     Function to get the weather data from the OpenWeatherMap API for Dublin.
     
@@ -30,7 +29,7 @@ def get_data_from_openweather() -> str:
             "units": "metric",
             "lang": "en"
         }
-        r = requests.get(CURRENT_OPENWEATHER_URI, params=params)
+        r = requests.get(link, params=params)
         r.raise_for_status()
         return r.text
     except:

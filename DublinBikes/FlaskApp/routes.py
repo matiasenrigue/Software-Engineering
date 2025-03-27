@@ -3,8 +3,11 @@ from DublinBikes.Utils.params import *
 from DublinBikes.FlaskApp import app
 from DublinBikes.FontEndData.data_loader_csv import read_bike_data_csv, read_weather_data_csv
 from DublinBikes.FontEndData.data_loader_SQL import get_station_data, get_all_stations_data, get_one_station_data
-from DublinBikes.FontEndData.data_loader_realtime import get_current_data
+from DublinBikes.FontEndData.data_loader_realtime import get_forecast_weather_data, get_current_weather_data
 from DublinBikes.SQL_code.user_db import register_user, get_user_by_email, update_user_profile
+
+from datetime import datetime, timedelta
+
 
 
 @app.route('/')
@@ -25,10 +28,11 @@ def home():
     print(default_station_data)
     
     return render_template('home.html', 
-                           weather=weather, 
-                           stations=stations,
-                            default_station=default_station_data,
-                           mapskey=MAPS_API_KEY)
+                       stations=stations,
+                       default_station=default_station_data,
+                       mapskey=MAPS_API_KEY,
+                       now=datetime.now()
+                       )
 
 
 @app.route('/about')
@@ -45,16 +49,22 @@ def station_view(station_id):
     return render_template('station.html', station=station)
 
 
-# Page that will display current data in JSON format.
-@app.route('/currentdata')
-def currentdata_page():
-    return render_template('currentdata.html')
 
 
-# API endpoint: Return current data (both bikes and weather) in JSON.
-@app.route('/api/current_data')
-def current_data_api():
-    data = get_current_data()
+@app.route('/api/current_weather')
+def current_weather_api():
+    data = get_current_weather_data()
+    return jsonify(data)
+
+
+@app.route('/api/forecast_weather')
+def forecast_weather_api():
+    # Expect query parameters 'forecast_type' and 'target_datetime'
+    forecast_type = request.args.get('forecast_type', 'current')
+    target_datetime = request.args.get('target_datetime')
+    if not target_datetime:
+        return jsonify({"error": "target_datetime parameter is required"}), 400
+    data = get_forecast_weather_data(forecast_type, target_datetime)
     return jsonify(data)
 
 

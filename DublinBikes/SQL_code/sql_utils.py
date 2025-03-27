@@ -150,12 +150,37 @@ def create_data_base():
         PRIMARY KEY (dt)
     );
     """
+    
+     # forecast_type -- 'current', 'hourly', or 'daily'
+     # target_datetime -- The forecast valid time (for current data, same as timestamp_weatherinfo)
+    sql_fetched_weather = """    
+    CREATE TABLE IF NOT EXISTS FetchedWeatherData (
+        timestamp_requested DATETIME NOT NULL,
+        timestamp_weatherinfo DATETIME NOT NULL,
+        forecast_type TEXT,         
+        target_datetime DATETIME,     
+        feels_like FLOAT, 
+        humidity INTEGER,
+        pressure INTEGER,
+        sunrise DATETIME,
+        sunset DATETIME,
+        temp FLOAT,
+        uvi FLOAT,
+        weather_id INTEGER,
+        wind_gust FLOAT,
+        wind_speed FLOAT,
+        rain_1h FLOAT,
+        snow_1h FLOAT,
+        PRIMARY KEY (timestamp_requested, timestamp_weatherinfo)
+    );
+    """
 
     # Execute all the CREATE TABLE statements
     execute_sql(sql_users_table, engine)
     execute_sql(sql_station_table, engine)
     execute_sql(sql_availability_table, engine)
     execute_sql(sql_current_table, engine)
+    execute_sql(sql_fetched_weather, engine)
 
     
     
@@ -182,6 +207,17 @@ def test_queries():
     execute_sql("select * from station where address = 'Smithfield North';", engine)
     execute_sql("select * from availability where available_bike_stands > 20 LIMIT 5", engine)
     execute_sql("select * from current where temp > 20", engine)
+
+
+
+# def drop_fetched_weather_table():
+#     engine = get_sql_engine()
+#     try:
+#         drop_query = "DROP TABLE IF EXISTS FetchedWeatherData;"
+#         execute_sql(drop_query, engine)
+#         print("FetchedWeatherData table dropped successfully.")
+#     finally:
+#         engine.close()
 
 
 if __name__ == "__main__":

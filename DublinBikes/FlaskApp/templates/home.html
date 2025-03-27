@@ -18,13 +18,40 @@
 
         <button id="locationText">Select Location on the map</button>
 
+        <div class="weather-forecast">
+          <h3>Weather Forecast</h3>
+          <label>
+            <input type="radio" name="forecastType" value="current" checked>
+            Current Weather
+          </label>
+          <label>
+            <input type="radio" name="forecastType" value="forecast">
+            Forecast
+          </label>
+        
+          <div id="forecast-options" style="display:none; margin-top:1em;">
+            <label for="forecast-date">Select Date:</label>
+            <input type="date" id="forecast-date" 
+                   min="{{ now.strftime('%Y-%m-%d') }}" 
+                   max="{{ (now + timedelta(days=5)).strftime('%Y-%m-%d') }}">
+            <div id="hour-selector" style="display:none; margin-top:0.5em;">
+              <label for="forecast-hour">Select Hour:</label>
+              <!-- step="3600" restricts selection to whole hours -->
+              <input type="time" id="forecast-hour" step="3600" pattern="^(?:[01]\d|2[0-3]):00$">
+            </div>
+            <button onclick="fetchForecastWeather()">Get Forecast</button>
+          </div>
+        </div>
+        
+        
         <div class="weather">
           <h3>Live Weather</h3>
 
-          <p><strong>Temperature:</strong> {{ weather.temperature }}°C</p>
-          <p><strong>Description:</strong> {{ weather.description }}</p>
-          <p><strong>Sunrise:</strong> {{ weather.sunrise }}</p>
-          <p><strong>Sunset:</strong> {{ weather.sunset }}</p>
+          <p id="timestamp-weatherinfo"></p>
+          <p id="weather-temp"></p>
+          <p id="weather-description"></p>
+          <p id="weather-sunrise"></p>
+          <p id="weather-sunset"></p>
 
         </div>
       </div>
@@ -47,6 +74,10 @@
     
       <!-- Load your custom script after defining 'stations' -->
       <script src="{{ url_for('static', filename='maps.js') }}"></script>
+
+      <!-- Load the weather script -->
+      <script src="{{ url_for('static', filename='weather.js') }}"></script>
+
     
       <!-- Google Maps API script with callback to initMap -->
       <script src="https://maps.googleapis.com/maps/api/js?key={{ mapskey }}&callback=initMap" async defer></script>
