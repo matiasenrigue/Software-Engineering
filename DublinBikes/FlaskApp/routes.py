@@ -2,7 +2,7 @@ from flask import render_template, jsonify, request, redirect, url_for, session,
 from DublinBikes.Utils.params import *
 from DublinBikes.FlaskApp import app
 from DublinBikes.FontEndData.data_loader_csv import read_bike_data_csv, read_weather_data_csv
-from DublinBikes.FontEndData.data_loader_SQL import get_station_data, get_all_stations_data, get_one_station_data
+from DublinBikes.FontEndData.data_loader_SQL import get_station_data, get_all_stations_data, get_one_station_data, get_station_availability_daily
 from DublinBikes.FontEndData.data_loader_realtime import get_forecast_weather_data, get_current_weather_data
 from DublinBikes.SQL_code.user_db import register_user, get_user_by_email, update_user_profile
 
@@ -40,13 +40,24 @@ def about():
     return render_template('about.html')
 
 
+
 # Display detailed info for a particular station.
 @app.route('/station/<int:station_id>')
 def station_view(station_id):
-    station = get_station_data(station_id)
-    if not station:
+    station_list = get_station_data(station_id)
+    if not station_list:
         return f"No data found for station {station_id}", 404
-    return render_template('station.html', station=station)
+    # Assuming get_station_data returns a list, we pick the first record:
+    station = station_list[0]
+    
+    # Fetch availability records for the current day
+    availability_data = get_station_availability_daily(station_id)
+    print(availability_data)
+    
+    return render_template('station.html', station=station, 
+                           availability_data=availability_data, 
+                           mapskey=MAPS_API_KEY)
+
 
 
 

@@ -26,7 +26,8 @@ def get_station_data(station_id: int) -> dict:
     conn = get_sql_engine()
     try:
         cursor = conn.cursor()
-        cursor.execute(query)
+        cursor.execute(query, {'station_id': station_id})
+
         # Fetch all station records
         rows = cursor.fetchall()
         stations = [dict(row) for row in rows]
@@ -73,3 +74,27 @@ def get_one_station_data(station_id: int) -> dict:
 
 
 
+
+def get_station_availability_daily(station_id: int) -> list:
+    """
+    Retrieve all availability records for the given station for the current day.
+    Assumes that 'last_update' is stored as a DATETIME string.
+    """
+    
+    # The scrapped data is from March 3, so we only show data from that day
+    query = """
+        SELECT last_update, available_bikes, available_bike_stands
+        FROM availability
+        WHERE station_id = :station_id
+            AND DATE(last_update) = '2025-03-03'
+        ORDER BY last_update ASC;
+    """
+    conn = get_sql_engine()
+    try:
+        cursor = conn.cursor()
+        cursor.execute(query, {'station_id': station_id})
+        rows = cursor.fetchall()
+        print(rows)
+        return [dict(row) for row in rows]
+    finally:
+        conn.close()

@@ -80,6 +80,7 @@ function fetchCurrentWeather() {
         }
 
         const rawTimestamp = data.timestamp_weatherinfo;
+        document.getElementById("weather-current-forecast").textContent = "Current Weather:";
         document.getElementById("timestamp-weatherinfo").textContent = formatTimestamp(rawTimestamp);
         document.getElementById("weather-temp").textContent = data.temp + " °C";
         document.getElementById("weather-description").textContent =
@@ -98,63 +99,44 @@ function fetchCurrentWeather() {
 
 
 function fetchForecastWeather() {
-  const forecastTypeRadio = document.querySelector('input[name="forecastType"]:checked').value;
-  // Only "forecast" branch should call this function.
   const selectedDate = document.getElementById("forecast-date").value;
   if (!selectedDate) {
-      alert("Please select a valid date.");
-      return;
+    alert("Please select a valid date.");
+    return;
   }
+  
+  // Build target datetime from the selected date and time.
   let targetDatetime = selectedDate; // ISO date (YYYY-MM-DD)
-
-  // If hour selection is visible, append the time.
-  if (document.getElementById("hour-selector").style.display !== "none") {
-      const selectedTime = document.getElementById("forecast-hour").value;
-      if (!selectedTime) {
-          alert("Please select an hour.");
-          return;
-      }
-      targetDatetime += "T" + selectedTime;
+  const selectedTime = document.getElementById("forecast-hour").value;
+  if (selectedTime) {
+    targetDatetime += "T" + selectedTime;
   } else {
-      // For daily forecast, set a fixed time (e.g., noon)
-      targetDatetime += "T12:00:00";
+    // Default to noon if no hour is selected.
+    targetDatetime += "T12:00:00";
   }
   
-  // Determine forecast type for caching:
-  // - If the selected date is today, treat as "current".
-  // - If within 4 days and hour selection is visible, use "hourly".
-  // - Otherwise, use "daily".
-  let forecast_type = "daily";
-  const now = new Date();
-  const selectedDT = new Date(targetDatetime);
-  if (selectedDT.toDateString() === now.toDateString()) {
-      forecast_type = "current";
-  } else if ((selectedDT - now) <= 4 * 24 * 3600 * 1000 &&
-             document.getElementById("hour-selector").style.display !== "none") {
-      forecast_type = "hourly";
-  }
-  
+  // Forecast type is always hourly.
+  const forecast_type = "hourly";
   const url = `/api/forecast_weather?forecast_type=${forecast_type}&target_datetime=${encodeURIComponent(targetDatetime)}`;
+
   fetch(url)
     .then(response => response.json())
     .then(data => {
-        if(data.error) {
-            console.error("Forecast error:", data.error);
-            return;
-        }
+      if (data.error) {
+        console.error("Forecast error:", data.error);
+        return;
+      }
 
-        document.getElementById("timestamp-weatherinfo").textContent = formatTimestamp(rawTimestamp);
-        document.getElementById("weather-temp").textContent = data.temp + " °C";
-        document.getElementById("weather-description").textContent =
-            "Humidity: " + data.humidity + "%";
+      // Update the weather info with data from the hourly forecast.
+      document.getElementById("weather-current-forecast").textContent = "Forecast Weather for:";
+      document.getElementById("timestamp-weatherinfo").textContent = formatTimestamp(data.timestamp_weatherinfo);
+      document.getElementById("weather-temp").textContent = data.temp + " °C";
+      document.getElementById("weather-description").textContent = "Humidity: " + data.humidity + "%";
 
-        setWeatherIcon(data.weather_id);
+      setWeatherIcon(data.weather_id);
     })
     .catch(error => {
-        console.error("Error fetching forecast data:", error);
+      console.error("Error fetching forecast data:", error);
     });
-
-
-
-
 }
+

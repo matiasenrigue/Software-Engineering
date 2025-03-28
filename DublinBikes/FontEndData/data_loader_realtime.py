@@ -3,6 +3,17 @@ import json
 from DublinBikes.SQL_code.sql_utils import get_sql_engine
 from DublinBikes.ScrappingData.scrapper_open_weather import get_data_from_openweather
 
+"""
+Improve this documentation:
+
+
+Script Logic:
+- Check if there is data in cache (data requested X mins ago, depending on the API)
+- If yes: use it from the DB
+- Else: Request it new, and save it to the DB
+
+Daily delets of Cache
+"""
 
 
 
@@ -155,7 +166,7 @@ def get_forecast_weather_data(forecast_type: str, target_datetime: str) -> dict:
         
     target_dt = datetime.datetime.fromisoformat(target_datetime)
     now = datetime.datetime.now()
-    cache_interval = datetime.timedelta(hours=3)
+    cache_interval = datetime.timedelta(hours=1)
     
     engine = get_sql_engine()
     

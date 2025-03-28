@@ -1,57 +1,134 @@
 {% extends "base.html" %}
 
-{% block title %}Station Details{% endblock %}
+{% block title %}Station Details - {{ station.name }}{% endblock %}
 
 {% block content %}
 <section>
 
-    <h1>Station Details</h1>
+    <!-- Optional: Other station details -->
+    <h1>{{ station.name }}</h1>
     <table>
-        <tr>
-            <th>Station ID</th>
-            <td>{{ station.station_id }}</td>
-        </tr>
-        <tr>
-            <th>Name</th>
-            <td>{{ station.name }}</td>
-        </tr>
-        <tr>
-            <th>Address</th>
-            <td>{{ station.address }}</td>
-        </tr>
-        <tr>
-            <th>Bike Stands</th>
-            <td>{{ station.bike_stands }}</td>
-        </tr>
-        <tr>
-            <th>Banking</th>
-            <td>{{ station.banking }}</td>
-        </tr>
-        <tr>
-            <th>Bonus</th>
-            <td>{{ station.bonus }}</td>
-        </tr>
-        <tr>
-            <th>Position</th>
-            <td>{{ station.position_lat }}, {{ station.position_lng }}</td>
-        </tr>
-        <tr>
-            <th>Last Update</th>
-            <td>{{ station.last_update }}</td>
-        </tr>
-        <tr>
-            <th>Available Bikes</th>
-            <td>{{ station.available_bikes }}</td>
-        </tr>
-        <tr>
-            <th>Available Bike Stands</th>
-            <td>{{ station.available_bike_stands }}</td>
-        </tr>
-        <tr>
-            <th>Status</th>
-            <td>{{ station.status }}</td>
-        </tr>
+      <tr>
+        <th>Bike Stands</th>
+        <td>{{ station.bike_stands }}</td>
+      </tr>
+      <tr>
+        <th>Available Bikes</th>
+        <td>{{ station.available_bikes }}</td>
+      </tr>
+      <tr>
+        <th>Available Bike Stands</th>
+        <td>{{ station.available_bike_stands }}</td>
+      </tr>
+      <tr>
+        <th>Status</th>
+        <td>{{ station.status }}</td>
+      </tr>
     </table>
 
+    <!-- Map Section -->
+  <div>
+    <h2>Location</h2>
+    <div id="stationMap" style="height: 300px; width: 600px;"></div>
+  </div>
+ 
+  <!-- Graph Section -->
+  <div>
+    <h2>Availability Trends</h2>
+    <canvas id="availabilityChart" style="height: 300px; width: 600px;"></canvas>
+  </div>
+
+
+
+
 </section>
+
+
+<!-- Include Chart.js from CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+
+<script>
+  // Parse availability data passed from Flask
+  const availabilityData = {{ availability_data | tojson }};
+  availabilityData.sort((a, b) => new Date(a.last_update) - new Date(b.last_update));
+
+  
+  // Prepare arrays for the chart
+  const labels = availabilityData.map(item => item.last_update);
+  const availableBikes = availabilityData.map(item => item.available_bikes);
+  const availableStands = availabilityData.map(item => item.available_bike_stands);
+
+  console.log("Labels:", labels);
+  console.log("Available Bikes:", availableBikes);
+  console.log("Available Stands:", availableStands);
+
+
+  const ctx = document.getElementById('availabilityChart').getContext('2d');
+  const availabilityChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Available Bikes',
+          data: availableBikes,
+          borderColor: 'rgba(75, 192, 192, 1)',
+          fill: false
+        },
+        {
+          label: 'Available Bike Stands',
+          data: availableStands,
+          borderColor: 'rgba(153, 102, 255, 1)',
+          fill: false
+        }
+      ]
+    },
+    options: {
+      responsive: false, // Turn off responsiveness
+      maintainAspectRatio: false, // Usually used with responsive: true, but you can try both
+      scales: {
+        x: {
+          type: 'time',
+          time: {
+            unit: 'hour',
+            tooltipFormat: 'MMM dd, h:mm a', // use dd for day
+          },
+          title: {
+            display: true,
+            text: 'Time'
+          }
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Number'
+          }
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  // Initialize a Google Map zoomed in on the station
+  function initStationMap() {
+    const stationPosition = { lat: {{ station.position_lat }}, lng: {{ station.position_lng }} };
+    const map = new google.maps.Map(document.getElementById('stationMap'), {
+      center: stationPosition,
+      zoom: 16, // High zoom level for a closer view
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+    // Use the green bike icon (assumed to be in your static/pics folder)
+    const marker = new google.maps.Marker({
+      position: stationPosition,
+      map: map,
+      title: "{{ station.name }}",
+      icon: "{{ url_for('static', filename='pics/bike-green.png') }}"
+    });
+  }
+</script>
+<!-- Load the Google Maps API and call the initStationMap callback -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ mapskey }}&callback=initStationMap"></script>
+
 {% endblock %}
