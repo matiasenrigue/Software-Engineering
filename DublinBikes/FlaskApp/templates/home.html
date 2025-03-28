@@ -81,12 +81,14 @@
       <!-- Load your custom script after defining 'stations' -->
       <script src="{{ url_for('static', filename='maps.js') }}"></script>
 
-      <!-- Load the weather script -->
-      <script src="{{ url_for('static', filename='weather.js') }}"></script>
-
     
       <!-- Google Maps API script with callback to initMap -->
       <script src="https://maps.googleapis.com/maps/api/js?key={{ mapskey }}&callback=initMap" async defer></script>
+
+      
+      <!-- Load the weather and bikes scripts -->
+      <script src="{{ url_for('static', filename='weather.js') }}"></script>
+      <script src="{{ url_for('static', filename='bikes.js') }}"></script>
 
     </div>
 

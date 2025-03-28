@@ -4,6 +4,11 @@ import os
 from datetime import datetime
 
 
+"""
+Not used, but kept for future reference.
+"""
+
+
 def get_csv_folder_path():
     """
     Return the path to the folder containing the CSV files.

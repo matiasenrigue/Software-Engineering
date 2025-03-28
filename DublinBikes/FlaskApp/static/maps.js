@@ -57,9 +57,8 @@ if (stationMarkers[stationId]) {
 }
 
 
+
 function initMap() {
-  let oneWindowWasOpen = false;
-  let currentInfoWindow;
 
   // Set initial map center (Dublin)
   let centerCoordinates = { lat: 53.3498, lng: -6.2603 };
@@ -76,8 +75,25 @@ function initMap() {
     mapTypeId: google.maps.MapTypeId.SATELLITE
   });
 
-  // Loop through the stations data passed from the template.
-  stations.forEach(station => {
+  // Place the markers with the SQL Data to have ALL the stations ready on the map.
+  // placeMarkers(stations)
+  console.log(stations);
+
+}
+
+
+
+// Function to plavce markers on the map
+function placeMarkers(stations_data) {
+
+  let oneWindowWasOpen = false;
+  let currentInfoWindow;
+
+
+// Loop through the stations data passed from the template.
+  stations_data.forEach(station => {
+    console.log(station);
+
     if (station.position && station.position.lat && station.position.lng) {
       
       // Set the icon
@@ -129,7 +145,6 @@ function initMap() {
     }
   });
 }
-
 
 
 // Global variable to hold the polyline arrow
@@ -209,5 +224,7 @@ function estimateArrivalTime(cyclingMinutes) {
   const arrival = new Date(Date.now() + cyclingMinutes * 60000);
   return arrival.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
 }
+
+
 
 

@@ -2,6 +2,7 @@ import datetime
 import json
 from DublinBikes.SQL_code.sql_utils import get_sql_engine
 from DublinBikes.ScrappingData.scrapper_open_weather import get_data_from_openweather
+from DublinBikes.FontEndData.manage_cache import clean_cache
 
 """
 Improve this documentation:
@@ -28,6 +29,10 @@ def save_weather_data_to_cache_db(data: dict, forecast_type: str, target_datetim
         target_datetime (datetime.datetime): The target datetime for the weather info.
         return_row (bool): If we want the newly inserted to row to be returned or not
     """
+    
+    # First clean the cache form last days
+    clean_cache()
+    
     conn = get_sql_engine()
     
     try:

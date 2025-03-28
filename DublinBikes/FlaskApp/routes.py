@@ -2,8 +2,9 @@ from flask import render_template, jsonify, request, redirect, url_for, session,
 from DublinBikes.Utils.params import *
 from DublinBikes.FlaskApp import app
 from DublinBikes.FontEndData.data_loader_csv import read_bike_data_csv, read_weather_data_csv
-from DublinBikes.FontEndData.data_loader_SQL import get_station_data, get_all_stations_data, get_one_station_data, get_station_availability_daily
-from DublinBikes.FontEndData.data_loader_realtime import get_forecast_weather_data, get_current_weather_data
+from DublinBikes.FontEndData.data_loader_SQL import get_station_data, get_all_stations_data_SQL, get_one_station_data, get_station_availability_daily
+from DublinBikes.FontEndData.data_realtime_weather import get_forecast_weather_data, get_current_weather_data
+from DublinBikes.FontEndData.data_realtime_bikes import get_current_bikes_data
 from DublinBikes.SQL_code.user_db import register_user, get_user_by_email, update_user_profile
 
 from datetime import datetime, timedelta
@@ -12,8 +13,10 @@ from datetime import datetime, timedelta
 
 @app.route('/')
 def home():
-    weather = read_weather_data_csv()
-    stations =  read_bike_data_csv()
+    
+    # Get all the stations first, then after they are all place on the MAP, JS will update the info
+    stations = get_all_stations_data_SQL()
+    
     default_station_data = None
     
     # If the user is logged in and has set a default station, use it;
@@ -44,6 +47,7 @@ def about():
 # Display detailed info for a particular station.
 @app.route('/station/<int:station_id>')
 def station_view(station_id):
+    
     station_list = get_station_data(station_id)
     if not station_list:
         return f"No data found for station {station_id}", 404
@@ -70,14 +74,22 @@ def current_weather_api():
 
 @app.route('/api/forecast_weather')
 def forecast_weather_api():
-    # Expect query parameters 'forecast_type' and 'target_datetime'
+    
     forecast_type = request.args.get('forecast_type', 'current')
     target_datetime = request.args.get('target_datetime')
+    
     if not target_datetime:
         return jsonify({"error": "target_datetime parameter is required"}), 400
+    
     data = get_forecast_weather_data(forecast_type, target_datetime)
-    print(data)
     return jsonify(data)
+
+
+@app.route('/api/current_bikes')
+def current_bikes_api():
+    data = get_current_bikes_data()
+    return jsonify(data)
+
 
 
 
@@ -87,7 +99,7 @@ def forecast_weather_api():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     
-    stations = sorted(get_all_stations_data(), key=lambda s: s['name'])
+    stations = sorted(get_all_stations_data_SQL(), key=lambda s: s['name'])
     
     if request.method == 'POST':
         email = request.form.get('email')
@@ -142,7 +154,7 @@ def edit_profile():
     user = session['user']
     
     # Retrieve list of stations for the default_station select input
-    stations = sorted(get_all_stations_data(), key=lambda s: s['name'])
+    stations = sorted(get_all_stations_data_SQL(), key=lambda s: s['name'])
     
     if request.method == 'POST':
         # Get updated profile values from the form

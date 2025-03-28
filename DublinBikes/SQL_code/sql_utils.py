@@ -174,6 +174,28 @@ def create_data_base():
         PRIMARY KEY (timestamp_requested, timestamp_weatherinfo)
     );
     """
+    
+    # Bikes data cache table
+    sql_fetched_bikes = """
+    CREATE TABLE IF NOT EXISTS FetchedBikesData (
+        time_requested DATETIME NOT NULL,
+        station_id INTEGER NOT NULL,
+        available_bikes INTEGER,
+        available_bike_stands INTEGER,
+        status VARCHAR(128),
+        last_update DATETIME,
+        address VARCHAR(128),
+        banking INTEGER,
+        bonus INTEGER,
+        bike_stands INTEGER,
+        name VARCHAR(128),
+        position_lat FLOAT,
+        position_lng FLOAT,
+        PRIMARY KEY (time_requested, station_id)
+    );
+    """
+    
+
 
     # Execute all the CREATE TABLE statements
     execute_sql(sql_users_table, engine)
@@ -181,6 +203,7 @@ def create_data_base():
     execute_sql(sql_availability_table, engine)
     execute_sql(sql_current_table, engine)
     execute_sql(sql_fetched_weather, engine)
+    execute_sql(sql_fetched_bikes, engine)
 
     
     
@@ -221,6 +244,7 @@ def test_queries():
 
 
 if __name__ == "__main__":
+    
     get_db_path()
     create_data_base()
     test_queries()
