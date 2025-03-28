@@ -72,7 +72,7 @@ def get_current_weather_data():
                 snow_1h = None
                 timestamp_requested = datetime.datetime.now()
                 is_current_weather = 1  # true
-                weather_id = current.get("id")
+                weather_id = current.get("weather")[0].get("icon")
                 
                 insert_query = """
                 INSERT INTO FetchedWeatherData (
@@ -125,6 +125,9 @@ def get_forecast_weather_data(forecast_type: str, target_datetime: str) -> dict:
     target_datetime: ISO formatted datetime string for which the forecast is valid
                      (for daily forecasts, you can store the date with a fixed time, e.g., noon)
     """
+    
+    print("hey")
+    
     target_dt = datetime.datetime.fromisoformat(target_datetime)
     now = datetime.datetime.now()
     
@@ -134,7 +137,7 @@ def get_forecast_weather_data(forecast_type: str, target_datetime: str) -> dict:
     # Set caching intervals based on forecast type.
     if forecast_type == "current":
         cache_interval = datetime.timedelta(minutes=30)
-    elif forecast_type == "forecast":
+    elif forecast_type == "hourly":
         cache_interval = datetime.timedelta(hours=3)
     else:
         return {"error": "Invalid forecast type"}
@@ -199,7 +202,7 @@ def get_forecast_weather_data(forecast_type: str, target_datetime: str) -> dict:
                 rain_1h = matching_forecast.get("rain", {}).get("3h")
                 snow_1h = matching_forecast.get("snow", {}).get("3h")
                 uvi = None  # if not provided
-                weather_id = matching_forecast.get("weather", [{}])[0].get("id")
+                weather_id = matching_forecast.get("weather", [{}])[0].get("icon")
 
                 insert_query = """
                 INSERT INTO FetchedWeatherData (

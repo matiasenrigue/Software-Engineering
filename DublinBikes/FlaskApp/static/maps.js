@@ -8,18 +8,23 @@ let stationMarkers = {};
 
 // This function will be called when a user clicks the "GO" button.
 function selectStation(stationId, stationName, stationLat, stationLng) {
-  // If a station was previously selected, reset its marker icon.
-  if (selectedStationId && stationMarkers[selectedStationId]) {
-    stationMarkers[selectedStationId].setIcon("http://maps.google.com/mapfiles/ms/icons/ltblue-dot.png");
-  }
-  
+
+
+// Reset the previously selected station's icon to black bike
+if (selectedStationId && stationMarkers[selectedStationId]) {
+  stationMarkers[selectedStationId].setIcon("/static/pics/bike-yellowpng");
+}
+
   // Update the selected station ID.
   selectedStationId = stationId;
+
+// For the newly selected station, use green bike
+if (stationMarkers[stationId]) {
+  stationMarkers[stationId].setIcon("/static/pics/bike-green.png");
+}
+
   
-  // Set the new marker's icon to a different color (green).
-  if (stationMarkers[stationId]) {
-    stationMarkers[stationId].setIcon("http://maps.google.com/mapfiles/ms/icons/green-dot.png");
-  }
+
   
   // Draw the arrow from the default station to the selected station.
   // Assume defaultStation has properties lat and lng.
@@ -27,15 +32,28 @@ function selectStation(stationId, stationName, stationLat, stationLng) {
   let to = { lat: stationLat, lng: stationLng };
   drawArrow(from, to, map);  // Note: map variable must be in scope
 
-  // Calculate the distance between the stations.
+
+  // Calculate the distance between the default and selected station.
   const distance = calculateDistance(defaultStation.lat, defaultStation.lng, stationLat, stationLng);
+
+  // Find the selected station data (assuming the global "stations" variable is available)
+  const selectedStation = stations.find(s => s.station_id == stationId);
+  const availableBikeStands = selectedStation ? selectedStation.available_bike_stands : "N/A";
+
+  // Estimate cycling time in minutes and then format it.
+  const cyclingMinutes = getCyclingTimeMinutes(distance);
+  const cyclingTime = formatTime(cyclingMinutes);
+
+  // Estimate arrival time based on current time.
+  const arrivalTime = estimateArrivalTime(cyclingMinutes);
   
   // Update the sidebar text to show the station name and distance.
-  const locationText = document.getElementById("locationText");
-  if (locationText) {
-    locationText.textContent = `Displaying directions to station: ${stationName}`;
-    locationText.textContent += ` (Distance: ${distance.toFixed(2)} km)`;
-  }
+  document.getElementById("selected-location").textContent = `Displaying directions to station: ${stationName}`;
+  document.getElementById("selected-location-distance").textContent = `Distance: ${distance.toFixed(2)} km`;
+  document.getElementById("selected-location-time").textContent = `Estimated Cycling Time: ${cyclingTime}`;
+  document.getElementById("selected-location-arrival").textContent = `Estimated Arrival Time: ${arrivalTime}`;
+  document.getElementById("selected-station-info").textContent = `Available Bike Stands: ${availableBikeStands}`;
+
 }
 
 
@@ -55,16 +73,17 @@ function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: centerCoordinates,
     zoom: 14,
+    mapTypeId: google.maps.MapTypeId.SATELLITE
   });
 
   // Loop through the stations data passed from the template.
   stations.forEach(station => {
     if (station.position && station.position.lat && station.position.lng) {
       
-      // Set the icon: default station in red, others in light blue.
-      let iconUrl = (station.station_id == defaultStation.id) ?
-        "http://maps.google.com/mapfiles/ms/icons/red-dot.png" : 
-        "http://maps.google.com/mapfiles/ms/icons/ltblue-dot.png";
+      // Set the icon
+      let iconUrl = (station.station_id == defaultStation.id)
+      ? "/static/pics/bike-red.png"    // Default station = red bike
+      : "/static/pics/bike-yellow.png"; // Others = black bike
 
       // Create the marker.
       let marker = new google.maps.Marker({
@@ -156,4 +175,39 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
       (1 - Math.cos(dLon))/2;
   return R * 2 * Math.asin(Math.sqrt(a));
 }
+
+
+
+/**
+ * Calculates the cycling time (in minutes) for a given distance,
+ * assuming an average cycling speed (default is 12 km/h).
+ * @param {number} distance - Distance in kilometers.
+ * @param {number} [avgSpeed=12] - Average cycling speed (km/h).
+ * @returns {number} Time in minutes.
+ */
+function getCyclingTimeMinutes(distance, avgSpeed = 12) {
+  return (distance / avgSpeed) * 60;
+}
+
+/**
+ * Formats a number of minutes as a string like "1 hr 20 min" or "25 min".
+ * @param {number} minutes - Total minutes.
+ * @returns {string} Formatted time string.
+ */
+function formatTime(minutes) {
+  const hrs = Math.floor(minutes / 60);
+  const mins = Math.round(minutes % 60);
+  return hrs > 0 ? `${hrs} hr ${mins} min` : `${mins} min`;
+}
+
+/**
+ * Estimates the arrival time by adding the cycling minutes to the current time.
+ * @param {number} cyclingMinutes - The cycling time in minutes.
+ * @returns {string} The estimated arrival time (e.g., "3:45 PM").
+ */
+function estimateArrivalTime(cyclingMinutes) {
+  const arrival = new Date(Date.now() + cyclingMinutes * 60000);
+  return arrival.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+}
+
 

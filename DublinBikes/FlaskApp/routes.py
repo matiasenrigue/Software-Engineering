@@ -65,6 +65,7 @@ def forecast_weather_api():
     if not target_datetime:
         return jsonify({"error": "target_datetime parameter is required"}), 400
     data = get_forecast_weather_data(forecast_type, target_datetime)
+    print(data)
     return jsonify(data)
 
 

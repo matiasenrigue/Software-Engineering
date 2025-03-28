@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
+
   // When a date is selected, determine if hour selection should appear.
   document.getElementById("forecast-date").addEventListener("change", function() {
     const selectedDate = new Date(this.value);
@@ -32,6 +33,42 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
+  /**
+ * Parses an ISO timestamp and returns a formatted string with day and hour.
+ * @param {string|number|Date} timestamp - The timestamp to format. Can be an ISO string, a Unix timestamp (milliseconds), or a Date object.
+ * @returns {string} A formatted string, e.g., "Monday 02:30 PM".
+ */
+  function formatTimestamp(timestamp) {
+    // Create a Date object from the provided timestamp.
+    const date = (timestamp instanceof Date) ? timestamp : new Date(timestamp);
+
+    // Define options for day and time in 12-hour format.
+    const options = { weekday: 'long', hour: '2-digit', minute: '2-digit', hour12: true };
+
+    // Return the formatted date string using toLocaleString.
+    return date.toLocaleString('en-US', options);
+  }
+
+
+    /**
+   * Sets the weather icon <img> based on the icon code returned by OpenWeather.
+   * @param {string} iconCode - For example "10d", "09n", etc.
+   * @param {string} [elementId="weather-icon"] - The ID of the <img> element in the HTML.
+   */
+  function setWeatherIcon(iconCode, elementId = "weather-icon") {
+    if (!iconCode) return; // if missing, do nothing or show a placeholder
+
+    // Build the relative path to your static/pics/weather_icons folder
+    const iconUrl = `/static/pics/weather_icons/${iconCode}.png`;
+
+    // Set the <img> src to the appropriate icon
+    const imgElem = document.getElementById(elementId);
+    if (imgElem) {
+      imgElem.src = iconUrl;
+    }
+  }
+
+
 function fetchCurrentWeather() {
   // Your existing current weather fetch logic (or call an endpoint for current data)
   fetch('/api/current_weather')
@@ -41,11 +78,15 @@ function fetchCurrentWeather() {
             console.error("Weather error:", data.error);
             return;
         }
-        document.getElementById("timestamp-weatherinfo").textContent =
-            "Weather data from: " + data.timestamp_weatherinfo;
+
+        const rawTimestamp = data.timestamp_weatherinfo;
+        document.getElementById("timestamp-weatherinfo").textContent = formatTimestamp(rawTimestamp);
         document.getElementById("weather-temp").textContent = data.temp + " °C";
         document.getElementById("weather-description").textContent =
             "Humidity: " + data.humidity + "%";
+
+        setWeatherIcon(data.weather_id);
+
         // Add more updates as needed.
         window.fullWeatherData = data;
     })
@@ -53,6 +94,8 @@ function fetchCurrentWeather() {
         console.error("Error fetching weather data:", error);
     });
 }
+
+
 
 function fetchForecastWeather() {
   const forecastTypeRadio = document.querySelector('input[name="forecastType"]:checked').value;
@@ -99,11 +142,19 @@ function fetchForecastWeather() {
             console.error("Forecast error:", data.error);
             return;
         }
+
+        document.getElementById("timestamp-weatherinfo").textContent = formatTimestamp(rawTimestamp);
         document.getElementById("weather-temp").textContent = data.temp + " °C";
-        document.getElementById("weather-description").textContent = "Humidity: " + data.humidity + "%";
-        // Update other elements as needed.
+        document.getElementById("weather-description").textContent =
+            "Humidity: " + data.humidity + "%";
+
+        setWeatherIcon(data.weather_id);
     })
     .catch(error => {
         console.error("Error fetching forecast data:", error);
     });
+
+
+
+
 }
