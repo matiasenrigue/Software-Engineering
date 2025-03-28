@@ -92,6 +92,24 @@ def current_bikes_api():
 
 
 
+@app.route('/api/ride_prediction', methods=['POST'])
+def ride_prediction():
+    # Dummy machine learning model for ride prediction
+    import random
+    data = request.get_json()
+    # Print received data for debugging
+    print("Ride prediction request received:")
+    print("Timestamp:", data.get("timestamp"))
+    print("Weather Conditions - Temperature:", data.get("temperature"),
+          "Rain:", data.get("rain"),
+          "Wind Speed:", data.get("windspeed"))
+    print("Destination Station ID:", data.get("destination_station_id"))
+    print("Departure Station ID:", data.get("origin_station_id"))
+    
+    # Generate a random prediction value (simulate the ML model output)
+    prediction = random.randint(0, 40)
+    
+    return jsonify({"prediction": prediction})
 
 
 

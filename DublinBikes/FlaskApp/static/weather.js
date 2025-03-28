@@ -71,7 +71,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function fetchCurrentWeather() {
   // Your existing current weather fetch logic (or call an endpoint for current data)
-  fetch('/api/current_weather')
+
+    // Return the fetch promise so we can await it
+  return fetch('/api/current_weather')
     .then(response => response.json())
     .then(data => {
         if(data.error) {
@@ -134,6 +136,9 @@ function fetchForecastWeather() {
       document.getElementById("weather-description").textContent = "Humidity: " + data.humidity + "%";
 
       setWeatherIcon(data.weather_id);
+
+      window.fullWeatherData = data;
+
     })
     .catch(error => {
       console.error("Error fetching forecast data:", error);

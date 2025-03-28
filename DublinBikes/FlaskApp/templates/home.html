@@ -26,14 +26,13 @@
         </div>
 
         <div class="weather-forecast">
-          <h3>Weather Forecast</h3>
           <label>
             <input type="radio" name="forecastType" value="current" checked>
-            Current Weather
+            Bike Now
           </label>
           <label>
             <input type="radio" name="forecastType" value="forecast">
-            Forecast
+            Bike Later
           </label>
         
           <div id="forecast-options" style="display:none; margin-top:1em;">
@@ -46,7 +45,13 @@
               <!-- step="3600" restricts selection to whole hours -->
               <input type="time" id="forecast-hour" step="3600" pattern="^(?:[01]\d|2[0-3]):00$">
             </div>
-            <button onclick="fetchForecastWeather()">Get Forecast</button>
+
+            <div class="ML-model">
+              <button id="getRidePredictionBtn" onclick="combinedForecastAndPrediction()">Get Ride Prediction</button>
+              <p id="prediction-result-origin"></p>
+              <p id="prediction-result-destination"></p>
+              
+            </div>
           </div>
         </div>
         
@@ -60,6 +65,9 @@
           <img id="weather-icon" alt="Weather Icon" style="width: 50px; height: 50px;">
 
         </div>
+
+
+
       </div>
 
       <div class="map">
@@ -89,6 +97,7 @@
       <!-- Load the weather and bikes scripts -->
       <script src="{{ url_for('static', filename='weather.js') }}"></script>
       <script src="{{ url_for('static', filename='bikes.js') }}"></script>
+      <script src="{{ url_for('static', filename='prediction.js') }}"></script>
 
     </div>
 

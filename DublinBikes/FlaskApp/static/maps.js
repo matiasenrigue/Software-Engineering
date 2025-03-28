@@ -1,8 +1,10 @@
 let map; // global map variable
 
+// window.originStationId = default_station.id; // Set the default station id globally 
 
 // Global variable to hold the currently selected station id.
 let selectedStationId = null;
+
 // Global dictionary to store markers by station id.
 let stationMarkers = {};
 
@@ -17,6 +19,7 @@ if (selectedStationId && stationMarkers[selectedStationId]) {
 
   // Update the selected station ID.
   selectedStationId = stationId;
+  window.selectedStationId = stationId; // Store in a global variable for prediction.js
 
 // For the newly selected station, use green bike
 if (stationMarkers[stationId]) {
