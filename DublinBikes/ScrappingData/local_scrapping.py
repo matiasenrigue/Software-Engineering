@@ -9,9 +9,11 @@ def get_data_folder() -> str:
     Ensure that the data folder exists and return the path to it.
     If it does not exist, create it.
     """
-    
-    data_folder: str = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
-    
+
+    data_folder: str = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data"
+    )
+
     if not os.path.exists(data_folder):
         os.mkdir(data_folder)
         print("Folder 'data' created!")
@@ -19,22 +21,20 @@ def get_data_folder() -> str:
     return data_folder
 
 
-
-def create_data_file(filename: str)-> os.path:
+def create_data_file(filename: str) -> os.path:
     """
     Function to save the data to a text file.
     """
-   
+
     data_folder: str = get_data_folder()
     time_stamp: str = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
     text_file: str = os.path.join(data_folder, f"{filename}_{time_stamp}.csv")
-    
+
     # create file, only create, not write anything
     with open(text_file, "w") as f:
         pass
-    
-    return text_file
 
+    return text_file
 
 
 def save_data_to_file(data: str, filepath: os.path) -> None:
@@ -44,12 +44,11 @@ def save_data_to_file(data: str, filepath: os.path) -> None:
     if not os.path.exists(filepath):
         with open(filepath, "w") as f:
             f.write(data)
-    
+
     else:
         with open(filepath, "a") as f:
             f.write(data)
-    
-    
+
 
 def save_data_to_file(data: str, filepath: str) -> None:
     """
@@ -73,7 +72,7 @@ def save_data_to_file(data: str, filepath: str) -> None:
                 if file_empty:
                     writer.writeheader()
                 writer.writerows(json_data)
-                
+
         # If it is a single dictionary (e.g. weather data)
         elif isinstance(json_data, dict):
             with open(filepath, "a", newline="") as f:
@@ -85,9 +84,8 @@ def save_data_to_file(data: str, filepath: str) -> None:
             # If JSON data is not in an expected format, write the raw data.
             with open(filepath, "a") as f:
                 f.write(data)
-                
+
     except Exception as e:
         # If parsing as JSON fails, simply write the raw data.
         with open(filepath, "a") as f:
             f.write(data)
-

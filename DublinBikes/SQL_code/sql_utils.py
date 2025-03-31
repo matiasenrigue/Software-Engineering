@@ -9,28 +9,25 @@ import os
 # from sqlalchemy.exc import SQLAlchemyError
 
 
-
-
 def get_db_path():
-    
+
     # Get the path to the database
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    data_folder = os.path.join(base_dir, 'data')
-    return os.path.join(data_folder, 'db.sqlite3')
-
+    data_folder = os.path.join(base_dir, "data")
+    return os.path.join(data_folder, "db.sqlite3")
 
 
 def get_sql_engine() -> sqlite3.Connection:
     """
     Function to get the SQLite connection.
-    
+
     If the file does not exist, sqlite3 will automatically create it.
     Returns a connection with a row_factory set so that rows can be accessed by column name.
     """
     # Define the file path for the SQLite database file (e.g., in the project root)
     db_path = get_db_path()
     print("🌐 Connecting to the database file:", db_path)
-    
+
     try:
         # This will create the file if it does not exist.
         conn = sqlite3.connect(db_path)
@@ -41,14 +38,14 @@ def get_sql_engine() -> sqlite3.Connection:
     except sqlite3.Error as error:
         print(f"Failed to establish connection to the SQLite database: {error}")
         raise
-    
+
     return conn
 
 
 def execute_sql(sql: str, connection: sqlite3.Connection) -> None:
     """
     Execute a SQL command and provide feedback.
-    
+
     For SELECT queries, prints the returned rows.
     For non-SELECT queries, prints the number of rows affected.
     """
@@ -57,7 +54,7 @@ def execute_sql(sql: str, connection: sqlite3.Connection) -> None:
         with connection:
             print(f"Executing the following SQL command: {sql}")
             cursor = connection.execute(sql)
-            
+
             # If the query starts with SELECT, fetch and print the results
             if sql.strip().upper().startswith("SELECT"):
                 rows = cursor.fetchall()
@@ -71,16 +68,11 @@ def execute_sql(sql: str, connection: sqlite3.Connection) -> None:
             else:
                 # For non-SELECT queries, report the number of rows affected.
                 affected = connection.total_changes
-                print(f"Query executed successfully. Total rows affected (since connection opened): {affected}")
+                print(
+                    f"Query executed successfully. Total rows affected (since connection opened): {affected}"
+                )
     except sqlite3.Error as error:
         print(f"Failed to execute query: {error}")
-
-
-
-
-
-
-
 
 
 ##########################################################################################
@@ -88,12 +80,11 @@ def execute_sql(sql: str, connection: sqlite3.Connection) -> None:
 ##########################################################################################
 
 
-
 def create_data_base():
     engine = get_sql_engine()
-    
+
     # Users table
-    sql_users_table = '''
+    sql_users_table = """
     CREATE TABLE IF NOT EXISTS user (
         email TEXT PRIMARY KEY,
         username TEXT UNIQUE,
@@ -102,10 +93,10 @@ def create_data_base():
         password TEXT,
         default_station INTEGER
     );
-    '''
+    """
 
     # Station table
-    sql_station_table = '''
+    sql_station_table = """
     CREATE TABLE IF NOT EXISTS station (
         station_id INTEGER NOT NULL,
         address VARCHAR(128),
@@ -117,7 +108,7 @@ def create_data_base():
         position_lng FLOAT,
         PRIMARY KEY (station_id)
     );
-    '''
+    """
 
     # Availability table
     sql_availability_table = """
@@ -150,9 +141,9 @@ def create_data_base():
         PRIMARY KEY (dt)
     );
     """
-    
-     # forecast_type -- 'current', 'hourly', or 'daily'
-     # target_datetime -- The forecast valid time (for current data, same as timestamp_weatherinfo)
+
+    # forecast_type -- 'current', 'hourly', or 'daily'
+    # target_datetime -- The forecast valid time (for current data, same as timestamp_weatherinfo)
     sql_fetched_weather = """    
     CREATE TABLE IF NOT EXISTS FetchedWeatherData (
         timestamp_requested DATETIME NOT NULL,
@@ -174,7 +165,7 @@ def create_data_base():
         PRIMARY KEY (timestamp_requested, timestamp_weatherinfo)
     );
     """
-    
+
     # Bikes data cache table
     sql_fetched_bikes = """
     CREATE TABLE IF NOT EXISTS FetchedBikesData (
@@ -194,8 +185,6 @@ def create_data_base():
         PRIMARY KEY (time_requested, station_id)
     );
     """
-    
-
 
     # Execute all the CREATE TABLE statements
     execute_sql(sql_users_table, engine)
@@ -205,9 +194,6 @@ def create_data_base():
     execute_sql(sql_fetched_weather, engine)
     execute_sql(sql_fetched_bikes, engine)
 
-    
-    
-    
 
 def test_queries():
     """
@@ -215,22 +201,20 @@ def test_queries():
     """
     engine = get_sql_engine()
 
-    
     # QUERY 1 counts the total number of rows in the station table (count is count, and * is 'all')
     sql = "select count(*) from station;"
     execute_sql(sql, engine)
-
 
     # QUERY 2 select the rows associated with station Smithfield North
     sql = "select * from station where address = 'Smithfield North';"
     execute_sql(sql, engine)
 
-
     # QUERY 3: Check that the table was correctly updated
     execute_sql("select * from station where address = 'Smithfield North';", engine)
-    execute_sql("select * from availability where available_bike_stands > 20 LIMIT 5", engine)
+    execute_sql(
+        "select * from availability where available_bike_stands > 20 LIMIT 5", engine
+    )
     execute_sql("select * from current where temp > 20", engine)
-
 
 
 # def drop_fetched_weather_table():
@@ -244,14 +228,10 @@ def test_queries():
 
 
 if __name__ == "__main__":
-    
+
     get_db_path()
     create_data_base()
     test_queries()
-    
-    
-
-
 
 
 ####### OLD CODE #######
@@ -261,16 +241,16 @@ if __name__ == "__main__":
 # def get_sql_engine() -> sqla.engine.base.Connection:
 #     """
 #     Function to get the engine to be used to connect to the database.
-    
+
 #     :return: the engine to be used to connect to the database
 #     """
-    
+
 #     # If local is True, the connection is made to the local database
 #     # If local is False, the connection is made to the remote database
 #     local: bool = LOCAL_RUNNING
-    
+
 #     print("🌐 Connecting to the database")
-    
+
 #     if local:
 #         connection_string = f"mysql+mysqlconnector://{LOCAL_USER}:{LOCAL_PASSWORD}@{LOCAL_URI}:{PORT}/{LOCAL_DB}"
 #         engine = create_engine(connection_string)
@@ -278,29 +258,24 @@ if __name__ == "__main__":
 #         connection_string = f"mysql+mysqlconnector://{USER}:{PASSWORD}@{URI}:{PORT}/{DB}"
 #         engine = create_engine(connection_string)
 #         # engine = create_engine(WHOLE_URI)
-    
+
 #     print("🔗 Initial Connection String:", connection_string)
 #     print("🔗 Sent Connection string:", engine.url)
-    
+
 #     try:
 #         with engine.connect() as connection:
 #             # Execute a trivial query to test the connection
 #             connection.execute(text("SELECT 1"))
 
 #             print("✅ Connection to the database established successfully.")
-        
+
 #     except SQLAlchemyError as error:
 #         print(f"Failed to establish connection to the database: {error}")
-#         raise  
+#         raise
 
 #     return engine
 
 
-
-
-    
-    
-    
 # def execute_sql(sql: str, engine: sqla.engine.base.Connection) -> None:
 #     """
 #     Execute a SQL command and provide feedback from the server.
@@ -315,25 +290,24 @@ if __name__ == "__main__":
 #     Returns:
 #         None
 #     """
-    
+
 #     try:
 #         # engine.begin() because it is a context manager that will automatically commit or rollback the transaction
 #         with engine.begin() as connection:
 #             print(f"Executing the following SQL command: {sql}")
 #             result = connection.exec_driver_sql(sql)
 #             print("Query executed successfully.")
-            
+
 #             # Check if the query returned rows (e.g., SELECT statement)
 #             if result.returns_rows:
 #                 rows = result.fetchall()
 #                 print("Query returned the following rows:")
 #                 for row in rows:
 #                     print(row)
-            
+
 #             else:
 #                 rowcount = result.rowcount
 #                 print(f"Query executed successfully. Rows affected: {rowcount}")
-                
+
 #     except SQLAlchemyError as error:
 #         print(f"Failed to execute query: {error}")
-

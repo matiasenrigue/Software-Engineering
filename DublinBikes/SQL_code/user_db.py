@@ -4,10 +4,17 @@ import sqlite3
 from typing import Optional, Union, Dict
 
 
-def register_user(email: str, username: str, first_name: str, last_name: str, password: str, default_station: int) -> bool:
+def register_user(
+    email: str,
+    username: str,
+    first_name: str,
+    last_name: str,
+    password: str,
+    default_station: int,
+) -> bool:
     """
     Inserts a new user into the user table of the SQLite database.
-    
+
     The function expects the table 'user' to have the following structure:
         email TEXT PRIMARY KEY,
         username TEXT UNIQUE,
@@ -15,7 +22,7 @@ def register_user(email: str, username: str, first_name: str, last_name: str, pa
         last_name TEXT,
         password TEXT,
         default_station INTEGER
-    
+
     Parameters:
         email (str): User's email address (primary key).
         username (str): Unique username.
@@ -23,7 +30,7 @@ def register_user(email: str, username: str, first_name: str, last_name: str, pa
         last_name (str): User's last name.
         password (str): User's password (not encrypted).
         default_station (int): The default bike station ID associated with the user.
-        
+
     Returns:
         bool: True if the user was registered successfully, False if an integrity error occurred (e.g. duplicate email or username).
     """
@@ -31,11 +38,11 @@ def register_user(email: str, username: str, first_name: str, last_name: str, pa
     try:
         cursor = conn.cursor()
         cursor.execute(
-            '''
+            """
             INSERT INTO user (email, username, first_name, last_name, password, default_station)
             VALUES (?, ?, ?, ?, ?, ?)
-            ''',
-            (email, username, first_name, last_name, password, default_station)
+            """,
+            (email, username, first_name, last_name, password, default_station),
         )
         conn.commit()
         return True
@@ -49,17 +56,17 @@ def register_user(email: str, username: str, first_name: str, last_name: str, pa
 def get_user_by_email(email: str) -> Optional[Dict[str, Union[str, int]]]:
     """
     Retrieves a user's data from the SQLite database based on their email.
-    
+
     Parameters:
         email (str): The email of the user to retrieve.
-        
+
     Returns:
         Optional[Dict[str, Union[str, int]]]: A dictionary with the user's data if found, or None if no user with the given email exists.
     """
     conn = get_sql_engine()
     try:
         cursor = conn.cursor()
-        cursor.execute('SELECT * FROM user WHERE email = ?', (email,))
+        cursor.execute("SELECT * FROM user WHERE email = ?", (email,))
         row = cursor.fetchone()
         if row is not None:
             # Convert the sqlite3.Row to a standard dictionary.
@@ -69,9 +76,14 @@ def get_user_by_email(email: str) -> Optional[Dict[str, Union[str, int]]]:
         conn.close()
 
 
-
-
-def update_user_profile(email: str, username: str, first_name: str, last_name: str, password: str, default_station: int) -> bool:
+def update_user_profile(
+    email: str,
+    username: str,
+    first_name: str,
+    last_name: str,
+    password: str,
+    default_station: int,
+) -> bool:
     """
     Updates a user's profile information except for the email.
     Returns True on success, False if an error occurs (e.g., integrity issues).
@@ -80,12 +92,12 @@ def update_user_profile(email: str, username: str, first_name: str, last_name: s
     try:
         cursor = conn.cursor()
         cursor.execute(
-            '''
+            """
             UPDATE user
             SET username = ?, first_name = ?, last_name = ?, password = ?, default_station = ?
             WHERE email = ?
-            ''',
-            (username, first_name, last_name, password, default_station, email)
+            """,
+            (username, first_name, last_name, password, default_station, email),
         )
         conn.commit()
         return True

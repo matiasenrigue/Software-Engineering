@@ -2,3 +2,9 @@
 DublinBikes.egg-info
 
 .env
+
+# Pretty JS
+node_modules
+eslint.config.mjs
+package-lock.json
+package.json

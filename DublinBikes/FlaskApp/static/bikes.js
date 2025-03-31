@@ -1,19 +1,18 @@
 // Global variable to track when the bikes data was last fetched
-// let lastFetchTime = 0; 
+// let lastFetchTime = 0;
 
 // This function fetches updated bikes data from your API,
 // updates the global stations variable, and then calls updateMarkers
 function fetchBikesData() {
-
   // const now = Date.now();
   // if (now - lastFetchTime < 60000) {
   //   console.log("Using recently fetched bikes data.");
   //   return;
   // }
 
-  fetch('/api/current_bikes')
-    .then(response => response.json())
-    .then(data => {
+  fetch("/api/current_bikes")
+    .then((response) => response.json())
+    .then((data) => {
       lastFetchTime = Date.now();
       console.log("Fetched bikes data:", data);
       // Update global stations variable with the API data
@@ -21,7 +20,7 @@ function fetchBikesData() {
       // Call function to redraw markers with the new data
       updateMarkers(data);
     })
-    .catch(error => {
+    .catch((error) => {
       console.error("Error fetching bikes data:", error);
     });
 }
@@ -42,10 +41,10 @@ function updateMarkers(stationsData) {
 
   // Call the existing function (in maps.js) to place markers
   placeMarkers(stationsData);
-  
+
   // If a marker was previously selected, reopen its info window
   if (selectedStationId && stationMarkers[selectedStationId]) {
-    google.maps.event.trigger(stationMarkers[selectedStationId], 'click');
+    google.maps.event.trigger(stationMarkers[selectedStationId], "click");
   }
 }
 

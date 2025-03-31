@@ -17,26 +17,23 @@ def main_data_scrapper() -> None:
         "--save-to-db",
         action="store_true",
         default=False,
-        help="If set, save scraped data to the database (default: False, saves to CSV)"
+        help="If set, save scraped data to the database (default: False, saves to CSV)",
     )
     args = parser.parse_args()
     save_to_db: bool = args.save_to_db
-    
-    
-    if save_to_db: 
-        
+
+    if save_to_db:
+
         engine = get_sql_engine()
         bikes_args = (save_to_db, engine, None)
         weather_args = (save_to_db, engine, None)
-        
-    
+
     else:
-        
+
         bikes_data_file = create_data_file("bikes")
         weather_data_file = create_data_file("weather")
         bikes_args = (save_to_db, None, bikes_data_file)
         weather_args = (save_to_db, None, weather_data_file)
-        
 
     # Run the two scrappers in parallel using threads
     t_bikes = threading.Thread(target=main_data_scrapper_bikes, args=bikes_args)
@@ -47,7 +44,6 @@ def main_data_scrapper() -> None:
 
     t_bikes.join()
     t_weather.join()
-
 
 
 if __name__ == "__main__":
