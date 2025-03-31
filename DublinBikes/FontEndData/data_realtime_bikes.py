@@ -1,25 +1,38 @@
 import datetime
 import json
 from DublinBikes.SQL_code.sql_utils import get_sql_engine
-from DublinBikes.ScrappingData.scrapper_jc_decaux import get_data_from_jcdecaux
+from DublinBikes.ScrapingData.scrapper_jc_decaux import get_data_from_jcdecaux
+
+"""
+Module: data_realtime_bikes
+---------------------------
+This module provides functions for handling real-time bike data.
+It includes functionality for saving bike data to the cache database and retrieving current bike data,
+either from the cache or directly from the bikes API.
+"""
 
 
 def save_bikes_data_to_cache_db(bikes_data: list, return_rows: bool = True) -> list:
     """
-    Save bikes data (from the bikes API) into the cache database.
-    All inserted records share the same time_requested.
-    Now includes extra info: address, banking, bonus, bike_stands, name,
-    position_lat, position_lng.
+    Save bike station data to the cache database.
+
+    This function inserts bike station data obtained from the bikes API into the 'FetchedBikesData' table.
+    All records are inserted with a single timestamp (time_requested). Optionally, the inserted records can
+    be returned as a list of dictionaries.
+
+    Parameters:
+        bikes_data (list): A list of dictionaries representing bike station data from the API.
+        return_rows (bool): If True, returns the inserted records; otherwise, returns an empty list.
+
+    Returns:
+        list: A list of dictionaries representing the inserted bike station records (if return_rows is True).
     """
     conn = get_sql_engine()
     inserted_records = []
     try:
-        # Use a single timestamp for this snapshot
         time_requested = datetime.datetime.now()
         cursor = conn.cursor()
-
         for station in bikes_data:
-            # Get fields from API response.
             station_id = station.get("number")
             available_bikes = station.get("available_bikes")
             available_bike_stands = station.get("available_bike_stands")
@@ -30,18 +43,14 @@ def save_bikes_data_to_cache_db(bikes_data: list, return_rows: bool = True) -> l
                 if last_update_ms
                 else None
             )
-
-            # Extra fields from API (make sure your API returns these)
             address = station.get("address")
             banking = station.get("banking")
             bonus = station.get("bonus")
             bike_stands = station.get("bike_stands")
             name = station.get("name")
-            # For position, assume the API returns a dictionary with keys 'lat' and 'lng'
             position = station.get("position", {})
             position_lat = position.get("lat")
             position_lng = position.get("lng")
-
             insert_query = """
             INSERT INTO FetchedBikesData (
                 time_requested, station_id, available_bikes, available_bike_stands, status, last_update,
@@ -91,8 +100,15 @@ def save_bikes_data_to_cache_db(bikes_data: list, return_rows: bool = True) -> l
 
 def get_current_bikes_data():
     """
-    Retrieve bikes data from cache if it was fetched within the last 5 minutes.
-    Otherwise, fetch new data from the bikes API, cache it, and return it.
+    Retrieve current bike station data.
+
+    This function checks if bike data is available in the cache (i.e., data requested within the last 5 minutes).
+    If cached data is available, it returns the data as a list of dictionaries. Otherwise, it fetches new data from
+    the bikes API, saves it to the cache, and returns the newly inserted records.
+
+    Returns:
+        list or dict: A list of dictionaries containing bike station data if successful,
+                      or a dictionary with an error message if the API data cannot be fetched.
     """
     conn = get_sql_engine()
     try:
@@ -107,12 +123,10 @@ def get_current_bikes_data():
         rows = cursor.fetchall()
     finally:
         conn.close()
-
     if rows:
         print("Using cached data")
         bikes_data = []
         for row in rows:
-            # Convert each row to a dictionary
             bikes_data.append(
                 {
                     "time_requested": row[0],
@@ -131,7 +145,6 @@ def get_current_bikes_data():
             )
         print(bikes_data)
         return bikes_data
-
     else:
         bikes_text = get_data_from_jcdecaux()
         if bikes_text:
