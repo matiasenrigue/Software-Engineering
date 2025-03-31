@@ -1,4 +1,4 @@
-from DublinBikes.SQL_code.sql_utils import get_sql_engine, execute_sql
+from DublinBikes.SqlCode.sql_utils import get_sql_engine, execute_sql
 
 import sqlite3
 from typing import Optional, Union, Dict

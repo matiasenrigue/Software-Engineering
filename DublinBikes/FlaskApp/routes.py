@@ -13,7 +13,7 @@ from DublinBikes.FontendData.data_realtime_weather import (
     get_current_weather_data,
 )
 from DublinBikes.FontendData.data_realtime_bikes import get_current_bikes_data
-from DublinBikes.SQL_code.user_db import (
+from DublinBikes.SqlCode.user_db import (
     register_user,
     get_user_by_email,
     update_user_profile,

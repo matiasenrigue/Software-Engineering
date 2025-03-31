@@ -2,7 +2,7 @@ import csv
 import json
 from datetime import datetime
 from sqlalchemy import text
-from DublinBikes.SQL_code.sql_utils import get_sql_engine
+from DublinBikes.SqlCode.sql_utils import get_sql_engine
 
 """
 Module: export_to_csv

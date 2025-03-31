@@ -1,7 +1,7 @@
 import datetime
 import json
-from DublinBikes.SQL_code.sql_utils import get_sql_engine
-from DublinBikes.ScrapingData.scrapper_jc_decaux import get_data_from_jcdecaux
+from DublinBikes.SqlCode.sql_utils import get_sql_engine
+from DublinBikes.DataMining.scrapper_jc_decaux import get_data_from_jcdecaux
 
 """
 Module: data_realtime_bikes

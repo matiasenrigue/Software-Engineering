@@ -1,6 +1,6 @@
 import os
 from datetime import date
-from DublinBikes.SQL_code.sql_utils import get_sql_engine
+from DublinBikes.SqlCode.sql_utils import get_sql_engine
 
 """
 Module: manage_cache
