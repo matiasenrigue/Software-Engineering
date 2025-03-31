@@ -1,57 +1,90 @@
-let map; // global map variable
+/**
+ * Module: maps.js
+ * ----------------
+ * Contains all functions for initializing the Google Map,
+ * placing markers for bike stations, handling station selection,
+ * drawing routes (arrows), and calculating distances/times.
+ */
 
-// window.originStationId = default_station.id; // Set the default station id globally
+// Global variables for map functionalities.
+export let map; // The Google Map instance.
+export let selectedStationId = null; // Currently selected station id.
+export let stationMarkers = {}; // Dictionary holding markers by station id.
+export let routePolyline = null; // Holds the drawn polyline arrow.
 
-// Global variable to hold the currently selected station id.
-let selectedStationId = null;
+// Expose selectStation globally for inline event handlers.
+window.selectStation = selectStation;
 
-// Global dictionary to store markers by station id.
-let stationMarkers = {};
 
-// This function will be called when a user clicks the "GO" button.
-function selectStation(stationId, stationName, stationLat, stationLng) {
-  // Reset the previously selected station's icon to black bike
+
+/**
+ * Selects a station on the map.
+ * Updates marker icons, draws a route arrow, calculates distance and time,
+ * and updates the sidebar with details.
+ * @param {number} stationId - Selected station id.
+ * @param {string} stationName - Selected station name.
+ * @param {number} stationLat - Latitude of the selected station.
+ * @param {number} stationLng - Longitude of the selected station.
+ */
+
+
+/**
+ * Initializes the Google Map.
+ * Centers the map either on Dublin or on a user’s default station (if defined).
+ */
+export function initMap() {
+  // Default center: Dublin.
+  let centerCoordinates = { lat: 53.3498, lng: -6.2603 };
+  // If defaultStation is defined in the global scope, re-center on it.
+  if (typeof defaultStation !== "undefined" && defaultStation) {
+    centerCoordinates = { lat: defaultStation.lat, lng: defaultStation.lng };
+  }
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: centerCoordinates,
+    zoom: 14,
+    mapTypeId: google.maps.MapTypeId.SATELLITE,
+  });
+  // console.log(stations);
+}
+
+
+export function selectStation(stationId, stationName, stationLat, stationLng) {
+  // Reset icon for previously selected station.
   if (selectedStationId && stationMarkers[selectedStationId]) {
-    stationMarkers[selectedStationId].setIcon("/static/pics/bike-yellowpng");
+    stationMarkers[selectedStationId].setIcon("/static/pics/bike-yellow.png");
   }
 
-  // Update the selected station ID.
   selectedStationId = stationId;
-  window.selectedStationId = stationId; // Store in a global variable for prediction.js
+  window.selectedStationId = stationId; // Expose for prediction.js.
 
-  // For the newly selected station, use green bike
+  // Set new icon for selected station.
   if (stationMarkers[stationId]) {
     stationMarkers[stationId].setIcon("/static/pics/bike-green.png");
   }
 
-  // Draw the arrow from the default station to the selected station.
-  // Assume defaultStation has properties lat and lng.
+  // Draw route arrow from the default station to the selected station.
   let from = { lat: defaultStation.lat, lng: defaultStation.lng };
   let to = { lat: stationLat, lng: stationLng };
-  drawArrow(from, to, map); // Note: map variable must be in scope
+  drawArrow(from, to, map);
 
-  // Calculate the distance between the default and selected station.
+  // Calculate distance between stations.
   const distance = calculateDistance(
     defaultStation.lat,
     defaultStation.lng,
     stationLat,
-    stationLng,
+    stationLng
   );
 
-  // Find the selected station data (assuming the global "stations" variable is available)
+  // Find selected station data.
   const selectedStation = stations.find((s) => s.station_id == stationId);
-  const availableBikeStands = selectedStation
-    ? selectedStation.available_bike_stands
-    : "N/A";
+  const availableBikeStands = selectedStation ? selectedStation.available_bike_stands : "N/A";
 
-  // Estimate cycling time in minutes and then format it.
+  // Calculate cycling time.
   const cyclingMinutes = getCyclingTimeMinutes(distance);
   const cyclingTime = formatTime(cyclingMinutes);
-
-  // Estimate arrival time based on current time.
   const arrivalTime = estimateArrivalTime(cyclingMinutes);
 
-  // Update the sidebar text to show the station name and distance.
+  // Update sidebar details.
   document.getElementById("selected-location").textContent =
     `Displaying directions to station: ${stationName}`;
   document.getElementById("selected-location-distance").textContent =
@@ -64,42 +97,24 @@ function selectStation(stationId, stationName, stationLat, stationLng) {
     `Available Bike Stands: ${availableBikeStands}`;
 }
 
-function initMap() {
-  // Set initial map center (Dublin)
-  let centerCoordinates = { lat: 53.3498, lng: -6.2603 };
 
-  // If defaultStation is defined, re-center on that station.
-  if (typeof defaultStation !== "undefined" && defaultStation) {
-    centerCoordinates = { lat: defaultStation.lat, lng: defaultStation.lng };
-  }
-
-  // Initialize the map.
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: centerCoordinates,
-    zoom: 14,
-    mapTypeId: google.maps.MapTypeId.SATELLITE,
-  });
-
-  // Place the markers with the SQL Data to have ALL the stations ready on the map.
-  // placeMarkers(stations)
-  console.log(stations);
-}
-
-// Function to plavce markers on the map
-function placeMarkers(stations_data) {
+/**
+ * Places markers on the map based on provided stations data.
+ * @param {Array} stations_data - Array of station objects.
+ */
+export function placeMarkers(stations_data) {
   let oneWindowWasOpen = false;
   let currentInfoWindow;
 
-  // Loop through the stations data passed from the template.
   stations_data.forEach((station) => {
-    console.log(station);
+    // console.log(station);
 
     if (station.position && station.position.lat && station.position.lng) {
-      // Set the icon
+      // Set icon: default station gets a red bike, others get yellow.
       let iconUrl =
         station.station_id == defaultStation.id
-          ? "/static/pics/bike-red.png" // Default station = red bike
-          : "/static/pics/bike-yellow.png"; // Others = black bike
+          ? "/static/pics/bike-red.png"
+          : "/static/pics/bike-yellow.png";
 
       // Create the marker.
       let marker = new google.maps.Marker({
@@ -109,7 +124,7 @@ function placeMarkers(stations_data) {
         icon: iconUrl,
       });
 
-      // Save the marker in our global dictionary.
+      // Store the marker for later updates.
       stationMarkers[station.station_id] = marker;
 
       // Build the content for the info window.
@@ -121,9 +136,8 @@ function placeMarkers(stations_data) {
           <button>Details</button>
         </a>`;
 
-      // Only add the "GO" button if this is not the default station.
+      // Add a "GO" button for non-default stations.
       if (station.station_id != defaultStation.id) {
-        // infoContent += `<button onclick="selectStation(${station.station_id}, '${station.name}')">GO</button>`;
         infoContent += `<button onclick="selectStation(${station.station_id}, '${station.name}', ${station.position.lat}, ${station.position.lng})">GO</button>`;
       }
 
@@ -145,42 +159,57 @@ function placeMarkers(stations_data) {
   });
 }
 
-// Global variable to hold the polyline arrow
-let routePolyline = null;
 
-// Function to draw a polyline with an arrow between two points
-function drawArrow(from, to, map) {
-  // Remove the previous arrow, if any.
+
+
+
+/**
+ * Draws an arrow (polyline) between two points on the map.
+ * @param {Object} from - Starting point {lat, lng}.
+ * @param {Object} to - Ending point {lat, lng}.
+ * @param {Object} mapInstance - The Google Map instance.
+ */
+export function drawArrow(from, to, mapInstance) {
+  // Remove previous arrow, if any.
   if (routePolyline) {
     routePolyline.setMap(null);
   }
 
-  // Define an arrow symbol
+  // Define arrow symbol.
   const arrowSymbol = {
     path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
     scale: 2,
     strokeColor: "#FF0000",
   };
 
-  // Create a polyline connecting the two coordinates
+  // Create a new polyline with the arrow.
   routePolyline = new google.maps.Polyline({
     path: [from, to],
     icons: [
       {
         icon: arrowSymbol,
-        offset: "100%", // display arrow at the end of the line
+        offset: "100%",
       },
     ],
     geodesic: true,
     strokeColor: "#FF0000",
     strokeOpacity: 1.0,
     strokeWeight: 2,
-    map: map,
+    map: mapInstance,
   });
 }
 
-function calculateDistance(lat1, lon1, lat2, lon2) {
-  const R = 6371; // Earth's radius in kilometers
+
+/**
+ * Calculates the distance between two latitude/longitude points using the haversine formula.
+ * @param {number} lat1 - Latitude of the first point.
+ * @param {number} lon1 - Longitude of the first point.
+ * @param {number} lat2 - Latitude of the second point.
+ * @param {number} lon2 - Longitude of the second point.
+ * @returns {number} Distance in kilometers.
+ */
+export function calculateDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371; // Earth's radius in kilometers.
   const dLat = ((lat2 - lat1) * Math.PI) / 180;
   const dLon = ((lon2 - lon1) * Math.PI) / 180;
   const a =
@@ -193,34 +222,35 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   return R * 2 * Math.asin(Math.sqrt(a));
 }
 
+
 /**
- * Calculates the cycling time (in minutes) for a given distance,
- * assuming an average cycling speed (default is 12 km/h).
+ * Calculates cycling time (in minutes) for a given distance assuming an average speed.
  * @param {number} distance - Distance in kilometers.
  * @param {number} [avgSpeed=12] - Average cycling speed (km/h).
- * @returns {number} Time in minutes.
+ * @returns {number} Cycling time in minutes.
  */
-function getCyclingTimeMinutes(distance, avgSpeed = 12) {
+export function getCyclingTimeMinutes(distance, avgSpeed = 12) {
   return (distance / avgSpeed) * 60;
 }
 
+
 /**
- * Formats a number of minutes as a string like "1 hr 20 min" or "25 min".
- * @param {number} minutes - Total minutes.
+ * Formats minutes into a human-readable string (e.g., "1 hr 20 min").
+ * @param {number} minutes - Time in minutes.
  * @returns {string} Formatted time string.
  */
-function formatTime(minutes) {
+export function formatTime(minutes) {
   const hrs = Math.floor(minutes / 60);
   const mins = Math.round(minutes % 60);
   return hrs > 0 ? `${hrs} hr ${mins} min` : `${mins} min`;
 }
 
 /**
- * Estimates the arrival time by adding the cycling minutes to the current time.
- * @param {number} cyclingMinutes - The cycling time in minutes.
- * @returns {string} The estimated arrival time (e.g., "3:45 PM").
+ * Estimates the arrival time by adding cycling minutes to the current time.
+ * @param {number} cyclingMinutes - Cycling time in minutes.
+ * @returns {string} Estimated arrival time (e.g., "3:45 PM").
  */
-function estimateArrivalTime(cyclingMinutes) {
+export function estimateArrivalTime(cyclingMinutes) {
   const arrival = new Date(Date.now() + cyclingMinutes * 60000);
   return arrival.toLocaleTimeString([], {
     hour: "2-digit",
@@ -228,3 +258,19 @@ function estimateArrivalTime(cyclingMinutes) {
     hour12: true,
   });
 }
+
+
+document.querySelectorAll('.go-button').forEach(button => {
+  button.addEventListener('click', (event) => {
+    const stationId = event.target.dataset.stationId;
+    const stationName = event.target.dataset.stationName;
+    const stationLat = parseFloat(event.target.dataset.stationLat);
+    const stationLng = parseFloat(event.target.dataset.stationLng);
+    selectStation(stationId, stationName, stationLat, stationLng);
+  });
+});
+
+
+// Expose initMap to the global scope for the Google Maps API callback.
+window.initMap = initMap;
+

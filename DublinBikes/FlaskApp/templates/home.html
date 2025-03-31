@@ -74,30 +74,38 @@
         <!-- This div is the container where the map will be rendered -->
         <div id="map" style="height: 500px;"></div>
       </div>
-  
-      <!-- Embed the stations data into a global JS variable -->
+
+      <!-- Embed stations and defaultStation from Flask -->
       <script>
         const stations = {{ stations | tojson }};
-
         var defaultStation = {
-        id: {{ default_station.station_id }},
-       lat: {{ default_station.position_lat }},
-       lng: {{ default_station.position_lng }}
-      };
-      </script>
-    
-      <!-- Load your custom script after defining 'stations' -->
-      <script src="{{ url_for('static', filename='js/maps.js') }}"></script>
+          id: {{ default_station.station_id }},
+          lat: {{ default_station.position_lat }},
+          lng: {{ default_station.position_lng }}
+        };
 
-    
+        window.originStationId = defaultStation.id;
+      </script>
+
+      <!-- Load your custom modules -->
+      <script type="module" src="{{ url_for('static', filename='js/maps.js') }}"></script>
+      <script type="module" src="{{ url_for('static', filename='js/weather.js') }}"></script>
+      <script type="module" src="{{ url_for('static', filename='js/bikes.js') }}"></script>
+      <script type="module" src="{{ url_for('static', filename='js/prediction.js') }}"></script>
+
       <!-- Google Maps API script with callback to initMap -->
       <script src="https://maps.googleapis.com/maps/api/js?key={{ mapskey }}&callback=initMap" async defer></script>
 
-      
-      <!-- Load the weather and bikes scripts -->
-      <script src="{{ url_for('static', filename='js/weather.js') }}"></script>
-      <script src="{{ url_for('static', filename='js/bikes.js') }}"></script>
-      <script src="{{ url_for('static', filename='js/prediction.js') }}"></script>
+      <!-- And once everything is loaded, call initMap manually -->
+      <script>
+        // Wait for the DOM and modules to load, then call initMap.
+        window.addEventListener('load', () => {
+          if (typeof window.initMap === 'function') {
+            window.initMap();
+          }
+        });
+      </script>
+
 
     </div>
 
