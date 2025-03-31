@@ -1,7 +1,20 @@
-from DublinBikes.SqlCode.sql_utils import get_sql_engine, execute_sql
-
 import sqlite3
 from typing import Optional, Union, Dict
+from DublinBikes.SqlCode.sql_utils import get_sql_engine
+
+"""
+Module: user_db
+===============
+
+This module provides functions for managing user information in the SQLite database.
+It includes functionality to register new users, retrieve user data by email, and update existing user profiles.
+
+Functions:
+    - register_user: Inserts a new user into the "user" table.
+    - get_user_by_email: Retrieves user details based on the provided email address.
+    - update_user_profile: Updates the profile information of an existing user (excluding the email).
+"""
+
 
 
 def register_user(
@@ -13,26 +26,21 @@ def register_user(
     default_station: int,
 ) -> bool:
     """
-    Inserts a new user into the user table of the SQLite database.
+    Register a new user in the database.
 
-    The function expects the table 'user' to have the following structure:
-        email TEXT PRIMARY KEY,
-        username TEXT UNIQUE,
-        first_name TEXT,
-        last_name TEXT,
-        password TEXT,
-        default_station INTEGER
+    Inserts a new record into the "user" table using the provided user details.
+    The email serves as the primary key and the username must be unique.
 
     Parameters:
-        email (str): User's email address (primary key).
-        username (str): Unique username.
-        first_name (str): User's first name.
-        last_name (str): User's last name.
-        password (str): User's password (not encrypted).
+        email (str): The user's email address.
+        username (str): The user's unique username.
+        first_name (str): The user's first name.
+        last_name (str): The user's last name.
+        password (str): The user's password (stored in plain text).
         default_station (int): The default bike station ID associated with the user.
 
     Returns:
-        bool: True if the user was registered successfully, False if an integrity error occurred (e.g. duplicate email or username).
+        bool: True if the registration is successful; False if an integrity error occurs.
     """
     conn = get_sql_engine()
     try:
@@ -55,23 +63,22 @@ def register_user(
 
 def get_user_by_email(email: str) -> Optional[Dict[str, Union[str, int]]]:
     """
-    Retrieves a user's data from the SQLite database based on their email.
+    Retrieve user information based on the email address.
+
+    Queries the "user" table for a record matching the provided email.
 
     Parameters:
-        email (str): The email of the user to retrieve.
+        email (str): The email address of the user to retrieve.
 
     Returns:
-        Optional[Dict[str, Union[str, int]]]: A dictionary with the user's data if found, or None if no user with the given email exists.
+        Optional[Dict[str, Union[str, int]]]: A dictionary with user details if found; otherwise, None.
     """
     conn = get_sql_engine()
     try:
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM user WHERE email = ?", (email,))
         row = cursor.fetchone()
-        if row is not None:
-            # Convert the sqlite3.Row to a standard dictionary.
-            return dict(row)
-        return None
+        return dict(row) if row is not None else None
     finally:
         conn.close()
 
@@ -85,8 +92,21 @@ def update_user_profile(
     default_station: int,
 ) -> bool:
     """
-    Updates a user's profile information except for the email.
-    Returns True on success, False if an error occurs (e.g., integrity issues).
+    Update an existing user's profile information.
+
+    Updates the username, first name, last name, password, and default station for the user identified by email.
+    The email itself remains unchanged.
+
+    Parameters:
+        email (str): The user's email address (identifier).
+        username (str): The new username.
+        first_name (str): The new first name.
+        last_name (str): The new last name.
+        password (str): The new password.
+        default_station (int): The new default bike station ID.
+
+    Returns:
+        bool: True if the update was successful; False if an integrity error occurs.
     """
     conn = get_sql_engine()
     try:
