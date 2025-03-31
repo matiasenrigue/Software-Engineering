@@ -6,39 +6,88 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     {% block head %}{% endblock %}
 </head>
-<body>
+<body>    
     <header>
-
-        <h1>
-            <a href="{{ url_for('home') }}" style="color: aliceblue;">
-                <img src="{{ url_for('static', filename='pics/logo.webp') }}" alt="Logo" width="40" />
-                DUBLIN BIKES (Style this better, theres inline CSS)
-            </a>
-          </h1>
-          <nav>
-            <ul>
-                {% if session.user %}
-                    <span style="margin-right: 20px;">Welcome, {{ session.user.username }}!</span>
-                    <a href="{{ url_for('edit_profile') }}">    Edit Profile</a>
-                    <a href="{{ url_for('logout') }}">Logout</a>
-                {% else %}
-                    <a href="{{ url_for('login') }}">Login</a> 
-                    <a href="{{ url_for('register') }}">   Create an Account</a>
-                {% endif %}
-
-            </ul>
-          </nav>
-
+        <div class="header-container">
+            <h1>
+                <a href="{{ url_for('home') }}" class="header-logo">
+                    <img src="{{ url_for('static', filename='pics/logo.webp') }}" alt="Logo" width="40" />
+                    DUBLIN BIKES
+                </a>
+            </h1>
+            <div class="header-right">
+                <nav>
+                    <ul>
+                        {% if session.user %}
+                            <span class="welcome-message">Welcome, {{ session.user.username }}!</span>
+                            <a href="{{ url_for('edit_profile') }}">Edit Profile</a>
+                            <a href="{{ url_for('logout') }}">Logout</a>
+                        {% else %}
+                            <a href="{{ url_for('login') }}">Login</a> 
+                            <a href="{{ url_for('register') }}">Register</a>
+                        {% endif %}
+                    </ul>
+                </nav>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <span id="theme-icon">🌙</span>
+                </button>
+            </div>
+        </div>
     </header>
-
-
-    
     <main>
         {% block content %}{% endblock %}
     </main>
     
     <footer>
         <p>&copy; Dublin Bikes Project</p>
-    </footer>
+    </footer> 
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            
+            // If we have a saved theme, apply it
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+                updateIcon(savedTheme);
+            } else {
+                // If user prefers dark mode, apply it
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    updateIcon('dark');
+                }
+            }
+            
+            // Toggle theme when button is clicked
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateIcon(newTheme);
+            });
+            
+            // Update the icon based on current theme
+            function updateIcon(theme) {
+                themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+            
+            // Listen for system theme changes
+            if (window.matchMedia) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+                    if (!localStorage.getItem('theme')) {
+                        const newTheme = event.matches ? 'dark' : 'light';
+                        document.documentElement.setAttribute('data-theme', newTheme);
+                        updateIcon(newTheme);
+                    }
+                });
+            }
+        });
+    </script>    
 </body>
 </html>
