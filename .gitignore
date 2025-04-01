@@ -1,4 +1,7 @@
-*/__pycache__
+__pycache__/
+*/__pycache__/
+*/*/__pycache__/
+
 DublinBikes.egg-info
 
 .env
@@ -10,3 +13,4 @@ package-lock.json
 package.json
 
 *.csv
+

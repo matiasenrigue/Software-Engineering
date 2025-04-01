@@ -18,7 +18,7 @@ runserver-local: killport
 
 # Run the server for EC2 (listens on all interfaces)
 runserver-ec2: killport
-	python run.py --host=0.0.0.0 --port=5000
+	python run.py --host=0.0.0.0 --port=8000
 
 
 scraping-textfile:

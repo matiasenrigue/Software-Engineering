@@ -20,7 +20,6 @@ The module supports two data-saving modes:
 ```
 DataMining/
 ├── __init__.py
-├── export_to_csv.py       # Exports historical bike and weather data from the SQL DB to CSV files.
 ├── general_scrapper.py    # Orchestrates the scraping process using threading for concurrent bike and weather data collection.
 ├── local_scrapping.py     # Contains utility functions to manage local file storage for scraped data.
 ├── scrapper_jc_decaux.py  # Fetches bike station data from the JCDecaux API and saves it to the database.
@@ -53,9 +52,6 @@ python general_scrapper.py --save-to-db
 ```
 
 ### Modules in Detail
-
-- **export_to_csv.py:**  
-  Contains functions to export bike and weather data from the SQL database into CSV files for offline analysis or backup.
 
 - **general_scrapper.py:**  
   Serves as the main entry point. It parses command-line arguments, sets up the required resources (SQL engine or file paths), and starts the bike and weather scrapers concurrently using threads.
