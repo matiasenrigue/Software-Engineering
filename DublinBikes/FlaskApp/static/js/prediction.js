@@ -7,6 +7,8 @@
 
 import { fetchForecastWeather } from "./weather.js";
 
+window.combinedForecastAndPrediction = combinedForecastAndPrediction;
+
 /**
  * Gets ride prediction by gathering the current timestamp,
  * weather data, and station information, then sends a POST request.
