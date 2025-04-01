@@ -11,7 +11,7 @@
       <div class="sidebar">
 
         {% if session.user %}
-          <p>You chose <strong>{{ default_station.name }}</strong> as your default station, can be changed in your profile settings.</p>
+          <p>You chose <strong>{{ default_station.name }}</strong> as your default station which can be changed in your profile settings.</p>
         {% else %}
           <p>Using <strong>{{ default_station.name }}</strong> as default location, sign in if you want to change it.</p>
         {% endif %}
@@ -33,14 +33,14 @@
           <label>
             <input type="radio" name="forecastType" value="forecast">
             Bike Later
-          </label>
+          </label> 
         
-          <div id="forecast-options" style="display:none; margin-top:1em;">
+          <div id="forecast-options" class="forecast-options-hidden">
             <label for="forecast-date">Select Date:</label>
             <input type="date" id="forecast-date" 
                    min="{{ now.strftime('%Y-%m-%d') }}" 
                    max="{{ (now + timedelta(days=5)).strftime('%Y-%m-%d') }}">
-            <div id="hour-selector" style="display:none; margin-top:0.5em;">
+            <div id="hour-selector" class="hour-selector-hidden">
               <label for="forecast-hour">Select Hour:</label>
               <!-- step="3600" restricts selection to whole hours -->
               <input type="time" id="forecast-hour" step="3600" pattern="^(?:[01]\d|2[0-3]):00$">
@@ -50,32 +50,30 @@
               <button id="getRidePredictionBtn" onclick="combinedForecastAndPrediction()">Get Ride Prediction</button>
               <p id="prediction-result-origin"></p>
               <p id="prediction-result-destination"></p>
-              
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="main-content">
         
-        
-        <div class="weather">
+        <div class="weather-container">
+          <div class="weather">
           <h3>Weather Info</h3>
 
           <p>Showing <span id="weather-current-forecast"></span><br><span id="timestamp-weatherinfo"></span></p>
           <p id="weather-temp"></p>
           <p id="weather-description"></p>
-          <img id="weather-icon" alt="Weather Icon" style="width: 50px; height: 50px;">
-
+          <img id="weather-icon" alt="Weather Icon">
+        </div>
         </div>
 
-
-
-      </div>
-
-      <div class="map">
+        <div class="map">
         <!-- This div is the container where the map will be rendered -->
-        <div id="map" style="height: 500px;"></div>
+        <div id="map" class="map-container"></div>
       </div>
-
-      <!-- Embed stations and defaultStation from Flask -->
+  
+      <!-- Embed the stations data into a global JS variable -->
       <script>
         const stations = {{ stations | tojson }};
         var defaultStation = {

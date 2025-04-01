@@ -13,7 +13,7 @@
         var button = document.getElementById("fetchButton");
 
         // Disable button immediately
-        button.disabled = true;
+        button.disabled = true; 
 
         fetch('/api/current_data')
           .then(response => response.json())

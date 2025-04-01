@@ -2,39 +2,46 @@
 {% block title %}Edit Profile{% endblock %}
 
 {% block content %}
-  <h2>Edit Your Profile</h2>
-  <form method="post">
-    <!-- Email is displayed for information but not editable -->
-    <p>
-      <label>Email:</label>
-      <span>{{ user.email }}</span>
-    </p>
-    <p>
-      <label>Username:</label>
-      <input type="text" name="username" value="{{ user.username }}" required>
-    </p>
-    <p>
-      <label>First Name:</label>
-      <input type="text" name="first_name" value="{{ user.first_name }}" required>
-    </p>
-    <p>
-      <label>Last Name:</label>
-      <input type="text" name="last_name" value="{{ user.last_name }}" required>
-    </p>
-    <p>
-      <label>Password:</label>
-      <input type="password" name="password" value="{{ user.password }}" required>
-    </p>
-    <p>
-      <label>Default Bike Station:</label>
-      <select name="default_station" required>
-        {% for station in stations %}
-          <option value="{{ station.station_id }}" {% if station.station_id == user.default_station %}selected{% endif %}>
-            {{ station.name }}
-          </option>
-        {% endfor %}
-      </select>
-    </p>
-    <button type="submit">Update Profile</button>
-  </form>
+ <div class="profile-container">
+    <h2>Edit Your Profile</h2>
+    <form method="post">
+      <div class="form-group">
+        <label>Email:</label>
+        <span>{{ user.email }}</span>
+      </div>
+      
+      <div class="form-group">
+        <label>Username:</label>
+        <input type="text" name="username" value="{{ user.username }}" required>
+      </div>
+      
+      <div class="form-group">
+        <label>First Name:</label>
+        <input type="text" name="first_name" value="{{ user.first_name }}" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Last Name:</label>
+        <input type="text" name="last_name" value="{{ user.last_name }}" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Password:</label>
+        <input type="password" name="password" value="{{ user.password }}" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Default Bike Station:</label>
+        <select name="default_station" required>
+          {% for station in stations %}
+            <option value="{{ station.station_id }}" {% if station.station_id == user.default_station %}selected{% endif %}>
+              {{ station.name }}
+            </option> 
+          {% endfor %}
+        </select>
+      </div>
+      
+      <button type="submit" class="update-btn">Update Profile</button>
+    </form>
+  </div>
 {% endblock %}

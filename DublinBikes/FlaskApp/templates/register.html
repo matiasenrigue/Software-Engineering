@@ -2,30 +2,48 @@
 {% block title %}Create Account{% endblock %}
 
 {% block content %}
-<h2>Create Account</h2>
-<form method="post">
-  <label>Email:</label>
-  <input type="email" name="email" required><br>
+<div class="registration-container">
   
-  <label>Username:</label>
-  <input type="text" name="username" required><br>
+  <h2>Create an Account</h2>
   
-  <label>First Name:</label>
-  <input type="text" name="first_name" required><br>
-  
-  <label>Last Name:</label>
-  <input type="text" name="last_name" required><br>
-  
-  <label>Password:</label>
-  <input type="password" name="password" required><br>
-  
-  <label>Default Bike Station:</label>
-  <select name="default_station" required>
-    {% for station in stations %}
-      <option value="{{ station.station_id }}">{{ station.name }}</option>
-    {% endfor %}
-  </select><br>
-  
-  <button type="submit">Register</button>
-</form>
+  <form method="post">
+    
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" class="form-control" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" class="form-control" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="first_name">First Name:</label>
+      <input type="text" id="first_name" name="first_name" class="form-control" required> 
+    </div>
+    
+    <div class="form-group">
+      <label for="last_name">Last Name:</label>
+      <input type="text" id="last_name" name="last_name" class="form-control" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" class="form-control" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="default_station">Default Bike Station:</label>
+      <select id="default_station" name="default_station" class="form-select" required>
+        {% for station in stations %}
+          <option value="{{ station.station_id }}">{{ station.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    
+    <button type="submit" class="btn-submit">Register</button>
+  </form>
+</div>
+
 {% endblock %}
