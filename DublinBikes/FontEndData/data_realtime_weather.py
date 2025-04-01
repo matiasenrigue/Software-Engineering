@@ -2,7 +2,7 @@ import datetime
 import json
 from DublinBikes.SqlCode.sql_utils import get_sql_engine
 from DublinBikes.DataMining.scrapper_open_weather import get_data_from_openweather
-from DublinBikes.FontendData.manage_cache import clean_cache
+from DublinBikes.FontEndData.manage_cache import clean_cache
 
 """
 Module: data_realtime_weather

@@ -15,17 +15,17 @@ from flask import render_template, jsonify, request, redirect, url_for, session,
 from DublinBikes.Utils.params import *
 from DublinBikes.FlaskApp import app
 
-from DublinBikes.FontendData.data_loader_SQL import (
+from DublinBikes.FontEndData.data_loader_SQL import (
     get_station_data,
     get_all_stations_data_SQL,
     get_one_station_data,
     get_station_availability_daily,
 )
-from DublinBikes.FontendData.data_realtime_weather import (
+from DublinBikes.FontEndData.data_realtime_weather import (
     get_forecast_weather_data,
     get_current_weather_data,
 )
-from DublinBikes.FontendData.data_realtime_bikes import get_current_bikes_data
+from DublinBikes.FontEndData.data_realtime_bikes import get_current_bikes_data
 from DublinBikes.SqlCode.user_db import (
     register_user,
     get_user_by_email,
