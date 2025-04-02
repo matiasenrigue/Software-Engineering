@@ -163,23 +163,17 @@ def ride_prediction():
         Response: JSON object with the predicted ride value.
     """
     import random
+    from DublinBikes.MachineLearning.predict_availability import prediction
 
     data = request.get_json()
-    print("Ride prediction request received:")
-    print("Timestamp:", data.get("timestamp"))
-    print(
-        "Weather Conditions - Temperature:",
-        data.get("temperature"),
-        "Rain:",
-        data.get("rain"),
-        "Wind Speed:",
-        data.get("windspeed"),
-    )
-    print("Destination Station ID:", data.get("destination_station_id"))
-    print("Departure Station ID:", data.get("origin_station_id"))
+    
+    origin = get_station_data(station_id=data["origin_station_id"])[0]
+    destination = get_station_data(station_id=data["destination_station_id"])[0]
+    
+    result = prediction(data, origin, destination)
+  
+    return result
 
-    prediction = random.randint(0, 40)
-    return jsonify({"prediction": prediction})
 
 
 @app.route("/register", methods=["GET", "POST"])

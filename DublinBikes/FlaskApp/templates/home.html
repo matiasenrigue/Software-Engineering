@@ -10,14 +10,9 @@
 
       <div class="sidebar">
 
-        {% if session.user %}
-          <p>You chose <strong>{{ default_station.name }}</strong> as your default station which can be changed in your profile settings.</p>
-        {% else %}
-          <p>Using <strong>{{ default_station.name }}</strong> as default location, sign in if you want to change it.</p>
-        {% endif %}
-
         <div class="location-search">
-          <h3>Select a location on the map</h3>
+          <h3>Route Planning</h3>
+          <p id="selection-text">Select a Location on the map: "GO"</p>
           <p id="selected-location"></p>
           <p id="selected-location-distance"></p>
           <p id="selected-location-time"></p>
@@ -58,6 +53,13 @@
       <div class="main-content">
         
         <div class="weather-container">
+
+              {% if session.user %}
+              <p>You chose <strong>{{ default_station.name }}</strong> as your default station which can be changed in your profile settings.</p>
+            {% else %}
+              <p>Using <strong>{{ default_station.name }}</strong> as default location, sign in if you want to change it.</p>
+            {% endif %}
+            
           <div class="weather">
           <h3>Weather Info</h3>
 

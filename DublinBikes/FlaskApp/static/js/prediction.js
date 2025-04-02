@@ -17,14 +17,12 @@ export function getRidePrediction() {
   // Create a formatted timestamp.
   const now = new Date();
   const options = { weekday: "long", hour: "2-digit", minute: "2-digit" };
-  const timestamp = now.toLocaleString("en-US", options);
 
   // Retrieve weather data from the global variable (set in weather.js).
+  const timestamp = window.TimestampWeather ? window.TimestampWeather : "N/A";
+  console.log("Timestamp:", timestamp);
   const temperature = window.fullWeatherData ? window.fullWeatherData.temp : "N/A";
-  const rain = window.fullWeatherData && window.fullWeatherData.rain
-    ? (window.fullWeatherData.rain["1h"] || 0)
-    : 0;
-  const windspeed = window.fullWeatherData ? window.fullWeatherData.wind_speed : "N/A";
+  const humidity = window.fullWeatherData ? window.fullWeatherData.humidity : "N/A";
 
   // Get destination station id from a global variable.
   const station_id = window.selectedStationId;
@@ -38,8 +36,7 @@ export function getRidePrediction() {
   const payload = {
     timestamp: timestamp,
     temperature: temperature,
-    rain: rain,
-    windspeed: windspeed,
+    humidity: humidity,
     origin_station_id: originStationId,
     destination_station_id: station_id,
   };
@@ -55,10 +52,12 @@ export function getRidePrediction() {
     .then((response) => response.json())
     .then((data) => {
       // Update the UI with prediction results.
+      console.log("Prediction data:", data);
+      console.log("Prediction data:", data.prediction);
       document.getElementById("prediction-result-origin").innerHTML =
-        "Prediction of Available Bikes at Origin: " + data.prediction;
+        "Prediction of Available Bikes at Origin: " + data.prediction.origin_station_id;
       document.getElementById("prediction-result-destination").innerHTML =
-        "Prediction of Available Stands at Destination: " + (data.prediction + 5);
+        "Prediction of Available Stands at Destination: " + data.prediction.destination_station_id;
     })
     .catch((error) => {
       console.error("Error:", error);

@@ -10,6 +10,8 @@
  * @param {string|number|Date} timestamp - The timestamp to format.
  * @returns {string} Formatted timestamp (e.g., "Monday 02:30 PM").
  */
+
+
 export function formatTimestamp(timestamp) {
   const date = timestamp instanceof Date ? timestamp : new Date(timestamp);
   const options = {
@@ -81,6 +83,8 @@ export function fetchForecastWeather() {
   }
   const forecast_type = "hourly";
   const url = `/api/forecast_weather?forecast_type=${forecast_type}&target_datetime=${encodeURIComponent(targetDatetime)}`;
+  window.TimestampWeather = targetDatetime;
+  console.log("Fetching forecast weather for:", targetDatetime);
 
   fetch(url)
     .then((response) => response.json())
@@ -95,6 +99,8 @@ export function fetchForecastWeather() {
       document.getElementById("weather-description").textContent = "Humidity: " + data.humidity + "%";
       setWeatherIcon(data.weather_id);
       window.fullWeatherData = data;
+
+
     })
     .catch((error) => {
       console.error("Error fetching forecast data:", error);

@@ -85,6 +85,7 @@ export function selectStation(stationId, stationName, stationLat, stationLng) {
   const arrivalTime = estimateArrivalTime(cyclingMinutes);
 
   // Update sidebar details.
+  document.getElementById("selection-text").remove();
   document.getElementById("selected-location").textContent =
     `Displaying directions to station: ${stationName}`;
   document.getElementById("selected-location-distance").textContent =
@@ -93,8 +94,6 @@ export function selectStation(stationId, stationName, stationLat, stationLng) {
     `Estimated Cycling Time: ${cyclingTime}`;
   document.getElementById("selected-location-arrival").textContent =
     `Estimated Arrival Time: ${arrivalTime}`;
-  document.getElementById("selected-station-info").textContent =
-    `Available Bike Stands: ${availableBikeStands}`;
 }
 
 
