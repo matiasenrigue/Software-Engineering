@@ -13,14 +13,8 @@
         <div class="location-search">
           <h3>Route Planning</h3>
           <p id="selection-text">Select a Location on the map: "GO"</p>
-          <p id="selected-location"></p>
-          <p id="selected-location-distance"></p>
-          <p id="selected-location-time"></p>
-          <p id="selected-location-arrival"></p>
-          <p id="selected-station-info"></p>
-        </div>
+          <h4 id="selected-location"></h4>
 
-        <div class="weather-forecast">
           <label>
             <input type="radio" name="forecastType" value="current" checked>
             Bike Now
@@ -41,6 +35,16 @@
               <input type="time" id="forecast-hour" step="3600" pattern="^(?:[01]\d|2[0-3]):00$">
             </div>
 
+        </div>
+
+        <p id="selected-location-distance"></p>
+          <p id="selected-location-time"></p>
+          <p id="selected-location-arrival"></p>
+          <p id="selected-station-info"></p>
+
+        <div class="weather-forecast">
+
+
             <div class="ML-model">
               <button id="getRidePredictionBtn" onclick="combinedForecastAndPrediction()">Get Ride Prediction</button>
               <p id="prediction-result-origin"></p>
@@ -53,15 +57,13 @@
       <div class="main-content">
         
         <div class="weather-container">
-
-              {% if session.user %}
-              <p>You chose <strong>{{ default_station.name }}</strong> as your default station which can be changed in your profile settings.</p>
-            {% else %}
-              <p>Using <strong>{{ default_station.name }}</strong> as default location, sign in if you want to change it.</p>
-            {% endif %}
             
           <div class="weather">
-          <h3>Weather Info</h3>
+            {% if session.user %}
+            <p>Using <strong>{{ default_station.name }}</strong> as your location <br> <a href="{{ url_for('edit_profile') }}">Edit Profile to Change it</a> </p>
+            {% else %}
+            <p>Using <strong>{{ default_station.name }}</strong> as your location <br> <a href="{{ url_for('login') }}">LogIn to Change it</a> </p>
+          {% endif %}
 
           <p>Showing <span id="weather-current-forecast"></span><br><span id="timestamp-weatherinfo"></span></p>
           <p id="weather-temp"></p>

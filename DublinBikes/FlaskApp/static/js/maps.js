@@ -14,18 +14,7 @@ export let routePolyline = null; // Holds the drawn polyline arrow.
 
 // Expose selectStation globally for inline event handlers.
 window.selectStation = selectStation;
-
-
-
-/**
- * Selects a station on the map.
- * Updates marker icons, draws a route arrow, calculates distance and time,
- * and updates the sidebar with details.
- * @param {number} stationId - Selected station id.
- * @param {string} stationName - Selected station name.
- * @param {number} stationLat - Latitude of the selected station.
- * @param {number} stationLng - Longitude of the selected station.
- */
+window.estimateArrivalTime = estimateArrivalTime;
 
 
 /**
@@ -48,6 +37,15 @@ export function initMap() {
 }
 
 
+/**
+ * Selects a station on the map.
+ * Updates marker icons, draws a route arrow, calculates distance and time,
+ * and updates the sidebar with details.
+ * @param {number} stationId - Selected station id.
+ * @param {string} stationName - Selected station name.
+ * @param {number} stationLat - Latitude of the selected station.
+ * @param {number} stationLng - Longitude of the selected station.
+ */
 export function selectStation(stationId, stationName, stationLat, stationLng) {
   // Reset icon for previously selected station.
   if (selectedStationId && stationMarkers[selectedStationId]) {
@@ -87,13 +85,14 @@ export function selectStation(stationId, stationName, stationLat, stationLng) {
   // Update sidebar details.
   document.getElementById("selection-text").remove();
   document.getElementById("selected-location").textContent =
-    `Displaying directions to station: ${stationName}`;
+    `Destination: ${stationName}`;
   document.getElementById("selected-location-distance").textContent =
     `Distance: ${distance.toFixed(2)} km`;
   document.getElementById("selected-location-time").textContent =
     `Estimated Cycling Time: ${cyclingTime}`;
+  window.cyclingTime = cyclingMinutes; // Expose for prediction.js.
   document.getElementById("selected-location-arrival").textContent =
-    `Estimated Arrival Time: ${arrivalTime}`;
+    `Estimated Arrival Time: ${arrivalTime}h`;
 }
 
 
@@ -222,6 +221,7 @@ export function calculateDistance(lat1, lon1, lat2, lon2) {
 }
 
 
+
 /**
  * Calculates cycling time (in minutes) for a given distance assuming an average speed.
  * @param {number} distance - Distance in kilometers.
@@ -249,12 +249,25 @@ export function formatTime(minutes) {
  * @param {number} cyclingMinutes - Cycling time in minutes.
  * @returns {string} Estimated arrival time (e.g., "3:45 PM").
  */
-export function estimateArrivalTime(cyclingMinutes) {
-  const arrival = new Date(Date.now() + cyclingMinutes * 60000);
+export function estimateArrivalTime(cyclingMinutes, departureTime = NaN) {
+
+  console.log("departureTime:", departureTime);
+
+  // If departureTime is not provided, use the current time.
+  if (isNaN(departureTime)) {
+    departureTime = Date.now();
+  }
+
+  console.log("Departure Time:", departureTime);
+  console.log("Cycling Minutes:", cyclingMinutes);
+
+  const arrival = new Date(departureTime + cyclingMinutes * 60000);
+  console.log("Arrival Time:", arrival);
+  
   return arrival.toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
-    hour12: true,
+    hour12: false,
   });
 }
 

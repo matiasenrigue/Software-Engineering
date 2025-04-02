@@ -2,6 +2,7 @@ import datetime
 import json
 from DublinBikes.SqlCode.sql_utils import get_sql_engine
 from DublinBikes.DataMining.scrapper_jc_decaux import get_data_from_jcdecaux
+from DublinBikes.FontEndData.manage_cache import clean_cache
 
 """
 Module: data_realtime_bikes
@@ -27,6 +28,9 @@ def save_bikes_data_to_cache_db(bikes_data: list, return_rows: bool = True) -> l
     Returns:
         list: A list of dictionaries representing the inserted bike station records (if return_rows is True).
     """
+    # Clean outdated cache records before saving new data.
+    clean_cache()
+    
     conn = get_sql_engine()
     inserted_records = []
     try:
@@ -124,7 +128,7 @@ def get_current_bikes_data():
     finally:
         conn.close()
     if rows:
-        print("Using cached data")
+        print("\n\n\n\nUsing cached data")
         bikes_data = []
         for row in rows:
             bikes_data.append(
@@ -143,14 +147,13 @@ def get_current_bikes_data():
                     "position": {"lat": row[11], "lng": row[12]},
                 }
             )
-        print(bikes_data)
         return bikes_data
     else:
+        print("\n\n\n\nFetching new data from API")
         bikes_text = get_data_from_jcdecaux()
         if bikes_text:
             bikes_data = json.loads(bikes_text)
             inserted_records = save_bikes_data_to_cache_db(bikes_data, return_rows=True)
-            print(inserted_records)
             return inserted_records
         else:
             return {"error": "Unable to fetch bikes data"}

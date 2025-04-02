@@ -34,13 +34,24 @@
             </div>
         </div>
     </header>
+
+    <!-- Flash messages block -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="flash-messages">
+            <ul>
+            {% for message in messages %}
+                <li class="flash-message">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
     <main>
         {% block content %}{% endblock %}
     </main>
     
-    <footer>
-        <p>&copy; Dublin Bikes Project</p>
-    </footer> 
+
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {

@@ -33,6 +33,8 @@ from DublinBikes.SqlCode.user_db import (
 )
 
 from datetime import datetime, timedelta
+import re
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 @app.route("/")
@@ -176,6 +178,9 @@ def ride_prediction():
 
 
 
+# Email regex pattern
+EMAIL_REGEX = r"[^@]+@[^@]+\.[^@]+"
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """
@@ -189,7 +194,6 @@ def register():
         str: Rendered HTML for the registration page or a redirection to the login page on success.
     """
     stations = sorted(get_all_stations_data_SQL(), key=lambda s: s["name"])
-
     if request.method == "POST":
         email = request.form.get("email")
         username = request.form.get("username")
@@ -198,14 +202,21 @@ def register():
         password = request.form.get("password")
         default_station = request.form.get("default_station")
 
-        if register_user(
-            email, username, first_name, last_name, password, default_station
-        ):
+        # Validate email format
+        if not re.match(EMAIL_REGEX, email):
+            flash("Error: Invalid email format.")
+            return render_template("register.html", stations=stations)
+
+        # Hash the password before storing it
+        hashed_password = generate_password_hash(password)
+
+        if register_user(email, username, first_name, last_name, hashed_password, default_station):
             flash("Successfully registered: Please log in.")
             return redirect(url_for("login"))
         else:
             flash("Error: Email or username already in use.")
     return render_template("register.html", stations=stations)
+
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -224,9 +235,8 @@ def login():
         email = request.form.get("email")
         password = request.form.get("password")
         user = get_user_by_email(email)
-        if user and user["password"] == password:
+        if user and check_password_hash(user["password"], password):
             session["user"] = dict(user)
-            flash("Successfully logged in.")
             return redirect(url_for("home"))
         else:
             flash("Error: Invalid email or password.")
@@ -244,7 +254,6 @@ def logout():
         Response: Redirection to the previous page or home page.
     """
     session.pop("user", None)
-    flash("Successfully logged out.")
     return redirect(request.referrer or url_for("home"))
 
 

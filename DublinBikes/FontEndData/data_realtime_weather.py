@@ -2,7 +2,6 @@ import datetime
 import json
 from DublinBikes.SqlCode.sql_utils import get_sql_engine
 from DublinBikes.DataMining.scrapper_open_weather import get_data_from_openweather
-from DublinBikes.FontEndData.manage_cache import clean_cache
 
 """
 Module: data_realtime_weather
@@ -39,9 +38,6 @@ def save_weather_data_to_cache_db(
     Returns:
         dict: The inserted weather data row as a dictionary if return_row is True; otherwise, None.
     """
-    # Clean outdated cache records before saving new data.
-    clean_cache()
-
     conn = get_sql_engine()
     try:
         timestamp_requested = datetime.datetime.now()

@@ -425,6 +425,18 @@ button:hover {
     background-color: var(--button-hover);
 }
 
+.flash-messages {
+    margin: 1em auto;
+    padding: 0.5em;
+    max-width: 500px;
+    text-align: center;
+  }
+  .flash-message {
+    color: red;
+    font-weight: bold;
+  }
+  
+
 .map-display {
     height: 300px;
     width: 600px;

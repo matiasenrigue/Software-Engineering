@@ -6,6 +6,7 @@
  */
 
 import { fetchForecastWeather } from "./weather.js";
+import { estimateArrivalTime } from "./maps.js";
 
 window.combinedForecastAndPrediction = combinedForecastAndPrediction;
 
@@ -51,13 +52,19 @@ export function getRidePrediction() {
   })
     .then((response) => response.json())
     .then((data) => {
-      // Update the UI with prediction results.
-      console.log("Prediction data:", data);
-      console.log("Prediction data:", data.prediction);
+  
       document.getElementById("prediction-result-origin").innerHTML =
-        "Prediction of Available Bikes at Origin: " + data.prediction.origin_station_id;
+        "Available Bikes at Origin: " + data.prediction.origin_station_id;
       document.getElementById("prediction-result-destination").innerHTML =
-        "Prediction of Available Stands at Destination: " + data.prediction.destination_station_id;
+        "Available Stands at Destination: " + data.prediction.destination_station_id;
+
+      const departureTime = window.TimestampWeather && !isNaN(Date.parse(window.TimestampWeather))
+      ? Date.parse(window.TimestampWeather)
+      : Date.now();
+      
+      const arrivalTimePrediction = estimateArrivalTime(window.cyclingTime, departureTime);
+      document.getElementById("selected-location-arrival").textContent =
+        `Estimated Arrival Time: ${arrivalTimePrediction}h`;
     })
     .catch((error) => {
       console.error("Error:", error);
