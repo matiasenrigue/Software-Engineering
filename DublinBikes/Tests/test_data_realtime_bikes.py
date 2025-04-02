@@ -2,7 +2,7 @@ import json
 import datetime
 import pytest
 import sqlite3
-from DublinBikes.FontEndData import data_realtime_bikes
+from DublinBikes.DataFrontend import data_realtime_bikes
 from DublinBikes.SqlCode import sql_utils
 from DublinBikes.DataMining.scrapper_jc_decaux import get_data_from_jcdecaux
 

@@ -2,7 +2,7 @@ import json
 import datetime
 import pytest
 import sqlite3
-from DublinBikes.FontEndData import data_realtime_weather
+from DublinBikes.DataFrontend import data_realtime_weather
 from DublinBikes.SqlCode import sql_utils
 
 @pytest.fixture

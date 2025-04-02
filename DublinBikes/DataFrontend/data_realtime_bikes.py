@@ -2,7 +2,7 @@ import datetime
 import json
 from DublinBikes.SqlCode.sql_utils import get_sql_engine
 from DublinBikes.DataMining.scrapper_jc_decaux import get_data_from_jcdecaux
-from DublinBikes.FontEndData.manage_cache import clean_cache
+from DublinBikes.DataFrontend.manage_cache import clean_cache
 
 """
 Module: data_realtime_bikes

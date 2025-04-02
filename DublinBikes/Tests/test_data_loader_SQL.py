@@ -4,7 +4,7 @@ Tests for data_loader_SQL module.
 
 import sqlite3
 import pytest
-from DublinBikes.FontEndData import data_loader_SQL
+from DublinBikes.DataFrontend import data_loader_SQL
 from DublinBikes.SqlCode import sql_utils
 
 def test_get_all_stations_data_SQL(tmp_path, monkeypatch):

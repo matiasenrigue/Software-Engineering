@@ -35,6 +35,14 @@
               <input type="time" id="forecast-hour" step="3600" pattern="^(?:[01]\d|2[0-3]):00$">
             </div>
 
+
+            <div class="ML-model">
+              <button id="getRidePredictionBtn" onclick="combinedForecastAndPrediction()">Get Ride Prediction</button>
+              <p id="prediction-result-origin"></p>
+              <p id="prediction-result-destination"></p>
+            </div>
+          
+
         </div>
 
         <p id="selected-location-distance"></p>
@@ -45,11 +53,6 @@
         <div class="weather-forecast">
 
 
-            <div class="ML-model">
-              <button id="getRidePredictionBtn" onclick="combinedForecastAndPrediction()">Get Ride Prediction</button>
-              <p id="prediction-result-origin"></p>
-              <p id="prediction-result-destination"></p>
-            </div>
           </div>
         </div>
       </div>
