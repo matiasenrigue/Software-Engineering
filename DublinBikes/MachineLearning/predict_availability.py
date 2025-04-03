@@ -91,6 +91,12 @@ def prediction(data: dict, origin_station: dict, destination_station: dict):
     features = [time_sin, time_cos, temperature, humidity] + day_features
     features = np.array(features).reshape(1, -1)
     
+    # Convert to a DataFrame with the correct feature names.
+    feature_names = ['time_sin', 'time_cos', 'air_temperature_celsius', 'relative_humidity_percent', 
+                    'day_of_week_Tue', 'day_of_week_Wed', 'day_of_week_Thu', 
+                    'day_of_week_Fri', 'day_of_week_Sat', 'day_of_week_Sun']
+    features_df = pd.DataFrame(features, columns=feature_names)
+    
     predictions_dict = {}
     for station_predicted in ["origin_station_id", "destination_station_id"]:
         
@@ -112,7 +118,7 @@ def prediction(data: dict, origin_station: dict, destination_station: dict):
 
         # Use the loaded model to predict the number of available bikes.
         try:
-            prediction = model.predict(features)
+            prediction = model.predict(features_df)
             prediction_value = int(prediction[0])
             
             if station_predicted == "origin_station_id":
