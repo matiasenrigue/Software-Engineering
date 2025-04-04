@@ -83,16 +83,10 @@ def execute_sql(sql: str, connection: sqlite3.Connection) -> None:
     """
     try:
         with connection:
-            print(f"Executing the following SQL command: {sql}")
             cursor = connection.execute(sql)
             if sql.strip().upper().startswith("SELECT"):
                 rows = cursor.fetchall()
-                if rows:
-                    print("Query returned the following rows:")
-                    for row in rows:
-                        print(dict(row))
-                else:
-                    print("Query returned no rows.")
+                
             else:
                 affected = connection.total_changes
                 print(f"Query executed successfully. Total rows affected (since connection opened): {affected}")
@@ -224,32 +218,7 @@ def create_data_base() -> None:
     execute_sql(sql_fetched_bikes, engine)
 
 
-def test_queries() -> None:
-    """
-    Run test queries to verify the database setup.
-
-    This function executes several SQL queries:
-      - Counts the total number of rows in the "station" table.
-      - Retrieves rows for the station with address "Smithfield North".
-      - Executes additional queries on the "availability" and "current" tables.
-
-    Returns:
-        None
-    """
-    engine = get_sql_engine()
-
-    sql = "select count(*) from station;"
-    execute_sql(sql, engine)
-
-    sql = "select * from station where address = 'Smithfield North';"
-    execute_sql(sql, engine)
-
-    execute_sql("select * from station where address = 'Smithfield North';", engine)
-    execute_sql("select * from availability where available_bike_stands > 20 LIMIT 5", engine)
-    execute_sql("select * from current where temp > 20", engine)
-
 
 if __name__ == "__main__":
     get_db_path()
     create_data_base()
-    test_queries()

@@ -40,7 +40,6 @@ def get_station_data(station_id: int) -> dict:
         cursor.execute(query, {"station_id": station_id})
         rows = cursor.fetchall()
         stations = [dict(row) for row in rows]
-        print(stations)
         return stations
     finally:
         conn.close()
@@ -131,7 +130,6 @@ def get_station_availability_daily(station_id: int) -> list:
         cursor = conn.cursor()
         cursor.execute(query, {"station_id": station_id})
         rows = cursor.fetchall()
-        print(rows)
         return [dict(row) for row in rows]
     finally:
         conn.close()

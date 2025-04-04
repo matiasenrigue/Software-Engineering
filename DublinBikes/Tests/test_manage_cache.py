@@ -1,27 +1,129 @@
 import os
-from datetime import date
-import pytest
-from DublinBikes.DataFrontend import manage_cache
-import sqlite3
+import unittest
+from datetime import date, timedelta
+from sqlite3 import Connection
+from DublinBikes.DataFrontend.manage_cache import clean_cache
+from DublinBikes.SqlCode.sql_utils import get_sql_engine
 
-def test_clean_cache(tmp_path, monkeypatch):
-    # Create a temporary "data" folder and a dummy lastcachedelete.txt file.
-    data_folder = tmp_path / "data"
-    data_folder.mkdir()
-    cache_file = data_folder / "lastcachedelete.txt"
-    cache_file.write_text("1900-01-01")
-    
-    # Patch os.path.abspath and os.path.dirname so that the base directory is tmp_path.
-    monkeypatch.setattr(os.path, "abspath", lambda path: str(tmp_path))
-    monkeypatch.setattr(os.path, "dirname", lambda path: str(tmp_path))
-    
-    # Patch get_sql_engine to return an in-memory SQLite connection.
-    monkeypatch.setattr(manage_cache, "get_sql_engine", lambda: sqlite3.connect(":memory:"))
-    
-    # Call the clean_cache function.
-    manage_cache.clean_cache()
-    
-    # Now, the cache file should contain today's date.
-    today_str = date.today().isoformat()
-    content = cache_file.read_text().strip()
-    assert content == today_str
+
+class TestManageCache(unittest.TestCase):
+    """
+    Test the cache cleaning functionality.
+    """
+
+
+
+    def setUp(self) -> None:
+        """
+        Remove any existing cache file and insert dummy records in the cache tables.
+        """
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        self.data_folder = os.path.join(base_dir, "data")
+        self.cache_file = os.path.join(self.data_folder, "lastcachedelete.txt")
+
+        if os.path.exists(self.cache_file):
+            os.remove(self.cache_file)
+
+        # Insert dummy records with yesterday's timestamp into both cache tables.
+        conn: Connection = get_sql_engine()
+        try:
+            cursor = conn.cursor()
+            yesterday_str = (date.today() - timedelta(days=1)).isoformat() + " 00:00:00"
+            # Dummy record for FetchedWeatherData.
+            dummy_weather = (
+                yesterday_str,  # timestamp_requested
+                yesterday_str,  # timestamp_weatherinfo
+                "current",      # forecast_type
+                yesterday_str,  # target_datetime
+                0, 0, 0, None, None, 0, None, 0, None, 0, None, None,
+            )
+            cursor.execute(
+                """INSERT INTO FetchedWeatherData (
+                        timestamp_requested, timestamp_weatherinfo, forecast_type, target_datetime,
+                        feels_like, humidity, pressure, sunrise, sunset, temp, uvi, weather_id,
+                        wind_gust, wind_speed, rain_1h, snow_1h
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);""",
+                dummy_weather
+            )
+            # Dummy record for FetchedBikesData.
+            dummy_bikes = (
+                yesterday_str, 1, 0, 0, "OPEN", yesterday_str, "dummy", 0, 0, 0, "dummy", 0.0, 0.0
+            )
+            cursor.execute(
+                """INSERT INTO FetchedBikesData (
+                        time_requested, station_id, available_bikes, available_bike_stands,
+                        status, last_update, address, banking, bonus, bike_stands, name,
+                        position_lat, position_lng
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);""",
+                dummy_bikes
+            )
+            conn.commit()
+        finally:
+            conn.close()
+
+
+
+    def tearDown(self) -> None:
+        """
+        Clean up the dummy records and remove the cache file.
+        """
+        conn: Connection = get_sql_engine()
+        try:
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM FetchedWeatherData;")
+            cursor.execute("DELETE FROM FetchedBikesData;")
+            conn.commit()
+        finally:
+            conn.close()
+
+        if os.path.exists(self.cache_file):
+            os.remove(self.cache_file)
+
+
+
+    def test_cache_tables_empty_after_cleaning(self) -> None:
+        """
+        Test that after calling clean_cache with a future date, both cache tables are empty.
+        """
+        tomorrow = date.today() + timedelta(days=1)
+        clean_cache(tomorrow)
+
+        conn: Connection = get_sql_engine()
+        try:
+            cursor = conn.cursor()
+            cursor.execute("SELECT COUNT(*) FROM FetchedWeatherData;")
+            count_weather = cursor.fetchone()[0]
+            cursor.execute("SELECT COUNT(*) FROM FetchedBikesData;")
+            count_bikes = cursor.fetchone()[0]
+        finally:
+            conn.close()
+
+        self.assertEqual(count_weather, 0, "FetchedWeatherData should be empty after cleaning.")
+        self.assertEqual(count_bikes, 0, "FetchedBikesData should be empty after cleaning.")
+
+
+
+    def test_cache_file_updated(self) -> None:
+        """
+        Test that after cleaning the cache, the cache file is created and contains today's date.
+        """
+        tomorrow = date.today() + timedelta(days=1)
+        clean_cache(tomorrow)
+        with open(self.cache_file, "r") as f:
+            content = f.read().strip()
+        self.assertEqual(content, date.today().isoformat(), "Cache file should contain today's date.")
+
+
+
+    def test_no_action_if_clean_called_twice(self) -> None:
+        """
+        Test that calling clean_cache again on the same day returns 0 (indicating no action).
+        """
+        tomorrow = date.today() + timedelta(days=1)
+        clean_cache(tomorrow)
+        result_second = clean_cache()
+        self.assertEqual(result_second, 0, "Clean cache called twice on same day should return 0.")
+
+
+if __name__ == '__main__':
+    unittest.main()
