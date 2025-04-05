@@ -126,7 +126,8 @@ export function placeMarkers(stations_data) {
       stationMarkers[station.station_id] = marker;
 
       // Build the content for the info window.
-      let infoContent = `<h3>${station.name}</h3>
+      let infoContent = `<div class="station-info-content">
+        <h3>${station.name}</h3>
         <p>Total Bike Stands: ${station.bike_stands || "N/A"}</p>
         <p>Available Bikes: ${station.available_bikes || "N/A"}</p>
         <p>Available Stands: ${station.available_bike_stands || "N/A"}</p>
@@ -138,10 +139,15 @@ export function placeMarkers(stations_data) {
       if (station.station_id != defaultStation.id) {
         infoContent += `<button onclick="selectStation(${station.station_id}, '${station.name}', ${station.position.lat}, ${station.position.lng})">GO</button>`;
       }
+      
+      infoContent += '</div>'; // Close the wrapper div
 
       // Create the info window.
       let infoWindow = new google.maps.InfoWindow({
         content: infoContent,
+        // Add custom InfoWindow styling options
+        maxWidth: 250,
+        pixelOffset: new google.maps.Size(0, 0),
       });
 
       // Add a click listener to open the info window.

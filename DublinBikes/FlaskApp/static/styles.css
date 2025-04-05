@@ -231,6 +231,56 @@ button:hover {
     background: var(--button-hover);
 }
 
+.gm-style .gm-style-iw-c {
+    background-color: var(--container-bg) !important;
+    color: var(--text-color) !important;
+    padding: 12px !important;
+}
+
+.gm-style .gm-style-iw-t::after {
+    background: var(--container-bg) !important;
+}
+
+.gm-style .gm-style-iw-d {
+    overflow: hidden !important;
+    max-height: none !important;
+}
+
+.station-info-content {
+    color: var(--text-color) !important;
+    font-family: Arial, sans-serif;
+}
+
+.station-info-content h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--text-color) !important;
+}
+
+.station-info-content p {
+    margin: 5px 0;
+    color: var(--text-color) !important;
+}
+
+.station-info-content button {
+    background-color: var(--button-bg);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.station-info-content button:hover {
+    background-color: var(--button-hover);
+}
+
+.gm-style-iw > button {
+    right: 0 !important;
+    top: 0 !important;
+}
+
 .login-container {
     max-width: 400px;
     margin: 0 auto;
