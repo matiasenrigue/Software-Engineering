@@ -7,23 +7,23 @@
 
 
     <div class="container">
-
       <div class="sidebar">
-
         <div class="location-search">
           <h3>Route Planning</h3>
           <p id="selection-text">Select a Location on the map: "GO"</p>
           <h4 id="selected-location"></h4>
-
-          <label>
-            <input type="radio" name="forecastType" value="current" checked>
-            Bike Now
-          </label>
-          <label>
-            <input type="radio" name="forecastType" value="forecast">
-            Bike Later
-          </label> 
-        
+          
+          <div class="radio-options">
+            <label>
+              <input type="radio" name="forecastType" value="current" checked>
+              Bike Now
+              </label>
+            <label>
+              <input type="radio" name="forecastType" value="forecast">
+              Bike Later
+            </label>
+          </div>
+ 
           <div id="forecast-options" class="forecast-options-hidden">
             <label for="forecast-date">Select Date:</label>
             <input type="date" id="forecast-date" 
@@ -41,44 +41,53 @@
               <p id="prediction-result-origin"></p>
               <p id="prediction-result-destination"></p>
             </div>
-          
-
         </div>
-
-        <p id="selected-location-distance"></p>
-          <p id="selected-location-time"></p>
-          <p id="selected-location-arrival"></p>
-          <p id="selected-station-info"></p>
-
-        <div class="weather-forecast">
-
-
+          
+          <div class="route-details">
+            <p id="selected-location-distance"></p>
+            <p id="selected-location-time"></p>
+            <p id="selected-location-arrival"></p>
+            <p id="selected-station-info"></p>
           </div>
+
+        <div class="weather-forecast"></div>
         </div>
       </div>
 
       <div class="main-content">
-        
         <div class="weather-container">
-            
           <div class="weather">
-            {% if session.user %}
-            <p>Using <strong>{{ default_station.name }}</strong> as your location <br> <a href="{{ url_for('edit_profile') }}">Edit Profile to Change it</a> </p>
-            {% else %}
-            <p>Using <strong>{{ default_station.name }}</strong> as your location <br> <a href="{{ url_for('login') }}">LogIn to Change it</a> </p>
-          {% endif %}
+              <div class="location-info">
+                <span class="label">Your Base:</span>
+                <strong id="station-name">{{ default_station.name }}</strong>
+                {% if session.user %}
+                  <a href="{{ url_for('edit_profile') }}" class="change-link">Change</a>
+                {% else %}
+                  <a href="{{ url_for('login') }}" class="change-link">Login to customise your location</a>
+                {% endif %}
+            </div>
 
-          <p>Showing <span id="weather-current-forecast"></span><br><span id="timestamp-weatherinfo"></span></p>
-          <p id="weather-temp"></p>
-          <p id="weather-description"></p>
-          <img id="weather-icon" alt="Weather Icon">
-        </div>
+            <div class="weather-current">
+              <span class="label"></span>
+              <span id="weather-current-forecast"></span>
+              <span class="weather-time" id="timestamp-weatherinfo"></span>
+            </div>
+            
+            <div class="weather-data">
+              <span id="weather-temp" class="temperature"></span>
+              <span class="separator">|</span>
+              <span id="weather-description" class="description"></span>
+              <img id="weather-icon" alt="Weather Icon" class="weather-icon">
+            </div>
+          </div>
         </div>
 
         <div class="map">
         <!-- This div is the container where the map will be rendered -->
         <div id="map" class="map-container"></div>
       </div>
+    </div>
+</div>
   
       <!-- Embed the stations data into a global JS variable -->
       <script>
@@ -110,11 +119,5 @@
           }
         });
       </script>
-
-
-    </div>
-
-  </body>
-
 
   {% endblock %}
