@@ -202,43 +202,57 @@ main {
     font-weight: 600;
 }
 
-.ML-model {
-    margin-top: 15px;
-    padding-top: 10px;
-    border-top: 1px solid var(--sidebar-border);
-}
-
-.ML-model button {
-    background-color: var(--button-bg);
-    transition: background-color var(--transition-speed), transform var(--transition-speed);
-}
-
-.ML-model button:hover {
-    background-color: var(--button-hover);
-    transform: translateY(-2px);
-}
-
-.ML-model button:active {
-    transform: translateY(0);
+#prediction-result-origin:empty,
+#prediction-result-destination:empty {
+    display: none;
 }
 
 #prediction-result-origin,
 #prediction-result-destination {
     margin: 8px 0;
-    padding: 8px;
+    padding: 8px 12px;
     background-color: rgba(43, 122, 120, 0.1);
     border-radius: 4px;
     font-weight: 500;
-    text-align: center;
     color: var(--text-color);
-}
-
-#prediction-result-origin {
     border-left: 3px solid var(--button-bg);
 }
 
-#prediction-result-destination {
-    border-left: 3px solid var(--accent-color);
+.ML-model::after {
+    content: "Select a destination and click 'Get Ride Prediction'";
+    display: block;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 15px;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.ML-model:has(#prediction-result-origin:not(:empty))::after {
+    display: none;
+}
+
+#getRidePredictionBtn:empty::before {
+    content: "Get Forecast Prediction";
+    display: block;
+}
+
+#getRidePredictionBtn {
+    width: 100%;
+    padding: 12px;
+    background: var(--button-bg);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+    transition: background-color var(--transition-speed);
+    text-align: center;
+}
+
+#getRidePredictionBtn:hover {
+    background-color: var(--button-hover);
 }
 
 .main-content {
@@ -564,6 +578,29 @@ button:hover {
 
 .submit-btn:hover {
     background-color: var(--button-hover);
+}
+
+.register-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.register-text {
+    color: #000000;
+    font-size: 15px;
+}
+
+.register-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 5px;
+    transition: color var(--transition-speed);
+    border-bottom: none;
+}
+
+.register-link:hover {
+    color: var(--accent-hover);
 }
 
 .registration-container {
