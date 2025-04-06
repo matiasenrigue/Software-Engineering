@@ -17,6 +17,11 @@
     --readonly-bg: #eee;
     --nav-hover: #808080;
     --box-shadow-focus: rgba(74, 144, 226, 0.5);
+    --accent-color: #2b7a78;
+    --card-border-radius: 12px;
+    --button-border-radius: 6px;
+    --input-border-radius: 6px;
+    --transition-speed: 0.3s;
 }
 
 /* Dark theme variables */
@@ -37,24 +42,25 @@
     --readonly-bg: #333;
     --nav-hover: #aaa;
     --box-shadow-focus: rgba(43, 122, 120, 0.7);
+    --accent-color: #3a9d99;
 }
 
 /* Theme toggle button */
 .theme-toggle {
     position: fixed;
-    top: 35px;
-    right: 5px;
+    top: 38px;
+    right: 10px;
     background: var(--button-bg);
     color: white;
     border: none;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.3s;
+    transition: background-color var(--transition-speed);
     z-index: 1000;
     box-shadow: 0 2px 5px var(--container-shadow);
 }
@@ -64,13 +70,13 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -79,9 +85,12 @@ body {
 header {
     background: var(--header-bg);
     color: var(--header-text);
-    padding: 15px 20px;
-    box-shadow: 0 2px 5px var(--container-shadow);
-    transition: background-color 0.3s;
+    padding: 15px 30px;
+    box-shadow: 0 2px 10px var(--container-shadow);
+    transition: background-color var(--transition-speed);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .header-container {
@@ -89,17 +98,20 @@ header {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .header-right {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
 }
 
 header h1 {
     margin: 0;
     font-size: 24px;
+    font-weight: 600;
 }
 
 .header-logo {
@@ -107,12 +119,24 @@ header h1 {
     display: flex;
     align-items: center;
     text-decoration: none;
-    gap: 10px;
+    gap: 12px;
+    font-weight: bold;
+    transition: opacity var(--transition-speed);
+}
+
+.header-logo:hover {
+    opacity: 0.7;
+}
+
+.header-logo img {
+    border-radius: 8px;
+    width: 50px;
+    height: auto;
 }
 
 header nav ul {
     display: flex;
-    gap: 10px;
+    gap: 20px;
     align-items: center;
     list-style-type: none;
     margin: 0;
@@ -121,43 +145,100 @@ header nav ul {
 
 .welcome-message {
     margin-right: 20px;
+    font-weight: 500;
 }
 
 header nav a {
     color: var(--header-text);
     text-decoration: none;
-    padding: 5px 10px;
-    transition: color 0.3s;
+    padding: 8px 16px;
+    border-radius: var(--button-border-radius);
+    transition: all var(--transition-speed);
+    font-weight: 500;
 }
 
 header nav a:hover {
-    color: var(--nav-hover);
+    color: var(--header-text);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 main {
     flex: 1;
-    padding: 1rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .container {
     display: flex;
-    padding: 20px;
-    gap: 20px;
+    gap: 22px;
+    margin-top: 2px;
 }
 
 .sidebar {
     width: 280px;
-    padding: 20px;
+    padding: 15px;
     background: var(--sidebar-bg);
     border-right: 2px solid var(--sidebar-border);
-    border-radius: 8px; 
-    transition: background-color 0.3s, border-color 0.3s;
+    border-radius: 9px; 
+    transition: background-color var(--transition-speed), border-color var(--transition-speed);
+    box-shadow: 0 2px 8px var(--container-shadow);
 }
 
 .sidebar h2, .sidebar h3 {
     text-align: center;
-    margin-bottom: 10px;
-    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.sidebar h4 {
+    margin-top: 16px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.ML-model {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid var(--sidebar-border);
+}
+
+.ML-model button {
+    background-color: var(--button-bg);
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+}
+
+.ML-model button:hover {
+    background-color: var(--button-hover);
+    transform: translateY(-2px);
+}
+
+.ML-model button:active {
+    transform: translateY(0);
+}
+
+#prediction-result-origin,
+#prediction-result-destination {
+    margin: 8px 0;
+    padding: 8px;
+    background-color: rgba(43, 122, 120, 0.1);
+    border-radius: 4px;
+    font-weight: 500;
+    text-align: center;
+    color: var(--text-color);
+}
+
+#prediction-result-origin {
+    border-left: 3px solid var(--button-bg);
+}
+
+#prediction-result-destination {
+    border-left: 3px solid var(--accent-color);
 }
 
 .main-content {
@@ -194,9 +275,16 @@ main {
     border-radius: 8px;
     padding: 16px 20px;
     width: 100%;
-    transition: all 0.2s ease;
+    transition: all var(--transition-speed) ease;
 }
 
+.location-info {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 12px;
+}
 
 .weather-info, .weather-current, .weather-data {
     display: flex;
@@ -225,8 +313,8 @@ main {
     font-size: 14px;
     padding: 5px 10px;
     border-radius: 15px;
-    background-color: rgba(74, 144, 226, 0.1);
-    transition: all 0.2s;
+    background-color: rgba(43, 122, 120, 0.1);
+    transition: all var(--transition-speed);
 }
   
 .change-link:hover {
@@ -237,7 +325,7 @@ main {
 
 .weather-time {
     opacity: 0.7;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
 }
   
@@ -245,6 +333,7 @@ main {
     margin-top: 8px;
     padding-top: 12px;
     border-top: 1px solid var(--sidebar-border);
+    justify-content: space-between;
 }
 
 .temperature {
@@ -271,8 +360,8 @@ main {
 }
 
 .weather-icon {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     margin-left: auto;
     text-align: right
 }
@@ -284,8 +373,28 @@ main {
     background: var(--sidebar-bg);
     text-align: center;
     border-radius: 10px;
-    box-shadow: 0 2px 5px var(--container-shadow);
-    transition: background-color 0.3s;
+    box-shadow: 0 2px 8px var(--container-shadow);
+    transition: background-color var(--transition-speed);
+    overflow: hidden;
+}
+
+.map-container {
+    height: 500px;
+    width: 100%;
+}
+
+.radio-options {
+    display: flex;
+    gap: 16px;
+    margin: 16px 0;
+}
+
+.radio-options label {
+    cursor: pointer;
+    padding: 6px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 button {
@@ -298,17 +407,53 @@ button {
     cursor: pointer;
     font-size: 16px;
     border-radius: 5px;
-    transition: background 0.3s;
+    transition: all var(--transition-speed);
+    font-weight: 500;
 }
 
 button:hover {
     background: var(--button-hover);
+    box-shadow: 0 2px 5px var(--container-shadow);
+}
+
+#forecast-options {
+    background-color: rgba(43, 122, 120, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+#forecast-options.forecast-options-hidden {
+    display: none;
+}
+
+#hour-selector.hour-selector-hidden {
+    display: none;
+}
+
+#forecast-options input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    margin-bottom: 12px;
+    transition: border-color var(--transition-speed);
+    box-sizing: border-box;
+}
+
+#forecast-options input:focus {
+    border-color: var(--input-focus);
+    outline: none;
+    box-shadow: 0 0 5px var(--box-shadow-focus);
 }
 
 .gm-style .gm-style-iw-c {
     background-color: var(--container-bg) !important;
     color: var(--text-color) !important;
     padding: 12px !important;
+    border-radius: 8px !important;
 }
 
 .gm-style .gm-style-iw-t::after {
@@ -322,13 +467,14 @@ button:hover {
 
 .station-info-content {
     color: var(--text-color) !important;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
 }
 
 .station-info-content h3 {
     margin-top: 0;
     margin-bottom: 10px;
-    color: var(--text-color) !important;
+    color: var(--accent-color) !important;
+    font-size: 16px;
 }
 
 .station-info-content p {
@@ -340,10 +486,12 @@ button:hover {
     background-color: var(--button-bg);
     color: white;
     border: none;
-    padding: 5px 10px;
-    margin-top: 5px;
+    padding: 6px 12px;
+    margin-top: 8px;
+    margin-right: 5px;
     cursor: pointer;
-    border-radius: 3px;
+    border-radius: 4px;
+    font-size: 14px;
 }
 
 .station-info-content button:hover {
@@ -357,18 +505,18 @@ button:hover {
 
 .login-container {
     max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
+    margin: 20px auto;
+    padding: 25px;
     background-color: var(--container-bg);
     border-radius: 8px;
     box-shadow: 0 2px 10px var(--container-shadow);
-    transition: background-color 0.3s, box-shadow 0.3s;
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
 }
 
 .login-container h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: var(--text-color);
+    color: var(--accent-color);
 }
 
 .form-group {
@@ -380,7 +528,7 @@ button:hover {
     margin-bottom: 5px;
     font-weight: bold;
     color: var(--text-color);
-    transition: color 0.3s;
+    transition: color var(--transition-speed);
 }
 
 .form-group input {
@@ -392,7 +540,7 @@ button:hover {
     box-sizing: border-box;
     background-color: var(--input-bg);
     color: var(--text-color);
-    transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+    transition: border-color var(--transition-speed), background-color var(--transition-speed), color var(--transition-speed);
 }
 
 .form-group input:focus {
@@ -410,7 +558,8 @@ button:hover {
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color var(--transition-speed);
+    font-weight: 500;
 }
 
 .submit-btn:hover {
@@ -420,17 +569,17 @@ button:hover {
 .registration-container {
     max-width: 400px;
     margin: 40px auto;
-    padding: 20px;
+    padding: 25px;
     background-color: var(--container-bg);
     border-radius: 8px;
     box-shadow: 0 2px 10px var(--container-shadow);
-    transition: background-color 0.3s, box-shadow 0.3s;
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
 }
 
 .registration-container h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: var(--text-color);
+    color: var(--accent-color);
 }
 
 .form-control {
@@ -442,7 +591,7 @@ button:hover {
     box-sizing: border-box;
     background-color: var(--input-bg);
     color: var(--text-color);
-    transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+    transition: border-color var(--transition-speed), background-color var(--transition-speed), color var(--transition-speed);
 }
 
 .form-control:focus {
@@ -460,7 +609,7 @@ button:hover {
     box-sizing: border-box;
     background-color: var(--input-bg);
     color: var(--text-color);
-    transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+    transition: border-color var(--transition-speed), background-color var(--transition-speed), color var(--transition-speed);
 }
 
 .form-select:focus {
@@ -478,7 +627,8 @@ button:hover {
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color var(--transition-speed);
+    font-weight: 500;
 }
 
 .btn-submit:hover {
@@ -487,19 +637,19 @@ button:hover {
 
 .profile-container {
     max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
+    margin: 20px auto;
+    padding: 25px;
     background-color: var(--container-bg);
     border-radius: 8px;
     box-shadow: 0 2px 10px var(--container-shadow);
-    transition: background-color 0.3s, box-shadow 0.3s;
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
 }
 
 .profile-container h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: var(--text-color);
-    transition: color 0.3s;
+    color: var(--accent-color);
+    transition: color var(--transition-speed);
 }
 
 /* Override for profile page form groups */
@@ -529,7 +679,7 @@ button:hover {
     border-radius: 4px;
     font-size: 16px;
     color: var(--text-color);
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    transition: background-color var(--transition-speed), color var(--transition-speed), border-color var(--transition-speed);
 }
 
 .update-btn {
@@ -541,8 +691,9 @@ button:hover {
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    margin-top: 10px;
+    transition: background-color var(--transition-speed);
+    margin-top: 15px;
+    font-weight: 500;
 }
 
 .update-btn:hover {
@@ -554,12 +705,17 @@ button:hover {
     padding: 0.5em;
     max-width: 500px;
     text-align: center;
-  }
-  .flash-message {
-    color: red;
+}
+
+.flash-message {
+    color: #e53935;
     font-weight: bold;
-  }
-  
+    background-color: rgba(229, 57, 53, 0.08);
+    padding: 10px;
+    border-radius: 4px;
+    margin: 8px 0;
+    display: inline-block;
+}
 
 .map-display {
     height: 300px;
@@ -575,7 +731,9 @@ footer {
     padding: 1rem;
     text-align: center;
     color: var(--text-color);
-    transition: color 0.3s;
+    transition: color var(--transition-speed);
+    margin-top: 20px;
+    font-size: 14px;
 }
 
 /* Responsive Adjustments for Tablets & Smaller Screens */
@@ -583,37 +741,58 @@ footer {
     .container {
         flex-direction: column;
         align-items: center;
+        padding: 10px;
     }
 
     .sidebar {
         width: 100%;
+        max-width: 600px;
         border-right: none;
-        border-bottom: 2px solid var(--sidebar-border);
-        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    main {
+        padding: 1rem 0.5rem;
     }
 }
 
 /* Responsive Adjustments for Mobile Phones */
 @media (max-width: 768px) {
-    header {
+    .header-container {
         flex-direction: column;
         text-align: center;
+        gap: 10px;
     }
 
-    header nav {
-        margin-top: 10px;
+    .header-right {
+        justify-content: center;
     }
     
     header nav ul {
         flex-direction: column;
+        gap: 8px;
     }
 
     header nav a {
-        margin: 5px 0;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+    
+    .welcome-message {
+        width: 100%;
+        margin-right: 0;
+        text-align: center;
     }
 
     .sidebar {
         padding: 15px;
+    }
+    
+    .ML-model {
+    margin-top: 12px;
+    padding-top: 8px;
     }
 
     .weather-heading {
@@ -624,7 +803,6 @@ footer {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
-
     }
 
     .separator {
@@ -638,7 +816,11 @@ footer {
     }
 
     .map {
-        min-height: 300px;
+        min-height: 350px;
+    }
+    
+    .map-container {
+        min-height: 350px;
     }
 
     button {
@@ -653,13 +835,10 @@ footer {
         height: 35px;
     }
     
-    .login-container {
+    .login-container,
+    .registration-container {
         width: 90%;
         padding: 15px;
-    }
-    
-    .registration-container {
-        margin: 20px auto;
     }
     
     .profile-container {
@@ -678,20 +857,18 @@ footer {
     .profile-container .form-group span {
         width: 100%;
     }
-}
-
-.forecast-options-hidden {
-    display: none;
-    margin-top: 1em;
-}
-
-.hour-selector-hidden {
-    display: none;
-    margin-top: 0.5em;
-}
-
-.map-container {
-    height: 500px;
+    
+    .radio-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .map-display,
+    .chart-display {
+        width: 100%;
+        height: 250px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -699,12 +876,20 @@ footer {
         width: 30px;
         height: 30px;
     }
-}
-
-@media (max-width: 768px) {
-    .map-display,
-    .chart-display {
-        width: 100%;
-        height: 250px;
+    
+    .weather {
+        padding: 12px;
+    }
+    
+    .map-container {
+        min-height: 300px;
+    }
+    
+    main {
+        padding: 0.5rem;
+    }
+    
+    .container {
+        padding: 5px;
     }
 }
