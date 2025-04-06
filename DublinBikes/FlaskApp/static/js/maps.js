@@ -137,7 +137,7 @@ export function placeMarkers(stations_data) {
 
       // Add a "GO" button for non-default stations.
       if (station.station_id != defaultStation.id) {
-        infoContent += `<button onclick="selectStation(${station.station_id}, '${station.name}', ${station.position.lat}, ${station.position.lng})">Get Ride Prediction</button>`;
+        infoContent += `<button onclick="selectStation(${station.station_id}, '${station.name}', ${station.position.lat}, ${station.position.lng})">Ride Prediction</button>`;
       }
       
       infoContent += '</div>'; // Close the wrapper div

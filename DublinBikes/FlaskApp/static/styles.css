@@ -202,6 +202,17 @@ main {
     font-weight: 600;
 }
 
+#selection-text {
+    font-weight: 500;
+    color: var(--accent-color);
+    margin-bottom: 12px;
+    font-size: 16px;
+    text-align: center;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--sidebar-border);
+    transition: color var(--transition-speed);
+}
+
 #prediction-result-origin:empty,
 #prediction-result-destination:empty {
     display: none;
@@ -219,7 +230,7 @@ main {
 }
 
 .ML-model::after {
-    content: "Select a destination and click 'Get Ride Prediction'";
+    content: "Select a destination and click 'Ride Prediction'";
     display: block;
     font-size: 13px;
     text-align: center;
@@ -233,7 +244,6 @@ main {
 }
 
 #getRidePredictionBtn:empty::before {
-    content: "Get Forecast Prediction";
     display: block;
 }
 
