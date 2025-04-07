@@ -139,12 +139,17 @@ export function placeMarkers(stations_data) {
 
       // Add a "GO" button for non-default stations.
       if (station.station_id != defaultStation.id) {
-        infoContent += `<button onclick="selectStation(${station.station_id}, '${station.name}', ${station.position.lat}, ${station.position.lng})">GO</button>`;
+        infoContent += `<button onclick="selectStation(${station.station_id}, '${station.name}', ${station.position.lat}, ${station.position.lng})">Ride Prediction</button>`;
       }
+      
+      infoContent += '</div>'; // Close the wrapper div
 
       // Create the info window.
       let infoWindow = new google.maps.InfoWindow({
         content: infoContent,
+        // Add custom InfoWindow styling options
+        maxWidth: 250,
+        pixelOffset: new google.maps.Size(0, 0),
       });
 
       // Add a click listener to open the info window.
