@@ -42,7 +42,6 @@ def save_weather_data_to_cache_db(
     try:
         timestamp_requested = datetime.datetime.now()
         timestamp_weatherinfo = datetime.datetime.fromtimestamp(data.get("dt"))
-        print("\nTimeStampWeather Info: " + str(timestamp_weatherinfo) + "\n")
         main = data.get("main", {})
         feels_like = main.get("feels_like")
         humidity = main.get("humidity")
@@ -143,8 +142,6 @@ def get_current_weather_data():
     finally:
         cursor.close()
     if row:
-        print("Found a recent record – return it as a dict.")
-        print(dict(row))
         return dict(row)
     else:
         # No recent record: fetch new data from OpenWeather.
@@ -213,8 +210,6 @@ def get_forecast_weather_data(forecast_type: str, target_datetime: str) -> dict:
         
         # Extract all the forecasts: cache all to the DB and save one
         for forecast in forecast_list:
-            print(forecast)
-            print("------------------------------------------")
             entry_dt = datetime.datetime.fromtimestamp(forecast.get("dt"))
 
             # We check if the entry is within 1.5 hours of the requested time stamp
@@ -230,5 +225,4 @@ def get_forecast_weather_data(forecast_type: str, target_datetime: str) -> dict:
                 )
         if not matching_forecast:
             return {"error": "No forecast found for the selected time."}
-        print(matching_forecast)
         return matching_forecast

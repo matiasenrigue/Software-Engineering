@@ -3,6 +3,10 @@ SHELL := /bin/bash  # Ensure we're using bash, since our commands are bash-speci
 
 .PHONY: setup install activate debug-env
 
+runtest:
+	@echo "Running tests..."
+	python -m unittest discover -s DublinBikes/Tests -p "test_*.py"
+
 # Comand to kill the port 5000
 killport:
 	lsof -ti:5000 | xargs kill -9 || echo "No hay procesos en el puerto 8000"

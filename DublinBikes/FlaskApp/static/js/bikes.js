@@ -14,7 +14,7 @@ let lastFetchTime = 0;
  * @param {Function} callback - Function to call once google is defined.
  * @param {number} [retries=10] - Number of times to retry before giving up.
  */
-function waitForGoogleMaps(callback, retries = 10) {
+function waitForGoogleMaps(callback, retries = 20) {
   if (typeof google !== "undefined") {
     callback();
   } else if (retries > 0) {

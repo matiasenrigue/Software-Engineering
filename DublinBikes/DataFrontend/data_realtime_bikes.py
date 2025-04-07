@@ -127,18 +127,31 @@ def get_current_bikes_data():
         rows = cursor.fetchall()
     finally:
         conn.close()
+
+    def _to_datetime(value):
+        """Helper to convert a value to datetime if it's a string."""
+        if isinstance(value, datetime.datetime):
+            return value
+        try:
+            return datetime.datetime.fromisoformat(value)
+        except Exception:
+            return value  # If conversion fails, return as-is
+
     if rows:
-        print("\n\n\n\nUsing cached data")
+        print("\n\nUsing cached data\n\n")
         bikes_data = []
         for row in rows:
+            # Convert the time_requested and last_update values explicitly to datetime
+            time_requested_val = _to_datetime(row[0])
+            last_update_val = _to_datetime(row[5])
             bikes_data.append(
                 {
-                    "time_requested": row[0],
+                    "time_requested": time_requested_val,
                     "station_id": row[1],
                     "available_bikes": row[2],
                     "available_bike_stands": row[3],
                     "status": row[4],
-                    "last_update": row[5],
+                    "last_update": last_update_val,
                     "address": row[6],
                     "banking": row[7],
                     "bonus": row[8],
@@ -149,7 +162,7 @@ def get_current_bikes_data():
             )
         return bikes_data
     else:
-        print("\n\n\n\nFetching new data from API")
+        print("\n\nFetching new data from API\n\n")
         bikes_text = get_data_from_jcdecaux()
         if bikes_text:
             bikes_data = json.loads(bikes_text)
@@ -157,3 +170,4 @@ def get_current_bikes_data():
             return inserted_records
         else:
             return {"error": "Unable to fetch bikes data"}
+

@@ -34,6 +34,9 @@ export function initMap() {
     mapTypeId: google.maps.MapTypeId.SATELLITE,
   });
   // console.log(stations);
+
+  fetchBikesData(); // now safe because the API is loaded
+
 }
 
 
@@ -75,7 +78,7 @@ export function selectStation(stationId, stationName, stationLat, stationLng) {
 
   // Find selected station data.
   const selectedStation = stations.find((s) => s.station_id == stationId);
-  const availableBikeStands = selectedStation ? selectedStation.available_bike_stands : "N/A";
+  const availableBikeStands = selectedStation ? selectedStation.available_bike_stands : 0;
 
   // Calculate cycling time.
   const cyclingMinutes = getCyclingTimeMinutes(distance);
@@ -126,11 +129,10 @@ export function placeMarkers(stations_data) {
       stationMarkers[station.station_id] = marker;
 
       // Build the content for the info window.
-      let infoContent = `<div class="station-info-content">
-        <h3>${station.name}</h3>
-        <p>Total Bike Stands: ${station.bike_stands || "N/A"}</p>
-        <p>Available Bikes: ${station.available_bikes || "N/A"}</p>
-        <p>Available Stands: ${station.available_bike_stands || "N/A"}</p>
+      let infoContent = `<h3>${station.name}</h3>
+        <p>Total Bike Stands: ${station.bike_stands || 0}</p>
+        <p>Available Bikes: ${station.available_bikes || 0}</p>
+        <p>Available Stands: ${station.available_bike_stands || 0}</p>
         <a href="./station/${station.station_id}">
           <button>Details</button>
         </a>`;

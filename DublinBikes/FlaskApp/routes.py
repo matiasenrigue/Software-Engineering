@@ -60,7 +60,6 @@ def home():
         default_station_id = 10  # Dame Street
 
     default_station_data = get_one_station_data(default_station_id)
-    print(default_station_data)
 
     return render_template(
         "home.html",
@@ -93,7 +92,6 @@ def station_view(station_id):
 
     # Fetch daily availability records for the station
     availability_data = get_station_availability_daily(station_id)
-    print(availability_data)
 
     return render_template(
         "station.html",
