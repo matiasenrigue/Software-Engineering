@@ -276,30 +276,17 @@ main {
 .weather-container {
     width: 100%; 
     max-width: 900px;
-    text-align: center;
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
+    margin-bottom: 10px
 }
 
-.weather-heading {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 8px; 
-    width: 100%;
-    color: var(--text-color);
-}   
-
 .weather {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
     background: var(--container-bg);
     box-shadow: 0 2px 8px var(--container-shadow);
-    border-radius: 8px;
-    padding: 16px 20px;
+    border-radius: 10px;
     width: 100%;
-    transition: all var(--transition-speed) ease;
+    transition: background-color var(--transition-speed);
+    overflow: hidden;
+    padding: 16px 20px;
 }
 
 .location-info {
@@ -307,14 +294,9 @@ main {
     align-items: center;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 12px;
-}
-
-.weather-info, .weather-current, .weather-data {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--sidebar-border);
 }
 
 .label {
@@ -331,7 +313,7 @@ main {
 }
 
 .change-link {
-    margin-left: 10px;
+    margin-left: auto;
     color: var(--button-bg);
     text-decoration: none;
     font-size: 14px;
@@ -352,16 +334,22 @@ main {
     font-size: 16px;
     font-weight: 500;
 }
-  
+
+.weather-current {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
 .weather-data {
-    margin-top: 8px;
-    padding-top: 12px;
-    border-top: 1px solid var(--sidebar-border);
-    justify-content: space-between;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    float: right;
 }
 
 .temperature {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
     color: var(--accent-color);
 }
@@ -373,8 +361,6 @@ main {
 
 .description {
     font-weight: 600;
-    text-transform: capitalize;
-    text-align: left
 }
   
 .humidity {
@@ -386,8 +372,6 @@ main {
 .weather-icon {
     width: 50px;
     height: 50px;
-    margin-left: auto;
-    text-align: right
 }
 
 .map {
