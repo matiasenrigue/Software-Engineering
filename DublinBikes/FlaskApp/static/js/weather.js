@@ -5,20 +5,22 @@
  * Also includes helper functions to format timestamps and set weather icons.
  */
 
+
+import { updateEstimatedArrivalTime } from "./maps.js";
+
+
 /**
  * Formats a timestamp into a human-readable string.
  * @param {string|number|Date} timestamp - The timestamp to format.
  * @returns {string} Formatted timestamp (e.g., "Monday 02:30 PM").
  */
-
-
 export function formatTimestamp(timestamp) {
   const date = timestamp instanceof Date ? timestamp : new Date(timestamp);
   const options = {
     weekday: "long",
     hour: "2-digit",
     minute: "2-digit",
-    hour12: true,
+    hour12: false,
   };
   return date.toLocaleString("en-US", options);
 }
@@ -50,7 +52,7 @@ export function fetchCurrentWeather() {
         return;
       }
       const rawTimestamp = data.timestamp_weatherinfo;
-      document.getElementById("weather-current-forecast").textContent = "Current Weather:";
+      document.getElementById("weather-current-forecast").textContent = "Current Weather: ";
       document.getElementById("timestamp-weatherinfo").textContent = formatTimestamp(rawTimestamp);
       document.getElementById("weather-temp").textContent = data.temp + " °C";
       document.getElementById("weather-description").textContent = "Humidity: " + data.humidity + "%";
@@ -119,13 +121,29 @@ document.addEventListener("DOMContentLoaded", function () {
     radio.addEventListener("change", function () {
       const forecastOptions = document.getElementById("forecast-options");
       if (this.value === "forecast") {
+        // Show the forecast options so the user can select a date/time
         forecastOptions.style.display = "block";
+        
+        // Check if the forecast date input has a value
+        const forecastDateInput = document.getElementById("forecast-date");
+        if (forecastDateInput && forecastDateInput.value) {
+          // If a forecast date is already selected, call the function to display forecast weather.
+          fetchForecastWeather();
+          updateEstimatedArrivalTime();
+        } else {
+          // Optionally, you might want to notify the user to select a date,
+          // or simply do nothing.
+          console.log("No forecast date selected yet.");
+        }
       } else {
+        // If "Bike Now" is selected, hide the forecast options and show current weather.
         forecastOptions.style.display = "none";
         fetchCurrentWeather();
+        updateEstimatedArrivalTime();
       }
     });
   });
+
 
   // Show or hide the hour selector based on chosen date.
   document.getElementById("forecast-date").addEventListener("change", function () {
@@ -133,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const now = new Date();
     const diffDays = (selectedDate - now) / (1000 * 3600 * 24);
     const hourSelector = document.getElementById("hour-selector");
-    if (diffDays < 1 || diffDays <= 4) {
+    if (diffDays < 1 || diffDays <= 5) {
       hourSelector.style.display = "block";
     } else {
       hourSelector.style.display = "none";

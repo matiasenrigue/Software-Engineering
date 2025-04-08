@@ -35,7 +35,8 @@
         </div>
     </header>
 
-    <!-- Flash messages block -->
+    <!-- Flash messages block as a dedicated block -->
+    {% block flash_messages %}
     <div class="flash-messages-wrapper">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -49,6 +50,8 @@
         {% endif %}
         {% endwith %}
     </div>
+    {% endblock %}
+
     <main>
         {% block content %}{% endblock %}
     </main>
@@ -120,11 +123,11 @@
     </script>
 
     <footer>
-        <p>
+        <!-- <p>
         <a href="{{ url_for('home') }}">Home</a> | 
         <a href="{{ url_for('login') }}">Login</a> | 
         <a href="{{ url_for('register') }}">Sign Up</a>
-    </p>
+        </p> -->
     <p>&copy; Group 22-Software Engineering Project 2025. All rights reserved.</p>
 </footer>
     

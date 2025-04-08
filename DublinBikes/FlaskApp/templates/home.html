@@ -2,6 +2,11 @@
   {% extends "base.html" %}
 
   {% block title %}Home - Dublin Bikes{% endblock %}
+
+  <!-- Override the flash_messages block to remove it on the home page -->
+{% block flash_messages %}
+<div class="flash-placeholder"></div>
+{% endblock %}
   
   {% block content %}
 
@@ -10,7 +15,7 @@
       <div class="sidebar">
         <div class="location-search">
           <h3>Route Planning</h3>
-          <p id="selection-text">Select a Location on the map: "Ride Prediction"</p>
+          <p id="selection-text">Select a Location on the map:<br> "Ride Prediction"</p>
           <h4 id="selected-location"></h4>
           
           <div class="radio-options">
@@ -28,7 +33,8 @@
             <label for="forecast-date">Select Date:</label>
             <input type="date" id="forecast-date" 
                    min="{{ now.strftime('%Y-%m-%d') }}" 
-                   max="{{ (now + timedelta(days=5)).strftime('%Y-%m-%d') }}">
+                   max="{{ (now + timedelta(days=4)).strftime('%Y-%m-%d') }}">
+                   <!-- Show only 4 days in the future, instead of 5. As the 5th day won't give us full data -->
             <div id="hour-selector" class="hour-selector-hidden">
               <label for="forecast-hour">Select Hour:</label>
               <!-- step="3600" restricts selection to whole hours -->
@@ -37,7 +43,9 @@
 
 
             <div class="ML-model">
-              <button id="getRidePredictionBtn" onclick="combinedForecastAndPrediction()">Forecast Prediction</button>
+              <button id="getRidePredictionBtn" onclick="combinedForecastAndPrediction()">Get Ride Prediction</button>
+              <p id="prediction-text"></p>
+              <p id="prediction-date"></p>
               <p id="prediction-result-origin"></p>
               <p id="prediction-result-destination"></p>
             </div>

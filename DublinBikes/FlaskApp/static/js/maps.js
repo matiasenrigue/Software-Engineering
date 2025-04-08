@@ -85,8 +85,14 @@ export function selectStation(stationId, stationName, stationLat, stationLng) {
   const cyclingTime = formatTime(cyclingMinutes);
   const arrivalTime = estimateArrivalTime(cyclingMinutes);
 
-  // Update sidebar details.
-  document.getElementById("selection-text").remove();
+  
+  // Check if element "selection-text" exists, then remove it.
+    const selectionTextElem = document.getElementById("selection-text");
+    if (selectionTextElem) {
+      selectionTextElem.remove();
+    }
+  
+    // Update sidebar details.
   document.getElementById("selected-location").textContent =
     `Destination: ${stationName}`;
   document.getElementById("selected-location-distance").textContent =
@@ -141,6 +147,8 @@ export function placeMarkers(stations_data) {
       if (station.station_id != defaultStation.id) {
         infoContent += `<button onclick="selectStation(${station.station_id}, '${station.name}', ${station.position.lat}, ${station.position.lng})">Ride Prediction</button>`;
       }
+
+
       
       infoContent += '</div>'; // Close the wrapper div
 
@@ -282,6 +290,7 @@ export function estimateArrivalTime(cyclingMinutes, departureTime = NaN) {
 
 document.querySelectorAll('.go-button').forEach(button => {
   button.addEventListener('click', (event) => {
+    console.log("Ride Prediction button clicked:", event.target);
     const stationId = event.target.dataset.stationId;
     const stationName = event.target.dataset.stationName;
     const stationLat = parseFloat(event.target.dataset.stationLat);
@@ -290,6 +299,43 @@ document.querySelectorAll('.go-button').forEach(button => {
   });
 });
 
+
+
+export function updateEstimatedArrivalTime() {
+  const selectedForecast = document.querySelector('input[name="forecastType"]:checked').value;
+  let departureTime;
+
+  if (selectedForecast === "forecast") {
+    // If Bike Later is selected, get the forecast date/time value.
+    const forecastDateInput = document.getElementById("forecast-date");
+    const forecastTimeInput = document.getElementById("forecast-hour");
+    if (forecastDateInput && forecastDateInput.value) {
+      let targetDatetime = forecastDateInput.value;
+      if (forecastTimeInput && forecastTimeInput.value) {
+        targetDatetime += "T" + forecastTimeInput.value;
+      } else {
+        targetDatetime += "T12:00:00"; // Default to noon if no time provided.
+      }
+      // Use the forecast timestamp as departure time.
+      departureTime = Date.parse(targetDatetime);
+    } else {
+      // Fallback in case forecast date is not set.
+      departureTime = Date.now();
+    }
+  } else {
+    // For "Bike Now", use the current time.
+    departureTime = Date.now();
+  }
+  
+  // Make sure there's a valid cycling time value stored in window.cyclingTime.
+  if (typeof window.cyclingTime === "number" && !isNaN(window.cyclingTime)) {
+    const newArrivalTime = estimateArrivalTime(window.cyclingTime, departureTime);
+    document.getElementById("selected-location-arrival").textContent =
+      `Estimated Arrival Time: ${newArrivalTime}h`;
+  } else {
+    console.log("Cycling time is not defined properly.");
+  }
+}
 
 // Expose initMap to the global scope for the Google Maps API callback.
 window.initMap = initMap;

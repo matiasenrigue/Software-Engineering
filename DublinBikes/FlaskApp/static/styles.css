@@ -229,7 +229,7 @@ main {
 }
 
 .ML-model::after {
-    content: "Select a destination and click 'Ride Prediction'";
+    /* content: "Select a destination and click 'Ride Prediction'"; */
     display: block;
     font-size: 13px;
     text-align: center;
@@ -292,6 +292,11 @@ main {
     margin-right: 60px; 
     box-sizing: border-box;
 }
+
+#timestamp-weatherinfo {
+    margin-left: 0.5rem; 
+  }
+  
 
 .location-info {
     display: flex;
@@ -563,6 +568,13 @@ button:hover {
 .flash-message:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
+ /* For the Home page, that doesn't have Flash Messages, to still have some spacing */
+.flash-placeholder {
+    padding: 10px;
+    background-color: white; 
+    height: 10px;            
+  }
+  
 
 @keyframes fadeIn {
     from { 
