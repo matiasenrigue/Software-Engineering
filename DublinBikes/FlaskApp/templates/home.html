@@ -58,12 +58,12 @@
         <div class="weather-container">
           <div class="weather">
               <div class="location-info">
-                <span class="label">Your Base:</span>
+                <span class="label">Your Base Station:</span>
                 <strong id="station-name">{{ default_station.name }}</strong>
                 {% if session.user %}
-                  <a href="{{ url_for('edit_profile') }}" class="change-link">Change</a>
+                  <a href="{{ url_for('edit_profile') }}" class="change-link">Change Station</a>
                 {% else %}
-                  <a href="{{ url_for('login') }}" class="change-link">Login to customise your location</a>
+                  <a href="{{ url_for('login') }}" class="change-link">Login to customise to your preferred station</a>
                 {% endif %}
             </div>
 
