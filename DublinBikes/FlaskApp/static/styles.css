@@ -571,7 +571,7 @@ button:hover {
  /* For the Home page, that doesn't have Flash Messages, to still have some spacing */
 .flash-placeholder {
     padding: 10px;
-    background-color: white; 
+    /* background-color: white;  */
     height: 10px;            
   }
   
