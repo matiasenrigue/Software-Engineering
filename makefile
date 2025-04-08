@@ -3,6 +3,10 @@ SHELL := /bin/bash  # Ensure we're using bash, since our commands are bash-speci
 
 .PHONY: setup install activate debug-env
 
+runtest:
+	@echo "Running tests..."
+	python -m unittest discover -s DublinBikes/Tests -p "test_*.py"
+
 # Comand to kill the port 5000
 killport:
 	lsof -ti:5000 | xargs kill -9 || echo "No hay procesos en el puerto 8000"
@@ -18,7 +22,7 @@ runserver-local: killport
 
 # Run the server for EC2 (listens on all interfaces)
 runserver-ec2: killport
-	python run.py --host=0.0.0.0 --port=5000
+	python run.py --host=0.0.0.0 --port=8000
 
 
 scraping-textfile:
