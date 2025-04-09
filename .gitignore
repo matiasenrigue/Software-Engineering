@@ -5,6 +5,7 @@ __pycache__/
 DublinBikes.egg-info
 
 .env
+.envrc
 
 # Pretty JS
 node_modules
@@ -13,4 +14,8 @@ package-lock.json
 package.json
 
 *.csv
+
+aws-flask.pem
+
+
 
