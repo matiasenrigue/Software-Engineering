@@ -11,6 +11,7 @@ requirements = [
 
 setup(
     name="DublinBikes",
+    version="1.0.0",
     description="Package for the Dublin Bikes project",
     packages=find_packages(),
     install_requires=requirements,

@@ -24,6 +24,7 @@ A comprehensive software suite for real-time bike sharing data management, histo
   - [Machine Learning Predictions](#machine-learning-predictions)
 - [Testing](#testing)
 - [Makefile Targets](#makefile-targets)
+- [Documentation](#documentation)
 - [Contributing](#contributing)
 - [License](#license)
 - [Acknowledgments](#acknowledgments)
@@ -86,6 +87,9 @@ The repository is organized into several key directories:
 ├── DublinBikes.egg-info
 ├── README.md                 # This file.
 ├── aws-flask.pem             # AWS key file (if applicable).
+├── docs                      # Documentation files.
+│   ├── Developer-Manual.md   # Developer manual with technical details.
+│   └── User-Manual.md        # User manual with instructions for end users.
 ├── makefile                  # Common commands for development and testing.
 ├── requirements.txt          # Python package requirements.
 ├── run.py                    # Entrypoint to start the Flask application.
@@ -160,8 +164,8 @@ The repository is organized into several key directories:
 
 - **Purpose:**  
   Store project-wide parameters such as API keys, URIs, and configuration flags.
-- **Key File:**  
-  `params.py`
+- **Key File:**
+  - `params.py`
 
 ---
 
@@ -283,6 +287,15 @@ To see all targets, open the Makefile.
 
 ---
 
+## Documentation
+
+For comprehensive technical details and user instructions, please refer to the following documents located in the **docs/** folder:
+
+- **Developer Manual:** Detailed technical documentation for developers, including architecture, API details, and extension guidelines. ([docs/Developer-Manual.md](docs/Developer-Manual.md))
+- **User Manual:** Instructions for end users on how to use the Dublin Bikes application. ([docs/User-Manual.md](docs/User-Manual.md))
+
+---
+
 ## Contributing
 
 Contributions, improvements, and bug fixes are welcome! Please follow these guidelines:
@@ -295,7 +308,6 @@ Contributions, improvements, and bug fixes are welcome! Please follow these guid
 For major changes, please open an issue to discuss what you would like to change first.
 
 ---
-
 
 ## Acknowledgments
 
