@@ -1,4 +1,26 @@
-/* Define CSS variables for both themes */
+/* 
+ * TABLE OF CONTENTS
+ * 1. Variables & Theme
+ * 2. Base Elements
+ * 3. Layout Components
+ * 4. Header
+ * 5. Main Content
+ * 6. Sidebar
+ * 7. Weather Components
+ * 8. Map & Station Related
+ * 9. Forms & Inputs
+ * 10. Buttons
+ * 11. Flash Messages
+ * 12. Login & Registration
+ * 13. Profile
+ * 14. Station Details
+ * 15. Utility Classes
+ * 16. Footer
+ */
+
+/* ===================================
+   1. VARIABLES & THEME
+=================================== */
 :root {
     --bg-color: #f9f9f9;
     --text-color: #1f1f1f;
@@ -17,6 +39,8 @@
     --nav-hover: #808080;
     --box-shadow-focus: rgba(74, 144, 226, 0.5);
     --accent-color: #2b7a78;
+    
+    /* Measurements */
     --card-border-radius: 12px;
     --button-border-radius: 6px;
     --input-border-radius: 6px;
@@ -66,6 +90,9 @@
     background: var(--button-hover);
 }
 
+/* ===================================
+   2. BASE ELEMENTS
+=================================== */
 body {
     font-family: 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
     margin: 0;
@@ -79,6 +106,52 @@ body {
     flex-direction: column;
 }
 
+main {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    padding-top: 0;
+    margin-top: -10px;
+}
+
+/* ===================================
+   3. LAYOUT COMPONENTS
+=================================== */
+.container {
+    display: flex;
+    gap: 22px;
+    margin-top: 2px;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    gap: 20px;
+    width: 100%;
+    padding-right: 0;
+}
+
+.side-by-side-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.side-by-side-item {
+    flex: 1 1 calc(50% - 10px); 
+    min-width: 300px; 
+}
+
+/* ===================================
+   4. HEADER
+=================================== */
 header {
     background: var(--header-bg);
     color: var(--header-text);
@@ -159,23 +232,9 @@ header nav a:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-main {
-    flex: 1;
-    padding: 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
-    box-sizing: border-box;
-    padding-top: 0;
-    margin-top: -10px;
-}
-
-.container {
-    display: flex;
-    gap: 22px;
-    margin-top: 2px;
-}
-
+/* ===================================
+   5. SIDEBAR
+=================================== */
 .sidebar {
     width: 280px;
     padding: 15px;
@@ -186,50 +245,72 @@ main {
     box-shadow: 0 2px 8px var(--container-shadow);
 }
 
-.sidebar h2, .sidebar h3 {
+.sidebar h2, 
+.sidebar h3 {
     text-align: center;
     margin-top: 0;
-    margin-bottom: 16px;
-    font-size: 20px;
+    margin-bottom: 20px;
+    font-size: 22px;
     font-weight: 600;
     color: var(--accent-color);
+    letter-spacing: -0.5px;
+    position: relative;
+}
+
+.sidebar h2::after, 
+.sidebar h3::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 3px;
+    background-color: var(--accent-color);
+    margin: 8px auto 0;
+    border-radius: 2px;
 }
 
 .sidebar h4 {
-    margin-top: 16px;
-    margin-bottom: 8px;
-    font-weight: 600;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 17px;
+    color: var(--text-color);
 }
 
 #selection-text {
     font-weight: 500;
     color: var(--accent-color);
-    margin-bottom: 12px;
+    margin-bottom: 16px;
     font-size: 16px;
     text-align: center;
-    padding: 6px 0;
+    padding: 8px 0;
     border-bottom: 1px solid var(--sidebar-border);
     transition: color var(--transition-speed);
+    letter-spacing: 0.3px;
 }
 
-#prediction-result-origin:empty,
-#prediction-result-destination:empty {
-    display: none;
+/* ML Model */
+.ML-model {
+    margin-top: 18px;
+    padding: 18px;
+    background-color: rgba(43, 122, 120, 0.05);
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(43, 122, 120, 0.1);
+    transition: all var(--transition-speed);
 }
 
-#prediction-result-origin,
-#prediction-result-destination {
-    margin: 8px 0;
-    padding: 8px 12px;
-    background-color: rgba(43, 122, 120, 0.1);
-    border-radius: 4px;
-    font-weight: 500;
-    color: var(--text-color);
-    border-left: 3px solid var(--button-bg);
+.ML-model:hover{
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    border-color: rgba(43, 122, 120, 0.15);
+}
+
+.ML-model p {
+    margin: 10px 0;
+    line-height: 1.5;
 }
 
 .ML-model::after {
-    /* content: "Select a destination and click 'Ride Prediction'"; */
+    content: "";
     display: block;
     font-size: 13px;
     text-align: center;
@@ -242,38 +323,68 @@ main {
     display: none;
 }
 
-#getRidePredictionBtn:empty::before {
-    display: block;
+/* Prediction Elements */
+#prediction-text {
+    font-weight: 600;
+    color: var(--accent-color);
+    font-size: 15px;
+    letter-spacing: 0.2px;
 }
 
-#getRidePredictionBtn {
-    width: 100%;
-    padding: 12px;
-    background: var(--button-bg);
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
+#prediction-date {
     font-weight: 500;
-    border-radius: 5px;
-    transition: background-color var(--transition-speed);
-    text-align: center;
+    font-style: italic;
+    margin-bottom: 14px;
+    color: var(--text-color);
+    opacity: 0.85;
+    padding: 4px 0;
+    border-bottom: 1px dashed rgba(43, 122, 120, 0.2);
 }
 
-#getRidePredictionBtn:hover {
-    background-color: var(--button-hover);
-}
-
-.main-content {
-    flex: 1;
+#prediction-result-origin,
+#prediction-result-destination {
+    margin: 12px 0;
+    padding: 12px 15px;
+    background-color: rgba(43, 122, 120, 0.1);
+    border-radius: 8px;
+    font-weight: 500;
+    color: var(--text-color);
+    border-left: 4px solid var(--button-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    transition: all var(--transition-speed);
     display: flex;
-    flex-direction: column;
-    align-items: flex-start; 
-    gap: 20px;
-    width: 100%;
-    padding-right: 0;
+    align-items: center;
 }
 
+#prediction-result-origin::before {
+    content: "🚲";
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+#prediction-result-destination::before {
+    content: "🅿️";
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+#prediction-result-origin:hover,
+#prediction-result-destination:hover {
+    background-color: rgba(43, 122, 120, 0.12);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.04);
+}
+
+#prediction-text:empty,
+#prediction-date:empty,
+#prediction-result-origin:empty,
+#prediction-result-destination:empty {
+    display: none;
+}
+
+/* ===================================
+   6. WEATHER COMPONENTS
+=================================== */
 .weather-container {
     width: 100%; 
     max-width: 900px;
@@ -295,9 +406,8 @@ main {
 
 #timestamp-weatherinfo {
     margin-left: 0.5rem; 
-  }
+}
   
-
 .location-info {
     display: flex;
     align-items: center;
@@ -385,6 +495,9 @@ main {
     height: 50px;
 }
 
+/* ===================================
+   7. MAP & STATION RELATED
+=================================== */
 .map {
     width: 100%;
     max-width: 900px;
@@ -402,6 +515,75 @@ main {
     width: 100%;
 }
 
+.map-display {
+    height: 280px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.chart-display {
+    height: 280px !important;
+    width: 100% !important;;
+    margin: 0 auto;
+}
+
+/* Google Maps styling */
+.gm-style .gm-style-iw-c {
+    background-color: var(--container-bg) !important;
+    color: var(--text-color) !important;
+    padding: 12px !important;
+    border-radius: 8px !important;
+}
+
+.gm-style .gm-style-iw-t::after {
+    background: var(--container-bg) !important;
+}
+
+.gm-style .gm-style-iw-d {
+    overflow: hidden !important;
+    max-height: none !important;
+}
+
+.gm-style-iw > button {
+    right: 0 !important;
+    top: 0 !important;
+}
+
+.station-info-content {
+    color: var(--text-color) !important;
+}
+
+.station-info-content h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--accent-color) !important;
+    font-size: 16px;
+}
+
+.station-info-content p {
+    margin: 5px 0;
+    color: var(--text-color) !important;
+}
+
+.station-info-content button {
+    background-color: var(--button-bg);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    margin-top: 8px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.station-info-content button:hover {
+    background-color: var(--button-hover);
+}
+
+/* ===================================
+   8. FORMS & INPUTS
+=================================== */
 .radio-options {
     display: flex;
     gap: 16px;
@@ -414,25 +596,6 @@ main {
     display: flex;
     align-items: center;
     gap: 6px;
-}
-
-button {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    background: var(--button-bg);
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-    transition: all var(--transition-speed);
-    font-weight: 500;
-}
-
-button:hover {
-    background: var(--button-hover);
-    box-shadow: 0 2px 5px var(--container-shadow);
 }
 
 #forecast-options {
@@ -468,60 +631,171 @@ button:hover {
     box-shadow: 0 0 5px var(--box-shadow-focus);
 }
 
-.gm-style .gm-style-iw-c {
-    background-color: var(--container-bg) !important;
-    color: var(--text-color) !important;
-    padding: 12px !important;
-    border-radius: 8px !important;
+.form-group {
+    margin-bottom: 15px;
 }
 
-.gm-style .gm-style-iw-t::after {
-    background: var(--container-bg) !important;
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--text-color);
+    transition: color var(--transition-speed);
 }
 
-.gm-style .gm-style-iw-d {
-    overflow: hidden !important;
-    max-height: none !important;
-}
-
-.gm-style-iw > button {
-    right: 0 !important;
-    top: 0 !important;
-}
-
-.station-info-content {
-    color: var(--text-color) !important;
-    font-family: 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-}
-
-.station-info-content h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: var(--accent-color) !important;
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
     font-size: 16px;
+    box-sizing: border-box;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    transition: border-color var(--transition-speed), background-color var(--transition-speed), color var(--transition-speed);
 }
 
-.station-info-content p {
-    margin: 5px 0;
-    color: var(--text-color) !important;
+.form-group input:focus {
+    border-color: var(--input-focus);
+    outline: none;
+    box-shadow: 0 0 5px var(--box-shadow-focus);
 }
 
-.station-info-content button {
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    transition: border-color var(--transition-speed), background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.form-control:focus {
+    border-color: var(--input-focus);
+    outline: none;
+    box-shadow: 0 0 5px var(--box-shadow-focus);
+}
+
+.form-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    transition: border-color var(--transition-speed), background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.form-select:focus {
+    border-color: var(--input-focus);
+    outline: none;
+    box-shadow: 0 0 5px var(--box-shadow-focus);
+}
+
+/* ===================================
+   9. BUTTONS
+=================================== */
+button {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    background: var(--button-bg);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: all var(--transition-speed);
+    font-weight: 500;
+}
+
+button:hover {
+    background: var(--button-hover);
+    box-shadow: 0 2px 5px var(--container-shadow);
+}
+
+#getRidePredictionBtn {
+    width: 100%;
+    padding: 14px;
+    background: var(--button-bg);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(43, 122, 120, 0.2);
+    letter-spacing: 0.3px;
+    position: relative;
+    overflow: hidden;
+}
+
+#getRidePredictionBtn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+#getRidePredictionBtn:hover {
+    background-color: var(--button-hover);
+    box-shadow: 0 4px 8px rgba(43, 122, 120, 0.3);
+    transform: translateY(-2px);
+}
+
+#getRidePredictionBtn:empty::before {
+    left: 100%;
+}
+
+#getRidePredictionBtn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(43, 122, 120, 0.2);
+}
+
+#getRidePredictionBtn:empty::before {
+    display: block;
+}
+
+.submit-btn,
+.btn-submit,
+.update-btn {
+    width: 100%;
+    padding: 12px;
     background-color: var(--button-bg);
     color: white;
     border: none;
-    padding: 6px 12px;
-    margin-top: 8px;
-    margin-right: 5px;
-    cursor: pointer;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+    font-weight: 500;
 }
 
-.station-info-content button:hover {
+.submit-btn:hover,
+.btn-submit:hover,
+.update-btn:hover {
     background-color: var(--button-hover);
 }
 
+/* ===================================
+   10. FLASH MESSAGES
+=================================== */
 .flash-messages-wrapper {
     height: 60px; 
     margin-bottom: 10px;
@@ -568,10 +842,9 @@ button:hover {
 .flash-message:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
- /* For the Home page, that doesn't have Flash Messages, to still have some spacing */
+
 .flash-placeholder {
     padding: 10px;
-    /* background-color: white;  */
     height: 10px;            
   }
   
@@ -587,7 +860,11 @@ button:hover {
     }
 }
 
-.login-container {
+/* ===================================
+   11. LOGIN & REGISTRATION
+=================================== */
+.login-container,
+.registration-container {
     max-width: 400px;
     margin: 0 auto;
     padding: 25px;
@@ -597,57 +874,11 @@ button:hover {
     transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
 }
 
-.login-container h2 {
+.login-container h2,
+.registration-container h2 {
     text-align: center;
     margin-bottom: 20px;
     color: var(--accent-color);
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: var(--text-color);
-    transition: color var(--transition-speed);
-}
-
-.form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--input-border);
-    border-radius: 4px;
-    font-size: 16px;
-    box-sizing: border-box;
-    background-color: var(--input-bg);
-    color: var(--text-color);
-    transition: border-color var(--transition-speed), background-color var(--transition-speed), color var(--transition-speed);
-}
-
-.form-group input:focus {
-    border-color: var(--input-focus);
-    outline: none;
-    box-shadow: 0 0 5px var(--box-shadow-focus);
-}
-
-.submit-btn {
-    width: 100%;
-    padding: 12px;
-    background-color: var(--button-bg);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color var(--transition-speed);
-    font-weight: 500;
-}
-
-.submit-btn:hover {
-    background-color: var(--button-hover);
 }
 
 .register-container {
@@ -673,75 +904,9 @@ button:hover {
     color: var(--accent-hover);
 }
 
-.registration-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 25px;
-    background-color: var(--container-bg);
-    border-radius: 8px;
-    box-shadow: 0 2px 10px var(--container-shadow);
-    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
-}
-
-.registration-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: var(--accent-color);
-}
-
-.form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--input-border);
-    border-radius: 4px;
-    font-size: 16px;
-    box-sizing: border-box;
-    background-color: var(--input-bg);
-    color: var(--text-color);
-    transition: border-color var(--transition-speed), background-color var(--transition-speed), color var(--transition-speed);
-}
-
-.form-control:focus {
-    border-color: var(--input-focus);
-    outline: none;
-    box-shadow: 0 0 5px var(--box-shadow-focus);
-}
-
-.form-select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--input-border);
-    border-radius: 4px;
-    font-size: 16px;
-    box-sizing: border-box;
-    background-color: var(--input-bg);
-    color: var(--text-color);
-    transition: border-color var(--transition-speed), background-color var(--transition-speed), color var(--transition-speed);
-}
-
-.form-select:focus {
-    border-color: var(--input-focus);
-    outline: none;
-    box-shadow: 0 0 5px var(--box-shadow-focus);
-}
-
-.btn-submit {
-    width: 100%;
-    padding: 12px;
-    background-color: var(--button-bg);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color var(--transition-speed);
-    font-weight: 500;
-}
-
-.btn-submit:hover {
-    background-color: var(--button-hover);
-}
-
+/* ===================================
+   12. PROFILE
+=================================== */
 .profile-container {
     max-width: 400px;
     margin: 0 auto;
@@ -780,11 +945,11 @@ button:hover {
     box-sizing: border-box;
     background-color: var(--input-bg);
     color: var(--text-color);
+    transition: color var(--transition-speed), background-color var(--transition-speed), color var(--transition-speed);
 }
 
 .profile-container .form-group span {
     display: block;
-    width: 100%;
     padding: 10px;
     background-color: var(--readonly-bg);
     border: 1px solid var(--input-border);
@@ -793,24 +958,9 @@ button:hover {
     color: var(--text-color);
 }
 
-.update-btn {
-    width: 100%;
-    padding: 12px;
-    background-color: var(--button-bg);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color var(--transition-speed);
-    margin-top: 15px;
-    font-weight: 500;
-}
-
-.update-btn:hover {
-    background-color: var(--button-hover);
-}
-
+/* ===================================
+   13. STATION DETAILS
+=================================== */
 .station-details {
     display: flex;
     flex-direction: column;
@@ -928,27 +1078,6 @@ button:hover {
     box-sizing: border-box;
 }
 
-.station-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.station-table th {
-    background-color: rgba(43, 122, 120, 0.08);
-    font-weight: 600;
-    width: 40%;
-    padding: 16px;
-    text-align: left;
-    border-bottom: 1px solid var(--sidebar-border);
-    font-size: 15px;
-    color: var(--text-color);
-}
-
 .station-section-title {
     font-size: 20px;
     margin-bottom: 16px;
@@ -999,6 +1128,7 @@ button:hover {
     border-bottom: none;
 }
 
+/* Station table values styling */
 .availability-value {
     font-weight: 700;
     font-size: 18px;
@@ -1031,31 +1161,9 @@ button:hover {
     font-weight: 600;
 }
 
-.side-by-side-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-top: 20px;
-    width: 100%;
-}
-
-.side-by-side-item {
-    flex: 1 1 calc(50% - 10px); 
-    min-width: 300px; 
-}
-
-.map-display {
-    height: 280px;
-    width: 100%;
-    margin: 0 auto;
-}
-
-.chart-display {
-    height: 280px;
-    width: 100%;
-    margin: 0 auto;
-}
-
+/* ===================================
+   15. FOOTER
+=================================== */
 footer {
     padding: 1rem;
     text-align: center;
@@ -1065,260 +1173,330 @@ footer {
     font-size: 14px;
 }
 
-footer p {
-    opacity: 0.9;
-    max-width: 1400px;
-    margin: 0 auto;
-}
+/* =================================== 
+   16. RESPONSIVE ADJUSTMENTS
+=================================== */
 
-footer a {
-    color: var(--text-color);
-    text-decoration: none;
-    margin: 0 10px;
-    transition: opacity 0.2s;
-}
+/* Large Devices (Desktops & Small Laptops, 1024px and below) */
+@media screen and (max-width: 1024px) {
+    /* Layout Adjustments */
+    main {
+        padding: 1.5rem;
+    }
 
-footer a:hover {
-    opacity: 0.7;
-}
-
-/* Responsive Adjustments for Small Laptops */
-@media (max-width: 1024px) {
     .container {
         flex-direction: column;
-        align-items: center;
-        padding: 10px;
     }
 
+    /* Sidebar Adjustments */
     .sidebar {
         width: 100%;
-        max-width: 600px;
+        max-width: 100%;
         border-right: none;
         margin-bottom: 20px;
-    }
-    
-    main {
-        padding: 1rem 0.5rem;
+        padding: 20px;
     }
 
+    /* Weather Container */
+    .weather-container {
+        max-width: 100%;
+    }
+
+    .weather {
+        margin-right: 0;
+    }
+
+    /* Map */
+    .map {
+        max-width: 100%;
+    }
+
+    /* Header Adjustments */
+    .header-container {
+        padding: 0 15px;
+    }
+
+    .welcome-message {
+        display: none;
+    }
+
+    /* Side by Side Container */
     .side-by-side-container {
-        gap: 15px; 
+        flex-direction: column;
     }
 
-    .station-card {
+    .side-by-side-item {
+        width: 100%;
+        min-width: 100%;
+    }
+
+    /* Station Details */
+    .station-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+}
+
+/* Medium Devices (Tablets, 768px and below) */
+@media screen and (max-width: 768px) {
+    /* Header Adjustments */
+    header {
         padding: 15px;
     }
 
-    .map-display, 
-    .chart-display {
-        height: 380px; 
-    }
-    
-    .station-header {
-        padding-bottom: 12px;
-    }
-    
-    .last-update {
-        font-size: 13px;
-        padding: 5px 10px;
-    }
-
-    .station-table th,
-    .station-table td {
-        padding: 10px 12px; 
-    }
-
-    .station-details {
-        padding: 15px; 
-    }
-}
-
-/* Responsive Adjustments for Tablets/iPad */
-@media (max-width: 768px) {
     .header-container {
         flex-direction: column;
-        text-align: center;
-        gap: 10px;
+        align-items: flex-start;
+        gap: 15px;
     }
 
     .header-right {
-        justify-content: center;
+        width: 100%;
+        justify-content: space-between;
     }
-    
+
     header nav ul {
-        flex-direction: column;
-        gap: 8px;
+        width: 100%;
+        justify-content: space-between;
     }
 
     header nav a {
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-        text-align: center;
-    }
-    
-    .welcome-message {
-        width: 100%;
-        margin-right: 0;
-        text-align: center;
+        padding: 8px 12px;
+        font-size: 14px;
     }
 
-    .sidebar {
+    .theme-toggle {
+        top: 15px;
+    }
+
+    /* Main Content */
+    main {
+        padding: 1rem;
+        margin-top: 0;
+    }
+
+    /* Weather Container */
+    .weather {
         padding: 15px;
     }
+
+    .location-info {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-right: 0;
+    }
+
+    .change-link {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .weather-data {
+        float: none;
+        margin-right: 0;
+        margin-top: 15px;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    /* Map */
+    .map {
+        min-height: 400px;
+    }
+
+    .map-container {
+        height: 400px;
+    }
+
+    /* Forms */
+    .login-container,
+    .registration-container,
+    .profile-container {
+        padding: 20px 15px;
+    }
+
+    /* Tables */
+    .station-table th,
+    .station-table td {
+        padding: 12px 15px;
+    }
+
+    /* Prediction Results */
+    #prediction-result-origin,
+    #prediction-result-destination {
+        padding: 10px;
+    }
+
+    /* Chart and Map Displays */
+    .map-display {
+        height: 250px;
+    }
     
-    .ML-model {
-        margin-top: 12px;
-        padding-top: 8px;
+    .chart-display {
+        height: 250px;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+    
+    /* Make sure charts resize properly */
+    .chart-display canvas,
+    .chart-display svg,
+    .chart-display > div {
+        max-width: 100%;
+        height: auto !important;
+    }
+}
+
+/* Small Devices (Mobile Phones, 480px and below) */
+@media screen and (max-width: 480px) {
+    /* Header Adjustments */
+    .header-logo {
+        font-size: 18px;
     }
 
-    .weather-heading {
-        font-size: 16px;
+    .header-logo img {
+        width: 40px;
     }
 
+    header nav ul {
+        gap: 5px;
+        flex-wrap: wrap;
+    }
+
+    header nav a {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+
+    .theme-toggle {
+        width: 25px;
+        height: 25px;
+    }
+
+    /* Main Content */
+    main {
+        padding: 0.8rem;
+    }
+
+    /* Weather Container */
+    #station-name {
+        font-size: 18px;
+    }
+
+    .weather-current,
     .weather-data {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
     }
 
-    .separator {
-        display: none;
-    }
-    
     .weather-icon {
-        margin: 10px auto;
         width: 40px;
         height: 40px;
     }
 
+    .separator {
+        display: none;
+    }
+
+    /* Map */
     .map {
-        min-height: 350px;
-    }
-    
-    .map-container {
-        min-height: 350px;
-    }
-
-    button {
-        font-size: 14px;
-        padding: 10px;
-    }
-    
-    .theme-toggle {
-        top: 10px;
-        right: 10px;
-        width: 35px;
-        height: 35px;
-    }
-    
-    .login-container,
-    .registration-container {
-        width: 90%;
-        padding: 15px;
-    }
-    
-    .profile-container {
-        max-width: 90%;
-        padding: 15px;
-    }
-    
-    .profile-container .form-group label {
-        display: block;
-        width: 100%;
-        margin-bottom: 8px;
-    }
-    
-    .profile-container .form-group input,
-    .profile-container .form-group select,
-    .profile-container .form-group span {
-        width: 100%;
-    }
-    
-    .radio-options {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
-    
-    .map-display,
-    .chart-display {
-        width: 100%;
-        height: 250px;
-    }
-    
-    .station-title-group{
-        margin-bottom: 12px;
-    }
-
-    .station-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-
-    .station-table th {
-        width: 50%;
-    }
-
-    .map-display, 
-    .chart-display {
-        height: 350px;
-        max-width: 100%;
-    }
-}
-
-/* Responsive Adjustments for Mobile Phones */
-@media (max-width: 480px) {
-    .theme-toggle {
-        width: 30px;
-        height: 30px;
-    }
-    
-    .weather {
-        padding: 12px;
-    }
-    
-    .map-container {
         min-height: 300px;
     }
-    
-    main {
-        padding: 0.5rem;
-    }
-    
-    .container {
-        padding: 5px;
-    }
-    
-    .last-update {
-        padding: 4px 8px;
-        font-size: 12px;
-    }
-    
-    .station-title-group {
-        width: 100%;
-    }
-    
-    .station-status {
-        align-self: flex-start;
+
+    .map-container {
+        height: 300px;
     }
 
-    .station-table th,
-    .station-table td {
+    /* Form Elements */
+    .form-group input,
+    .form-control,
+    .form-select,
+    button,
+    .submit-btn,
+    .btn-submit,
+    .update-btn {
         padding: 10px;
+        font-size: 14px;
     }
 
-    .station-details {
-        padding: 15px 10px;
+    /* Flash Messages */
+    .flash-message {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    /* Station Details */
+    .station-header h1 {
+        font-size: 22px;
     }
 
     .station-card {
         padding: 15px;
     }
 
-    .map-display,
+    .station-section-title {
+        font-size: 18px;
+    }
+
+    .station-table th,
+    .station-table td {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .availability-value {
+        font-size: 16px;
+    }
+
+    .availability-percentage {
+        font-size: 14px;
+    }
+
+    /* Chart and Map Displays */
+    .map-display {
+        height: 200px;
+    }
+    
     .chart-display {
-        height: 300px;
+        height: 200px;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+    
+    /* Additional chart responsiveness */
+    .chart-display canvas,
+    .chart-display svg,
+    .chart-display > div {
+        width: 100% !important;
+        max-height: 200px;
+    }
+
+    /* Radio Options */
+    .radio-options {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* ML Model Area */
+    .ML-model {
+        padding: 15px;
+    }
+
+    #prediction-result-origin,
+    #prediction-result-destination {
+        margin: 10px 0;
+        padding: 10px;
+    }
+
+    #prediction-text {
+        font-size: 14px;
+    }
+
+    #prediction-date {
+        font-size: 13px;
     }
 }

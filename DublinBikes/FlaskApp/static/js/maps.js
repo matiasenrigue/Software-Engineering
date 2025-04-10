@@ -57,6 +57,8 @@ export function selectStation(stationId, stationName, stationLat, stationLng) {
 
   selectedStationId = stationId;
   window.selectedStationId = stationId; // Expose for prediction.js.
+  
+  window.dispatchEvent(new CustomEvent('stationSelected'));
 
   // Set new icon for selected station.
   if (stationMarkers[stationId]) {
