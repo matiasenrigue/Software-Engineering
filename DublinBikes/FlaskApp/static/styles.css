@@ -4,18 +4,17 @@
  * 2. Base Elements
  * 3. Layout Components
  * 4. Header
- * 5. Main Content
- * 6. Sidebar
- * 7. Weather Components
- * 8. Map & Station Related
- * 9. Forms & Inputs
- * 10. Buttons
- * 11. Flash Messages
- * 12. Login & Registration
- * 13. Profile
- * 14. Station Details
- * 15. Utility Classes
- * 16. Footer
+ * 5. Sidebar
+ * 6. Weather Components
+ * 7. Map & Station Related
+ * 8. Forms & Inputs
+ * 9. Buttons
+ * 10. Flash Messages
+ * 11. Login & Registration
+ * 12. Profile
+ * 13. Station Details
+ * 14. Footer
+ * 15. Responsive Adjustments 
  */
 
 /* ===================================
@@ -1162,7 +1161,7 @@ button:hover {
 }
 
 /* ===================================
-   15. FOOTER
+   14. FOOTER
 =================================== */
 footer {
     padding: 1rem;
@@ -1174,7 +1173,7 @@ footer {
 }
 
 /* =================================== 
-   16. RESPONSIVE ADJUSTMENTS
+   15. RESPONSIVE ADJUSTMENTS
 =================================== */
 
 /* Large Devices (Desktops & Small Laptops, 1024px and below) */
