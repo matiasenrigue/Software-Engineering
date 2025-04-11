@@ -108,11 +108,13 @@
         window.originStationId = defaultStation.id;
       </script>
 
-      <!-- Load your custom modules -->
+      <!-- Load custom modules -->
       <script type="module" src="{{ url_for('static', filename='js/maps.js') }}"></script>
       <script type="module" src="{{ url_for('static', filename='js/weather.js') }}"></script>
       <script type="module" src="{{ url_for('static', filename='js/bikes.js') }}"></script>
       <script type="module" src="{{ url_for('static', filename='js/prediction.js') }}"></script>
+      <script type="module" src="{{ url_for('static', filename='js/switchbutton.js') }}"></script>
+
 
       <!-- Google Maps API script with callback to initMap -->
       <script src="https://maps.googleapis.com/maps/api/js?key={{ mapskey }}&callback=initMap" async defer></script>
@@ -126,46 +128,5 @@
           }          
         });
       </script>
-
-<!-- JS for Radio Button Handler artefact -->
-<script>
-// Handle radio button changes for forecast type
-document.addEventListener('DOMContentLoaded', function() {
-  // Get the radio buttons
-  const radioButtons = document.querySelectorAll('input[name="forecastType"]');
-  
-  // Get the forecast options container
-  const forecastOptions = document.getElementById('forecast-options');
-  
-  // Add event listeners to the radio buttons
-  radioButtons.forEach(function(radio) {
-    radio.addEventListener('change', function() {
-      if (this.value === 'forecast') {
-        // Show forecast options when "Bike Later" is selected
-        forecastOptions.classList.remove('forecast-options-hidden');
-      } else {
-        // Hide forecast options when "Bike Now" is selected
-        forecastOptions.classList.add('forecast-options-hidden');
-      }
-      
-      // Clear any previous prediction results when switching modes
-      document.getElementById('prediction-text').innerHTML = '';
-      document.getElementById('prediction-date').innerHTML = '';
-      document.getElementById('prediction-result-origin').innerHTML = '';
-      document.getElementById('prediction-result-destination').innerHTML = '';
-    });
-  });
-  
-  // When a date is selected, show the hour selector
-  const forecastDate = document.getElementById('forecast-date');
-  const hourSelector = document.getElementById('hour-selector');
-  
-  if (forecastDate) {
-    forecastDate.addEventListener('change', function() {
-      hourSelector.classList.remove('hour-selector-hidden');
-    });
-  }
-});
-</script>
 
   {% endblock %}
