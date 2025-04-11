@@ -40,16 +40,15 @@
               <!-- step="3600" restricts selection to whole hours -->
               <input type="time" id="forecast-hour" step="3600" pattern="^(?:[01]\d|2[0-3]):00$">
             </div>
-
-
-            <div class="ML-model">
-              <button id="getRidePredictionBtn" onclick="combinedForecastAndPrediction()">Get Ride Prediction</button>
-              <p id="prediction-text"></p>
-              <p id="prediction-date"></p>
-              <p id="prediction-result-origin"></p>
-              <p id="prediction-result-destination"></p>
-            </div>
         </div>
+          
+          <div class="ML-model">
+            <button id="getRidePredictionBtn" onclick="combinedForecastAndPrediction()">Get Ride Prediction</button>
+            <p id="prediction-text"></p>
+            <p id="prediction-date"></p>
+            <p id="prediction-result-origin"></p>
+            <p id="prediction-result-destination"></p>
+          </div>
           
           <div class="route-details">
             <p id="selected-location-distance"></p>
@@ -124,8 +123,49 @@
         window.addEventListener('load', () => {
           if (typeof window.initMap === 'function') {
             window.initMap();
-          }
+          }          
         });
       </script>
+
+<!-- JS for Radio Button Handler artefact -->
+<script>
+// Handle radio button changes for forecast type
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the radio buttons
+  const radioButtons = document.querySelectorAll('input[name="forecastType"]');
+  
+  // Get the forecast options container
+  const forecastOptions = document.getElementById('forecast-options');
+  
+  // Add event listeners to the radio buttons
+  radioButtons.forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      if (this.value === 'forecast') {
+        // Show forecast options when "Bike Later" is selected
+        forecastOptions.classList.remove('forecast-options-hidden');
+      } else {
+        // Hide forecast options when "Bike Now" is selected
+        forecastOptions.classList.add('forecast-options-hidden');
+      }
+      
+      // Clear any previous prediction results when switching modes
+      document.getElementById('prediction-text').innerHTML = '';
+      document.getElementById('prediction-date').innerHTML = '';
+      document.getElementById('prediction-result-origin').innerHTML = '';
+      document.getElementById('prediction-result-destination').innerHTML = '';
+    });
+  });
+  
+  // When a date is selected, show the hour selector
+  const forecastDate = document.getElementById('forecast-date');
+  const hourSelector = document.getElementById('hour-selector');
+  
+  if (forecastDate) {
+    forecastDate.addEventListener('change', function() {
+      hourSelector.classList.remove('hour-selector-hidden');
+    });
+  }
+});
+</script>
 
   {% endblock %}

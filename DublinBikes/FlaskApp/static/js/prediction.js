@@ -18,10 +18,9 @@ window.combinedForecastAndPrediction = combinedForecastAndPrediction;
 export function getRidePrediction() {
   // Create a formatted timestamp.
   const now = new Date();
-  const options = { weekday: "long", hour: "2-digit", minute: "2-digit" };
 
   // Retrieve weather data from the global variable (set in weather.js).
-  const timestamp = window.TimestampWeather ? window.TimestampWeather : "N/A";
+  const timestamp = window.TimestampWeather ? window.TimestampWeather : now.toISOString();
   console.log("Timestamp:", timestamp);
   const temperature = window.fullWeatherData ? window.fullWeatherData.temp : "N/A";
   const humidity = window.fullWeatherData ? window.fullWeatherData.humidity : "N/A";
@@ -56,8 +55,31 @@ export function getRidePrediction() {
   
       document.getElementById("prediction-text").innerHTML =
         "Prediction Availability for: ";
-      document.getElementById("prediction-date").innerHTML =
-        formatTimestamp(timestamp);
+      
+      try{
+        const formattedDate = formatTimestamp(timestamp);
+        if (formattedDate === "Invalid Date") {
+          // Fall back to current time if the formatted timestamp is invalid
+          const currentDate = new Date();
+          document.getElementById("prediction-date").innerHTML = currentDate.toLocaleString('en-US', {
+            weekday: 'long',
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+        } else {
+          // Use the formatted timestamp if it's valid
+          document.getElementById("prediction-date").innerHTML = formattedDate;
+        }
+      } catch (e) {
+        // Handle any errors in the formatting process
+        const currentDate = new Date();
+        document.getElementById("prediction-date").innerHTML = currentDate.toLocaleString('en-US', {
+          weekday: 'long',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+      }
+     
          
       document.getElementById("prediction-result-origin").innerHTML =
         "Bikes at Origin: " + data.prediction.origin_station_id;
@@ -89,7 +111,16 @@ export async function combinedForecastAndPrediction() {
     alert("Please select a station first!");
     return;
   }
+  
+  // Check which forecast type is selected
+  const forecastType = document.querySelector('input[name="forecastType"]:checked').value;
+  
+  
+  if (forecastType === "forecast") {
+    // For "Bike Later" option
+    await fetchForecastWeather();
+  }
 
-  await fetchForecastWeather();
+  // Always get the ride prediction
   getRidePrediction();
 }

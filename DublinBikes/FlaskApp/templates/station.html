@@ -165,7 +165,15 @@ document.addEventListener('DOMContentLoaded', function() {
   if (parts.length > 1) {
     // If we have a space-separated format, take the time part
     const timePart = parts[parts.length - 1]; // Get the time)
-    timeElement.textContent = timePart;
+    
+    // Remove seconds by splitting on colon and taking just the hours and minutes
+    const timeComponents = timePart.split(':');
+    if (timeComponents.length >= 2) {
+      const hoursAndMinutes = timeComponents[0] + ':' + timeComponents[1];
+      timeElement.textContent = hoursAndMinutes;
+    }else {
+      timeElement.textContent = timePart; // Fallback if format isn't as expected
+    }
   }
   // If no space is found, leave as is (fallback)
 });
