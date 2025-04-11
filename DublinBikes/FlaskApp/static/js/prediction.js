@@ -20,7 +20,7 @@ export function getRidePrediction() {
   const now = new Date();
 
   // Retrieve weather data from the global variable (set in weather.js).
-  const timestamp = window.TimestampWeather ? window.TimestampWeather : now.toISOString();
+  const timestamp = window.TimestampWeather ? window.TimestampWeather : "N/A";
   console.log("Timestamp:", timestamp);
   const temperature = window.fullWeatherData ? window.fullWeatherData.temp : "N/A";
   const humidity = window.fullWeatherData ? window.fullWeatherData.humidity : "N/A";
@@ -52,7 +52,8 @@ export function getRidePrediction() {
   })
     .then((response) => response.json())
     .then((data) => {
-  
+      
+      document.getElementById("prediction-text").style.display = "block";
       document.getElementById("prediction-text").innerHTML =
         "Prediction Availability for: ";
       
@@ -68,7 +69,9 @@ export function getRidePrediction() {
           });
         } else {
           // Use the formatted timestamp if it's valid
-          document.getElementById("prediction-date").innerHTML = formattedDate;
+          document.getElementById("prediction-date").style.display = "block";
+          window.predictionDate = formattedDate;
+          document.getElementById("prediction-date").innerHTML = window.predictionDate;
         }
       } catch (e) {
         // Handle any errors in the formatting process
@@ -80,11 +83,13 @@ export function getRidePrediction() {
         });
       }
      
+      window.lastPredictionOrigin = data.prediction.origin_station_id;
+      window.lastPredictionDestination = data.prediction.destination_station_id;
          
       document.getElementById("prediction-result-origin").innerHTML =
-        "Bikes at Origin: " + data.prediction.origin_station_id;
+        "Bikes at Origin: " + window.lastPredictionOrigin;
       document.getElementById("prediction-result-destination").innerHTML =
-        "Stands at Destination: " + data.prediction.destination_station_id;
+        "Stands at Destination: " + window.lastPredictionDestination;
 
       const departureTime = window.TimestampWeather && !isNaN(Date.parse(window.TimestampWeather))
       ? Date.parse(window.TimestampWeather)
@@ -99,28 +104,92 @@ export function getRidePrediction() {
     });
 }
 
+
+export function displayRidePrediction() {
+  console.log("Displaying ride prediction...");
+  document.getElementById("getRidePredictionBtn").style.display = "block";
+
+   if (!window.lastPredictionOrigin || !window.lastPredictionDestination) {
+    document.getElementById("prediction-result-origin").innerHTML = "Select a date to predict";
+    document.getElementById("prediction-result-destination").innerHTML = "Select a date to predict";
+    
+      if (window.selectedStationId) {
+      document.getElementById("selected-location-arrival").textContent = "Estimated Arrival Time: "   
+      }
+
+      return;
+  }
+
+  console.log("Displaying ride prediction...");
+  document.getElementById("prediction-text").style.display = "block";
+  document.getElementById("prediction-text").innerHTML = "Prediction Availability for: ";
+  document.getElementById("prediction-date").style.display = "block";
+  document.getElementById("prediction-date").innerHTML = window.predictionDate;
+  
+  document.getElementById("prediction-result-origin").innerHTML = "Bikes at Origin: " + window.lastPredictionOrigin;
+  document.getElementById("prediction-result-destination").innerHTML = "Stands at Destination: " + window.lastPredictionDestination;
+
+  document.getElementById("getRidePredictionBtn").style.display = "block";
+}
+
 /**
- * Combines the forecast weather fetch and ride prediction.
- * Waits for forecast data before predicting.
+ * Gets live information from the selected station and updates the UI.
+ */
+export function getLiveInfo() {
+
+
+  if (!window.stations) {
+    return;
+  }
+
+  const destinationStationId = window.selectedStationId;
+  const originStationId = window.defaultStation.id;
+
+
+
+  if (!originStationId) {
+    console.error("Origin station not found");
+  }
+  else {
+    const originStation = window.stations.find(s => s.station_id == originStationId);
+    document.getElementById("prediction-result-origin").innerHTML = "Bikes available: " + originStation.available_bikes;
+  }
+
+  if (!destinationStationId) {
+    document.getElementById("prediction-result-destination").innerHTML = "Select a destination station";
+  }
+  else {
+    const destinationStation = window.stations.find(s => s.station_id == destinationStationId);
+    document.getElementById("prediction-result-destination").innerHTML = "Stands available: " + destinationStation.available_bike_stands;
+    document.getElementById("getRidePredictionBtn").style.display = "none";
+  }
+
+    document.getElementById("prediction-text").style.display = "none";
+    document.getElementById("prediction-date").style.display = "none";
+    document.getElementById("getRidePredictionBtn").style.display = "none";
+  
+
+
+}
+
+/**
+ * Combines forecast weather and prediction or live info.
+ * If Bike Later is selected, it fetches the forecast and then performs the prediction.
+ * Otherwise (Bike Now), it simply displays live station info.
  */
 export async function combinedForecastAndPrediction() {
-  
-  // Make sure the user has selected a station.
+  // Ensure a station has been selected.
   const station_id = window.selectedStationId;
   if (!station_id) {
     alert("Please select a station first!");
     return;
   }
-  
-  // Check which forecast type is selected
-  const forecastType = document.querySelector('input[name="forecastType"]:checked').value;
-  
-  
-  if (forecastType === "forecast") {
-    // For "Bike Later" option
-    await fetchForecastWeather();
-  }
 
-  // Always get the ride prediction
-  getRidePrediction();
+  const forecastType = document.querySelector('input[name="forecastType"]:checked').value;
+  if (forecastType === "forecast") {
+    await fetchForecastWeather();
+    getRidePrediction();
+  }
+  // For "Bike Now" mode, the button is hidden and live info is updated automatically.
 }
+

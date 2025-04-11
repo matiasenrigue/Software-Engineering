@@ -6,6 +6,11 @@
  * drawing routes (arrows), and calculating distances/times.
  */
 
+import { getLiveInfo } from "./prediction.js";
+import { fetchBikesData } from './bikes.js';
+
+
+
 // Global variables for map functionalities.
 export let map; // The Google Map instance.
 export let selectedStationId = null; // Currently selected station id.
@@ -27,6 +32,7 @@ export function initMap() {
   // If defaultStation is defined in the global scope, re-center on it.
   if (typeof defaultStation !== "undefined" && defaultStation) {
     centerCoordinates = { lat: defaultStation.lat, lng: defaultStation.lng };
+    window.defaultStation = defaultStation; // Expose for prediction.js.
   }
   map = new google.maps.Map(document.getElementById("map"), {
     center: centerCoordinates,
@@ -104,6 +110,22 @@ export function selectStation(stationId, stationName, stationLat, stationLng) {
   window.cyclingTime = cyclingMinutes; // Expose for prediction.js.
   document.getElementById("selected-location-arrival").textContent =
     `Estimated Arrival Time: ${arrivalTime}h`;
+
+  // Check which mode is active.
+  const currentForecastType = document.querySelector('input[name="forecastType"]:checked').value;
+  if (currentForecastType === "current") {
+    // In ride now mode, automatically call live info to update the live info display.
+    // (The live info will update automatically without a button.)
+    getLiveInfo();
+  } else if (currentForecastType === "forecast") {
+    // In prediction mode, update the button text.
+    const predictionBtn = document.getElementById("getRidePredictionBtn");
+    if (window.selectedStationId) {
+      predictionBtn.textContent = "Get Ride Prediction";
+    }
+  }
+
+
 }
 
 

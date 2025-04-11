@@ -28,7 +28,21 @@
               Bike Later
             </label>
           </div>
- 
+          
+          <div class="ML-model">
+            <p id="prediction-text"></p>
+            <p id="prediction-date"></p>
+            <p id="prediction-result-origin">Select a Destination</p>
+            <p id="prediction-result-destination">Select a Destination</p>
+          </div>
+          
+          <div class="route-details">
+            <p id="selected-location-distance"></p>
+            <p id="selected-location-time"></p>
+            <p id="selected-location-arrival"></p>
+            <p id="selected-station-info"></p>
+          </div>
+
           <div id="forecast-options" class="forecast-options-hidden">
             <label for="forecast-date">Select Date:</label>
             <input type="date" id="forecast-date" 
@@ -41,21 +55,11 @@
               <input type="time" id="forecast-hour" step="3600" pattern="^(?:[01]\d|2[0-3]):00$">
             </div>
         </div>
-          
-          <div class="ML-model">
-            <button id="getRidePredictionBtn" onclick="combinedForecastAndPrediction()">Get Ride Prediction</button>
-            <p id="prediction-text"></p>
-            <p id="prediction-date"></p>
-            <p id="prediction-result-origin"></p>
-            <p id="prediction-result-destination"></p>
-          </div>
-          
-          <div class="route-details">
-            <p id="selected-location-distance"></p>
-            <p id="selected-location-time"></p>
-            <p id="selected-location-arrival"></p>
-            <p id="selected-station-info"></p>
-          </div>
+
+        <button id="getRidePredictionBtn" onclick="combinedForecastAndPrediction()"
+          style="display: none;"
+          >Select station</button>
+
 
         <div class="weather-forecast"></div>
         </div>
