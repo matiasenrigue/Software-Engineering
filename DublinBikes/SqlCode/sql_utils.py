@@ -20,6 +20,11 @@ Note:
     Legacy code for AWS RDS (using SQLAlchemy) is retained as comments and is not active.
 """
 
+import logging
+
+logger = logging.getLogger(__name__)
+
+
 
 
 def get_db_path() -> str:
@@ -50,15 +55,15 @@ def get_sql_engine() -> sqlite3.Connection:
         sqlite3.Error: If there is an error connecting to the database.
     """
     db_path = get_db_path()
-    print("🌐 Connecting to the database file:", db_path)
+    logger.info("Connecting to database at %s", db_path)
 
     try:
         conn = sqlite3.connect(db_path)
         conn.row_factory = sqlite3.Row
         conn.execute("SELECT 1")  # Test the connection.
-        print("✅ Connection to the SQLite database established successfully.")
+        logger.info("Database connection established")
     except sqlite3.Error as error:
-        print(f"Failed to establish connection to the SQLite database: {error}")
+        logger.error("Failed to connect to database: %s", error)
         raise
 
     return conn
@@ -89,9 +94,9 @@ def execute_sql(sql: str, connection: sqlite3.Connection) -> None:
                 
             else:
                 affected = connection.total_changes
-                print(f"Query executed successfully. Total rows affected (since connection opened): {affected}")
+                logger.info(f"Query executed successfully. Total rows affected (since connection opened): {affected}")
     except sqlite3.Error as error:
-        print(f"Failed to execute query: {error}")
+        logger.info(f"Failed to execute query: {error}")
         raise
 
 

@@ -12,6 +12,10 @@ It includes functionality for saving bike data to the cache database and retriev
 either from the cache or directly from the bikes API.
 """
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 def save_bikes_data_to_cache_db(bikes_data: list, return_rows: bool = True) -> list:
     """
@@ -97,6 +101,7 @@ def save_bikes_data_to_cache_db(bikes_data: list, return_rows: bool = True) -> l
                     }
                 )
         conn.commit()
+        logger.info("Bike data saved to cache database successfully.")
         return inserted_records
     finally:
         conn.close()
@@ -138,7 +143,7 @@ def get_current_bikes_data():
             return value  # If conversion fails, return as-is
 
     if rows:
-        print("\n\nUsing cached data\n\n")
+        logger.info("\n\nUsing cached data\n\n")
         bikes_data = []
         for row in rows:
             # Convert the time_requested and last_update values explicitly to datetime
@@ -162,12 +167,13 @@ def get_current_bikes_data():
             )
         return bikes_data
     else:
-        print("\n\nFetching new data from API\n\n")
+        logger.info("\n\nFetching new data from API\n\n")
         bikes_text = get_data_from_jcdecaux()
         if bikes_text:
             bikes_data = json.loads(bikes_text)
             inserted_records = save_bikes_data_to_cache_db(bikes_data, return_rows=True)
             return inserted_records
         else:
+            logger.error("Unable to fetch bikes data from API.")
             return {"error": "Unable to fetch bikes data"}
 

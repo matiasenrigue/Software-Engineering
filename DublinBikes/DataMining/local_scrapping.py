@@ -12,6 +12,10 @@ Functions include ensuring the existence of the data folder, creating a new time
 and saving data (either as raw text or as CSV) to a file.
 """
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 def get_data_folder() -> str:
     """
@@ -27,7 +31,7 @@ def get_data_folder() -> str:
     )
     if not os.path.exists(data_folder):
         os.mkdir(data_folder)
-        print("Folder 'data' created!")
+        logger.info("Folder 'data' created!")
     return data_folder
 
 

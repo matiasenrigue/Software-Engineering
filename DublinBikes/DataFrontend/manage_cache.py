@@ -10,6 +10,10 @@ It removes outdated records from both weather and bike data tables and updates a
 to record the last time the cache was cleaned.
 """
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 def clean_cache(date_today: date = None):
     """
@@ -35,7 +39,7 @@ def clean_cache(date_today: date = None):
         with open(cache_file, "r") as f:
             last_deleted = f.read().strip()
         if last_deleted == today_str:
-            print("Cache already cleaned today. No action taken.")
+            logger.info("Cache already cleaned today. No action taken.")
             return 0
         
     conn = get_sql_engine()
@@ -49,10 +53,10 @@ def clean_cache(date_today: date = None):
         cursor.execute(delete_bikes, (today_str,))
         
         conn.commit()
-        print("Cache cleaned successfully.")
+        logger.info("Cache cleaned successfully.")
         
     except Exception as e:
-        print("Error cleaning cache:", e)
+        logger.info("Error cleaning cache:", e)
     finally:
         conn.close()
     with open(cache_file, "w") as f:

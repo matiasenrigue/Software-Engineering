@@ -1,8 +1,9 @@
 from flask import Flask
+from DublinBikes.Utils.params import APP_SECRET_KEY
 
 app = Flask(__name__)
 
-app.secret_key = "12345"
+app.secret_key = APP_SECRET_KEY
 
 # Import routes to register them with the app.
 from DublinBikes.FlaskApp import routes

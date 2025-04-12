@@ -19,6 +19,10 @@ The scraped weather data is used to build a historical database for analysis, tr
 and for displaying weather-related statistics.
 """
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 def get_data_from_openweather(link=CURRENT_OPENWEATHER_URI) -> str:
     """
@@ -44,7 +48,7 @@ def get_data_from_openweather(link=CURRENT_OPENWEATHER_URI) -> str:
         r.raise_for_status()
         return r.text
     except:
-        print(traceback.format_exc())
+        logger.info(traceback.format_exc())
         return None
 
 
@@ -63,7 +67,7 @@ def save_weather_data_to_db(data: str, in_engine: sqla.engine.base.Connection) -
     Returns:
         None
     """
-    print(data)
+    logger.info(data)
     save_current_data_to_db(data, in_engine)
 
 
@@ -122,8 +126,8 @@ def save_current_data_to_db(data: str, in_engine: sqla.engine.base.Connection) -
         """
         execute_sql(query, in_engine)
     except Exception as e:
-        print("Error saving current weather data:", e)
-        print(traceback.format_exc())
+        logger.info("Error saving current weather data:", e)
+        logger.info(traceback.format_exc())
 
 
 def main_data_scrapper_weather(save_to_db: bool, engine: sqla.engine.base.Connection = None, text_file_path: os.path = None) -> None:
@@ -146,13 +150,13 @@ def main_data_scrapper_weather(save_to_db: bool, engine: sqla.engine.base.Connec
     while True:
         weather_data = get_data_from_openweather()
         if weather_data:
-            print("Weather Data Downloaded at ", datetime.datetime.now())
+            logger.info("Weather Data Downloaded at ", datetime.datetime.now())
             if save_to_db:
                 save_weather_data_to_db(weather_data, engine)
             else:
                 save_data_to_file(weather_data, text_file_path)
         else:
-            print("No Weather Data at ", datetime.datetime.now())
+            logger.info("No Weather Data at ", datetime.datetime.now())
         time.sleep(60 * minutes)
 
 

@@ -24,6 +24,10 @@ The historical bike data obtained here is used for training machine learning mod
 to predict station availability and for displaying availability statistics.
 """
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 def get_data_from_jcdecaux() -> str:
     """
@@ -38,7 +42,7 @@ def get_data_from_jcdecaux() -> str:
         r = requests.get(STATIONS_URI, params={"apiKey": JCKEY, "contract": NAME})
         return r.text
     except:
-        print(traceback.format_exc())
+        logger.info(traceback.format_exc())
         return None
 
 
@@ -138,14 +142,14 @@ def main_data_scrapper_bikes(save_to_db: bool, engine: sqla.engine.base.Connecti
     while True:
         bikes_data = get_data_from_jcdecaux()
         if bikes_data:
-            print("Bike Data Downloaded at ", datetime.datetime.now())
+            logger.info("Bike Data Downloaded at ", datetime.datetime.now())
             if save_to_db:
                 save_bikes_data_to_db(bikes_data, engine)
             else:
                 save_data_to_file(bikes_data, text_file_path)
 
         else:  
-            print("No Bike Data at ", datetime.datetime.now())
+            logger.info("No Bike Data at ", datetime.datetime.now())
 
         time.sleep(60 * minutes)
 

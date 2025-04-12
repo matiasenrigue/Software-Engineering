@@ -17,6 +17,10 @@ Script Logic:
 - The cache is cleaned daily to remove outdated records.
 """
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 def save_weather_data_to_cache_db(
     data: dict, forecast_type: str, target_datetime: datetime.datetime, return_row: bool
@@ -103,6 +107,7 @@ def save_weather_data_to_cache_db(
             ),
         )
         conn.commit()
+        logger.info("Weather data saved to cache database successfully.")
         
         # If we want to return the row we just inserted
         if return_row:
@@ -142,6 +147,7 @@ def get_current_weather_data():
     finally:
         cursor.close()
     if row:
+        logger.info("Weather data found in cache.")
         return dict(row)
     else:
         # No recent record: fetch new data from OpenWeather.
@@ -153,6 +159,7 @@ def get_current_weather_data():
                 current, "current", dt_current, return_row=True
             )
         else:
+            logger.error("Unable to fetch current weather data from API.")
             return {"error": "Unable to fetch weather data"}
 
 
@@ -196,6 +203,7 @@ def get_forecast_weather_data(forecast_type: str, target_datetime: str) -> dict:
     finally:
         engine.close()
     if row:
+        logger.info("Weather data found in cache.")
         return dict(row)
     
     # Else, ask the API, and save cache data from the API for all the forecasts given
@@ -224,5 +232,6 @@ def get_forecast_weather_data(forecast_type: str, target_datetime: str) -> dict:
                     forecast, forecast_type, target_datetime, return_row=False
                 )
         if not matching_forecast:
+            logger.error("No matching forecast found for the requested time.")
             return {"error": "No forecast found for the selected time."}
         return matching_forecast

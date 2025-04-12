@@ -15,6 +15,10 @@ Functions:
     - update_user_profile: Updates the profile information of an existing user (excluding the email).
 """
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 
 def register_user(
@@ -55,7 +59,7 @@ def register_user(
         conn.commit()
         return True
     except sqlite3.IntegrityError as e:
-        print("Error registering user:", e)
+        logger.info("Error registering user:", e)
         return False
     finally:
         conn.close()
@@ -122,7 +126,7 @@ def update_user_profile(
         conn.commit()
         return True
     except sqlite3.IntegrityError as e:
-        print("Error updating user profile:", e)
+        logger.info("Error updating user profile:", e)
         return False
     finally:
         conn.close()

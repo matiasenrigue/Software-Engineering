@@ -4,6 +4,10 @@ import numpy as np
 import pandas as pd
 import os
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 def prediction(data: dict, origin_station: dict, destination_station: dict):
     """
@@ -46,7 +50,7 @@ def prediction(data: dict, origin_station: dict, destination_station: dict):
         Exception: If the station model cannot be loaded or if the prediction process fails.
     """
     
-    print(f"Received data: {data}")
+    logger.info(f"Received data: {data}")
     bike_stands_origin = origin_station["bike_stands"]
     bike_stands_destination = destination_station["bike_stands"]
 
@@ -66,11 +70,11 @@ def prediction(data: dict, origin_station: dict, destination_station: dict):
     try:
         dt = pd.to_datetime(timestamp_str)
     except Exception as e:
-        print(f"Timestamp parsing error: {e}")
+        logger.info(f"Timestamp parsing error: {e}")
         return jsonify({"error": f"Timestamp parsing error: {e}"}), 400
 
     # Check that all arguments are present
-    print(f"Received data: {data}")
+    logger.info(f"Received data: {data}")
 
 
     # Compute the features as used during training.
@@ -113,7 +117,7 @@ def prediction(data: dict, origin_station: dict, destination_station: dict):
             with open(model_path, "rb") as f:
                 model = pickle.load(f)
         except Exception as e:
-            print(f"Error loading model for station {station_id}: {e}")
+            logger.info(f"Error loading model for station {station_id}: {e}")
             return jsonify({"error": f"Could not load model for station {station_id}: {e}"}), 500
 
         # Use the loaded model to predict the number of available bikes.
@@ -133,12 +137,12 @@ def prediction(data: dict, origin_station: dict, destination_station: dict):
             
             predictions_dict[station_predicted] = prediction_value
             
-            print(f"Prediction: {prediction_value}")
+            logger.info(f"Prediction: {prediction_value}")
         except Exception as e:
-            print(f"Prediction error: {e}")
+            logger.info(f"Prediction error: {e}")
             return jsonify({"error": f"Prediction failed: {e}"}), 500
 
     # Return the prediction as JSON.
-    print(f"Final prediction: {predictions_dict}")
-    print(jsonify({"prediction": predictions_dict}))
+    logger.info(f"Final prediction: {predictions_dict}")
+    logger.info(jsonify({"prediction": predictions_dict}))
     return jsonify({"prediction": predictions_dict})

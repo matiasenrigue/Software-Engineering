@@ -1,10 +1,8 @@
 import os
 
-# Automatically load variables from the .env file in the current directory.
-# --> Disabled for now because can't make it work on amazon
-# from dotenv import load_dotenv
-# load_dotenv()
 
+DISABLE_LOGGING = True
+APP_SECRET_KEY = "12345"
 
 # Where is the code running --> Local or AWS / Railway
 LOCAL_RUNNING = True
