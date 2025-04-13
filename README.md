@@ -26,8 +26,7 @@ A comprehensive software suite for real-time bike sharing data management, histo
 - [Makefile Targets](#makefile-targets)
 - [Documentation](#documentation)
 - [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgments](#acknowledgments)
+- [Team Members and Contributions](#Team-Members-and-Contributions)
 
 ---
 
@@ -40,6 +39,21 @@ The **Dublin Bikes Project** brings together multiple functionalities for smart 
 - **Machine learning models** (trained on historical data) to forecast bike availability and dock capacity.
 
 By modularizing the functionalities (data ingestion, web serving, machine learning, and database management), the project is highly flexible, maintainable, and easy to extend.
+
+
+### Demo
+
+[Youtube Video](https://youtu.be/TNswnZJ8aLs)
+
+
+
+### Main Page
+![WebPage](./docs/main_web.png)
+
+### Stations Page
+![Station](./docs/station_details.png)
+
+
 
 ---
 
@@ -309,11 +323,13 @@ For major changes, please open an issue to discuss what you would like to change
 
 ---
 
-## Acknowledgments
+## Team Members and Contributions
 
-- **JCDecaux** and **OpenWeatherMap** for their APIs.
-- The developers of the various open-source libraries used within this project.
-- Special thanks to the team and contributors who helped make this comprehensive project a reality.
+| Name | Contribution | GitHub Profile |
+| -- | -- | -- |
+| Matías Enrigue | Python, ML, Testing, JS, SQL, Data, AWS, Project Architecture | @matiasenrigue |
+| Sofia Hassan | CSS | @SofiaH08 |
+| Rupia Begum | Api Key Google Maps | @rupiabd |
 
 ---
 
