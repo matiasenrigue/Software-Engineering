@@ -329,7 +329,7 @@ For major changes, please open an issue to discuss what you would like to change
 | -- | -- | -- |
 | Matías Enrigue | Python, ML, Testing, JS, SQL, Data, AWS, Project Architecture | @matiasenrigue |
 | Sofia Hassan | CSS | @SofiaH08 |
-| Rupia Begum | Api Key Google Maps | @rupiabd |
+| Rupia Begum | Api Key for Google Maps | @rupiabd |
 
 ---
 
