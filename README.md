@@ -327,9 +327,9 @@ For major changes, please open an issue to discuss what you would like to change
 
 | Name | Contribution | GitHub Profile |
 | -- | -- | -- |
-| Matías Enrigue | Python, ML, Testing, JS, SQL, Data, AWS, Project Architecture | @matiasenrigue |
-| Sofia Hassan | CSS | @SofiaH08 |
-| Rupia Begum | Api Key for Google Maps | @rupiabd |
+| Matías Enrigue | Python, ML, Testing, JS, SQL, Data, AWS, Project Architecture | [@matiasenrigue](https://github.com/matiasenrigue)   |
+| Sofia Hassan | CSS | [@SofiaH08](https://github.com/SofiaH08)  |
+| Rupia Begum | Api Keys |[@rupiabd](https://github.com/rupiabd)  |
 
 ---
 
