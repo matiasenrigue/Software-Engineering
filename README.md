@@ -43,7 +43,8 @@ By modularizing the functionalities (data ingestion, web serving, machine learni
 
 ### Demo
 
-[Youtube Video](https://youtu.be/TNswnZJ8aLs)
+- [Youtube Video](https://youtu.be/TNswnZJ8aLs)
+- **Note regarding the video**. You may see my computer clock and the on‑page JS code both displaying 17:00, while the API data shows 16:00. This one‑hour difference is due to time‑zone discrepancies. I filmed on a computer set to Spanish local time (UTC+2) and ran the JS accordingly, whereas the code lives on an AWS instance in Dublin, so the API timestamps use Dublin time (UTC+1). 
 
 
 
