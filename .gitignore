@@ -16,7 +16,7 @@ package.json
 *.csv
 *.log
 
-aws-flask.pem
+*.pem
 
 
 
