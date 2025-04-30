@@ -1,4 +1,22 @@
-*/__pycache__
+__pycache__/
+*/__pycache__/
+*/*/__pycache__/
+
 DublinBikes.egg-info
 
 .env
+.envrc
+
+# Pretty JS
+node_modules
+eslint.config.mjs
+package-lock.json
+package.json
+
+*.csv
+*.log
+
+*.pem
+
+
+

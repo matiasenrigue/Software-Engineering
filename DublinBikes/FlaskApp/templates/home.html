@@ -2,105 +2,135 @@
   {% extends "base.html" %}
 
   {% block title %}Home - Dublin Bikes{% endblock %}
+
+  <!-- Override the flash_messages block to remove it on the home page -->
+{% block flash_messages %}
+<div class="flash-placeholder"></div>
+{% endblock %}
   
   {% block content %}
 
 
     <div class="container">
-
       <div class="sidebar">
-
-        {% if session.user %}
-          <p>You chose <strong>{{ default_station.name }}</strong> as your default station which can be changed in your profile settings.</p>
-        {% else %}
-          <p>Using <strong>{{ default_station.name }}</strong> as default location, sign in if you want to change it.</p>
-        {% endif %}
-
         <div class="location-search">
-          <h3>Select a location on the map</h3>
-          <p id="selected-location"></p>
-          <p id="selected-location-distance"></p>
-          <p id="selected-location-time"></p>
-          <p id="selected-location-arrival"></p>
-          <p id="selected-station-info"></p>
-        </div>
+          <h3>Route Planning</h3>
+          <p id="selection-text">Select a Location on the map:<br> "Ride Prediction"</p>
+          <h4 id="selected-location"></h4>
+          
+          <div class="radio-options">
+            <label>
+              <input type="radio" name="forecastType" value="current" checked>
+              Bike Now
+              </label>
+            <label>
+              <input type="radio" name="forecastType" value="forecast">
+              Bike Later
+            </label>
+          </div>
+          
+          <div class="ML-model">
+            <p id="prediction-text"></p>
+            <p id="prediction-date"></p>
+            <p id="prediction-result-origin">Select a Destination</p>
+            <p id="prediction-result-destination">Select a Destination</p>
+          </div>
+          
+          <div class="route-details">
+            <p id="selected-location-distance"></p>
+            <p id="selected-location-time"></p>
+            <p id="selected-location-arrival"></p>
+            <p id="selected-station-info"></p>
+          </div>
 
-        <div class="weather-forecast">
-          <label>
-            <input type="radio" name="forecastType" value="current" checked>
-            Bike Now
-          </label>
-          <label>
-            <input type="radio" name="forecastType" value="forecast">
-            Bike Later
-          </label> 
-        
           <div id="forecast-options" class="forecast-options-hidden">
             <label for="forecast-date">Select Date:</label>
             <input type="date" id="forecast-date" 
                    min="{{ now.strftime('%Y-%m-%d') }}" 
-                   max="{{ (now + timedelta(days=5)).strftime('%Y-%m-%d') }}">
+                   max="{{ (now + timedelta(days=4)).strftime('%Y-%m-%d') }}">
+                   <!-- Show only 4 days in the future, instead of 5. As the 5th day won't give us full data -->
             <div id="hour-selector" class="hour-selector-hidden">
               <label for="forecast-hour">Select Hour:</label>
               <!-- step="3600" restricts selection to whole hours -->
               <input type="time" id="forecast-hour" step="3600" pattern="^(?:[01]\d|2[0-3]):00$">
             </div>
+        </div>
 
-            <div class="ML-model">
-              <button id="getRidePredictionBtn" onclick="combinedForecastAndPrediction()">Get Ride Prediction</button>
-              <p id="prediction-result-origin"></p>
-              <p id="prediction-result-destination"></p>
-            </div>
-          </div>
+        <button id="getRidePredictionBtn" onclick="combinedForecastAndPrediction()"
+          style="display: none;"
+          >Select station</button>
+
+
+        <div class="weather-forecast"></div>
         </div>
       </div>
 
       <div class="main-content">
-        
         <div class="weather-container">
           <div class="weather">
-          <h3>Weather Info</h3>
+              <div class="location-info">
+                <span class="label">Your Base Station:</span>
+                <strong id="station-name">{{ default_station.name }}</strong>
+                {% if session.user %}
+                  <a href="{{ url_for('edit_profile') }}" class="change-link">Change Station</a>
+                {% else %}
+                  <a href="{{ url_for('login') }}" class="change-link">Login to customise to your preferred station</a>
+                {% endif %}
+            </div>
 
-          <p>Showing <span id="weather-current-forecast"></span><br><span id="timestamp-weatherinfo"></span></p>
-          <p id="weather-temp"></p>
-          <p id="weather-description"></p>
-          <img id="weather-icon" alt="Weather Icon">
-        </div>
+            <div class="weather-current">
+              <span class="label"></span>
+              <span id="weather-current-forecast"></span>
+              <span class="weather-time" id="timestamp-weatherinfo"></span>
+            </div>
+            
+            <div class="weather-data">
+              <span id="weather-temp" class="temperature"></span>
+              <span class="separator">|</span>
+              <span id="weather-description" class="description"></span>
+              <img id="weather-icon" alt="Weather Icon" class="weather-icon">
+            </div>
+          </div>
         </div>
 
         <div class="map">
         <!-- This div is the container where the map will be rendered -->
         <div id="map" class="map-container"></div>
       </div>
-        </div>
+    </div>
+</div>
   
       <!-- Embed the stations data into a global JS variable -->
       <script>
         const stations = {{ stations | tojson }};
-
         var defaultStation = {
-        id: {{ default_station.station_id }},
-       lat: {{ default_station.position_lat }},
-       lng: {{ default_station.position_lng }}
-      };
-      </script>
-    
-      <!-- Load your custom script after defining 'stations' -->
-      <script src="{{ url_for('static', filename='maps.js') }}"></script>
+          id: {{ default_station.station_id }},
+          lat: {{ default_station.position_lat }},
+          lng: {{ default_station.position_lng }}
+        };
 
-    
+        window.originStationId = defaultStation.id;
+      </script>
+
+      <!-- Load custom modules -->
+      <script type="module" src="{{ url_for('static', filename='js/maps.js') }}"></script>
+      <script type="module" src="{{ url_for('static', filename='js/weather.js') }}"></script>
+      <script type="module" src="{{ url_for('static', filename='js/bikes.js') }}"></script>
+      <script type="module" src="{{ url_for('static', filename='js/prediction.js') }}"></script>
+      <script type="module" src="{{ url_for('static', filename='js/switchbutton.js') }}"></script>
+
+
       <!-- Google Maps API script with callback to initMap -->
       <script src="https://maps.googleapis.com/maps/api/js?key={{ mapskey }}&callback=initMap" async defer></script>
 
-      
-      <!-- Load the weather and bikes scripts -->
-      <script src="{{ url_for('static', filename='weather.js') }}"></script>
-      <script src="{{ url_for('static', filename='bikes.js') }}"></script>
-      <script src="{{ url_for('static', filename='prediction.js') }}"></script>
-
-    </div>
-
-  </body>
-
+      <!-- And once everything is loaded, call initMap manually -->
+      <script>
+        // Wait for the DOM and modules to load, then call initMap.
+        window.addEventListener('load', () => {
+          if (typeof window.initMap === 'function') {
+            window.initMap();
+          }          
+        });
+      </script>
 
   {% endblock %}

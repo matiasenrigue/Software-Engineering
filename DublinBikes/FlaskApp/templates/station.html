@@ -2,48 +2,88 @@
 
 {% block title %}Station Details - {{ station.name }}{% endblock %}
 
+
 {% block content %}
-<section>
+<section class="station-details">
 
-    <!-- Optional: Other station details -->
-    <h1>{{ station.name }}</h1>
-    <table>
-      <tr>
-        <th>Bike Stands</th>
-        <td>{{ station.bike_stands }}</td>
-      </tr>
-      <tr>
-        <th>Available Bikes</th>
-        <td>{{ station.available_bikes }}</td>
-      </tr>
-      <tr>
-        <th>Available Bike Stands</th>
-        <td>{{ station.available_bike_stands }}</td>
-      </tr>
-      <tr>
-        <th>Status</th>
-        <td>{{ station.status }}</td>
-      </tr>
-      <tr>
-        <th>Last Update</th>
-        <td>{{ station.last_update }}</td>
-    </table>
-
-    <!-- Map Section -->
-  <div>
-    <h2>Location</h2>
-    <div id="stationMap" class="map-display"></div>
+    <!-- Station header with name, last update, and status -->
+  <div class="station-header">
+    <div class="station-title-group">
+      <h1>{{ station.name }}</h1>
+      <div class="last-update">
+        <span class="last-update-label">Last Update:</span>
+        <span class="last-update-time" id="last-update-time">{{ station.last_update }}</span>
+      </div>
+    </div>
+    
+    <div class="station-status  {{ 'open' if station.status == 'OPEN' else 'closed' }}">
+      <span class="station-status-indicator {{ 'open' if station.status == 'OPEN' else 'closed' }}"></span>
+      {{ station.status }}
+    </div>
   </div>
- 
-  <!-- Graph Section -->
-  <div>
-    <h2>Availability Trends</h2>
-    <canvas id="availabilityChart" class="chart-display"></canvas>
-  </div> 
+  
+  <!-- Container to ensure alignment -->
+  <div  class="station-content-container">
+    <!-- Station Information Table -->
+    <div class="station-card station-info-card">
+      <h2 class="station-section-title">Live Information of this Station</h2>
+      <div class="station-table-container">
+        <table class="station-table">
+          <tr>
+            <th>Bike Stands</th>
+            <td>{{ station.bike_stands }}</td>
+          <tr>
+          <tr>
+            <th>Available Bikes</th>
+            <td>
+              <span class="availability-value {% if station.available_bikes > station.bike_stands * 0.3 %}value-high{% else %}value-low{% endif %}">
+              {{ station.available_bikes }}
+              </span>
+              {% if station.bike_stands > 0 %}
+              <span class="availability-percentage">
+                ({{ (station.available_bikes / station.bike_stands * 100) | round }}%)
+              </span>
+            {% endif %}
+            </td>
+          </tr>
+          <tr>
+            <th>Available Bike Stands</th>
+            <td>
+              <span class="availability-value {% if station.available_bike_stands > station.bike_stands * 0.3 %}value-high{% else %}value-low{% endif %}">
+              {{ station.available_bike_stands }}
+              </span>
+              {% if station.bike_stands > 0 %}
+              <span class="availability-percentage">
+                ({{ (station.available_bike_stands / station.bike_stands * 100) | round }}%)
+              </span>
+            {% endif %}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
 
 
+      <!-- Side-by-side Map and Graph Section -->
+    <div class="side-by-side-container">
+      <!-- Map Section -->
+      <div class="side-by-side-item"> 
+        <div class="station-card">
+          <h2 class="station-section-title">Location</h2>
+          <div id="stationMap" class="map-display"></div>
+        </div>
+      </div>
 
-
+      <!-- Graph Section -->
+      <div class="side-by-side-item">
+        <div class="station-card">
+          <h2 class="station-section-title">Availability Trends</h2>
+          <canvas id="availabilityChart" class="chart-display"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 </section>
 
 
@@ -112,6 +152,33 @@
     }
   });
 </script>
+
+
+<script>
+// Format the timestamp to show only time
+document.addEventListener('DOMContentLoaded', function() {
+  const timeElement = document.getElementById('last-update-time');
+  const fullTimestamp = timeElement.textContent.trim();
+
+  // Extract time portion (assuming standard format with a space between date and time)
+  const parts = fullTimestamp.split(' ');
+  if (parts.length > 1) {
+    // If we have a space-separated format, take the time part
+    const timePart = parts[parts.length - 1]; // Get the time)
+    
+    // Remove seconds by splitting on colon and taking just the hours and minutes
+    const timeComponents = timePart.split(':');
+    if (timeComponents.length >= 2) {
+      const hoursAndMinutes = timeComponents[0] + ':' + timeComponents[1];
+      timeElement.textContent = hoursAndMinutes;
+    }else {
+      timeElement.textContent = timePart; // Fallback if format isn't as expected
+    }
+  }
+  // If no space is found, leave as is (fallback)
+});
+</script>
+
 
 <script>
   // Initialize a Google Map zoomed in on the station

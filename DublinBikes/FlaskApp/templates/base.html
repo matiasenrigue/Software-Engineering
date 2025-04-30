@@ -34,60 +34,35 @@
             </div>
         </div>
     </header>
+
+    <!-- Flash messages block as a dedicated block -->
+    {% block flash_messages %}
+    <div class="flash-messages-wrapper">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                <ul>
+                {% for message in messages %}
+                    <li class="flash-message">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        {% endwith %}
+    </div>
+    {% endblock %}
+
     <main>
         {% block content %}{% endblock %}
     </main>
-    
+
+
     <footer>
-        <p>&copy; Dublin Bikes Project</p>
-    </footer> 
+        <p>&copy; Group 22-Software Engineering Project 2025. All rights reserved.</p>
+    </footer>
+
+    <script type="module" src="{{ url_for('static', filename='js/styling.js') }}"></script>
+
     
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const themeToggle = document.getElementById('theme-toggle');
-            const themeIcon = document.getElementById('theme-icon');
-            
-            // Check for saved theme preference
-            const savedTheme = localStorage.getItem('theme');
-            
-            // If we have a saved theme, apply it
-            if (savedTheme) {
-                document.documentElement.setAttribute('data-theme', savedTheme);
-                updateIcon(savedTheme);
-            } else {
-                // If user prefers dark mode, apply it
-                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                    updateIcon('dark');
-                }
-            }
-            
-            // Toggle theme when button is clicked
-            themeToggle.addEventListener('click', function() {
-                const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-                
-                document.documentElement.setAttribute('data-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
-                updateIcon(newTheme);
-            });
-            
-            // Update the icon based on current theme
-            function updateIcon(theme) {
-                themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
-            }
-            
-            // Listen for system theme changes
-            if (window.matchMedia) {
-                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-                    if (!localStorage.getItem('theme')) {
-                        const newTheme = event.matches ? 'dark' : 'light';
-                        document.documentElement.setAttribute('data-theme', newTheme);
-                        updateIcon(newTheme);
-                    }
-                });
-            }
-        });
-    </script>    
 </body>
 </html>
